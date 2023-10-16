@@ -10,6 +10,25 @@ const root = ReactDOM.createRoot(
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  a{
+    text-decoration : none;
+    color : black;
+  }
+  @font-face {
+    font-family: 'JejuGothic';
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.eot?#iefix')
+            format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.woff2')
+            format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.woff')
+            format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.ttf')
+            format('truetype');
+    font-display: swap;
+}
 `;
 root.render(
   <React.StrictMode>
