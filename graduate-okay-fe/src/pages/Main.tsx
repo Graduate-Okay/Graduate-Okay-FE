@@ -20,17 +20,21 @@ const Main: React.FC = () => {
 export default Main;
 
 const MainPageDiv = styled.div`
+  display: flex;
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ImgDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 70%;
+  height: 100%;
   justify-content: center;
+  align-items: center;
   > img {
     width: 100%;
     height: 100%;

@@ -26,17 +26,18 @@ const NavBar = styled.nav`
   justify-content: space-around;
   width: 80%;
   margin: 1.2rem auto;
-  font-size: 1rem;
+  font-size: 1.4rem;
 
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     margin: 1.3rem auto;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.3rem;
+    font-size: 2rem;
+    margin: 1rem auto;
     width: 60%;
   }
 `;

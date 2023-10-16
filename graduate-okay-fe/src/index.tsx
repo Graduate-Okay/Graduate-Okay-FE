@@ -28,7 +28,13 @@ const GlobalStyle = createGlobalStyle`
         url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.ttf')
             format('truetype');
     font-display: swap;
-}
+  }
+  html{
+    font-size : 62.5%;
+  }
+  body{
+    font-family : 'JejuGothic';
+  }
 `;
 root.render(
   <React.StrictMode>
