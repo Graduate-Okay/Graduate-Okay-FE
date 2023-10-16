@@ -6,10 +6,10 @@ const deviceSizes = {
 };
 
 const device = {
-  mobile: `screen and (max-width : ${deviceSizes.mobile})`,
-  tablet: `screen and (max-width : ${deviceSizes.tablet})`,
-  laptop: `screen and (max-width : ${deviceSizes.laptop})`,
-  largeLaptop: `screen and (max-width : ${deviceSizes.largeLaptop})`,
+  mobile: `screen and (min-width : ${deviceSizes.mobile})`,
+  tablet: `screen and (min-width : ${deviceSizes.tablet})`,
+  laptop: `screen and (min-width : ${deviceSizes.laptop})`,
+  largeLaptop: `screen and (min-width : ${deviceSizes.largeLaptop})`,
 };
 
 const theme = {
