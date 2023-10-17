@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Main from "./pages/Main";
+import Notice from "./pages/Notice";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/notice" element={<Notice />} />
       </Routes>
       <Footer />
     </BrowserRouter>
