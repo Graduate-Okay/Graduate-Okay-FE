@@ -34,35 +34,29 @@ const Graduate: React.FC = () => {
           <div>👉학업성적확인서(16학번 이후)</div>
           <div>👉SAVE</div>
         </GraduateContents>
-        <div className="section__text text-color">
+        <InformationText>
           교양과목 정보 외의 인적사항 및 학점은 따로 저장하지 않습니다!
-        </div>
-        <div className="section__text text-color2">
+        </InformationText>
+        <InformationText>
           현재 학기를 제외한 확실히 수료완료한 학기 기준으로 결과가 출력됩니다.
-        </div>
-
-        <div className="Graduate__check">
-          <div className="Graduate"></div>
-          <div>
-            <table className="OkTable">
-              <tr className="Ok__menu">
-                <th className="Lack__Graduate__Credit">이수 학점</th>
-                <th className="Lack__MajorCredit">전공 학점</th>
-                <th className="Lack__KyCredit">교양 학점</th>
-                <th className="Lack__NonSub">비교과 이수 학기</th>
-                <th className="Lack__mileage">마일리지</th>
-              </tr>
-              <tr>
-                <td className="Lack__Graduate__Credit">totalCredit</td>
-                <td className="Lack__MajorCredit">majorCredit</td>
-                <td className="Lack__KyCredit">kyCredit</td>
-                <td className="Lack__NonSub">nonSubject</td>
-                <td className="Lack__mileage">mileage</td>
-              </tr>
-            </table>
-          </div>
-          <div className="Graduate_lack">failure</div>
-        </div>
+        </InformationText>
+        <GraduateTable>
+          <GraduateTableHeaderRow>
+            <GraduateTd>이수 학점</GraduateTd>
+            <GraduateTd>전공 학점</GraduateTd>
+            <GraduateTd>교양 학점</GraduateTd>
+            <GraduateTd>비교과 이수 학기</GraduateTd>
+            <GraduateTd>마일리지</GraduateTd>
+          </GraduateTableHeaderRow>
+          <tr>
+            <GraduateTd>totalCredit</GraduateTd>
+            <GraduateTd>majorCredit</GraduateTd>
+            <GraduateTd>kyCredit</GraduateTd>
+            <GraduateTd>nonSubject</GraduateTd>
+            <GraduateTd>mileage</GraduateTd>
+          </tr>
+        </GraduateTable>
+        <GraduateResult>failure</GraduateResult>
       </GraduateSection>
     </ThemeProvider>
   );
@@ -81,6 +75,9 @@ const GraduateSection = styled.section`
   border: dashed;
   max-width: 100%;
   border-color: rgba(0, 0, 0, 0.5);
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 50%;
+  }
 `;
 
 const GraduateTitle = styled.div`
@@ -119,5 +116,36 @@ const GraduateContents = styled.div`
   border-radius: 10px;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
+`;
+
+const InformationText = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-top: 2vh;
+`;
+
+const GraduateTable = styled.table`
+  width: 90%;
+  text-align: center;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 8vh;
+  line-height: 30px;
+`;
+
+const GraduateTableHeaderRow = styled.tr`
+  background-color: #bfdefc96;
+`;
+
+const GraduateTd = styled.td`
+  border: 1px solid #a79d9d;
+`;
+
+const GraduateResult = styled.div`
+  color: red;
+  font-size: 1.6rem;
+  font-weight: bold;
   text-align: center;
 `;

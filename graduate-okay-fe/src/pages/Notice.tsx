@@ -52,7 +52,6 @@ const Notice: React.FC = () => {
 };
 
 export default Notice;
-// height : 39px;
 
 const NoticeDiv = styled.div`
   display: flex;
@@ -87,6 +86,7 @@ const SearchForm = styled.form`
     font-size: 1.4rem;
   }
 `;
+
 const SearchButton = styled.input`
   display: flex;
   align-items: center;
