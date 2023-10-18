@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Main from "./pages/Main";
 import Notice from "./pages/Notice";
 import KyRecommend from "./pages/KyRecommend";
+import Graduate from "./pages/Graduate";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
+        <Route path="/Graduate" element={<Graduate />} />
       </Routes>
       <Footer />
     </BrowserRouter>
