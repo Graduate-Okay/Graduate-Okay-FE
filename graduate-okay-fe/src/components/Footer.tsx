@@ -8,10 +8,18 @@ const Footer: React.FC = () => {
       <FooterSection>
         <Content>
           <p>바로가기</p>
-          <a href="https://www.hs.ac.kr/intro.html" target="_blank">
+          <a
+            href="https://www.hs.ac.kr/intro.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             한신대학교 홈페이지
           </a>
-          <a href="https://hsctis.hs.ac.kr/app-nexa/index.html" target="_blank">
+          <a
+            href="https://hsctis.hs.ac.kr/app-nexa/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             한신대학교 종합정보시스템
           </a>
         </Content>

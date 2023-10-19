@@ -25,7 +25,11 @@ const Graduate: React.FC = () => {
         </GraduateForm>
         <GraduateContents>
           <div>❓ 학업성적확인서 PDF ❓</div>
-          <a href="https://hsctis.hs.ac.kr/app-nexa/index.html" target="_blank">
+          <a
+            href="https://hsctis.hs.ac.kr/app-nexa/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             👉한신대학교 종합정보시스템
           </a>
           <div>👉인트라넷</div>
