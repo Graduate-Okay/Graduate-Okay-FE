@@ -6,7 +6,6 @@ const KyRecommend: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <RecommendDiv>
-        {/* <p>✨인기 교양 추천✨</p> */}
         <TableWrapper>
           <RecommendTable>
             <TableRow>
