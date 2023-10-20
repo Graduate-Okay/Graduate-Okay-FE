@@ -1,5 +1,4 @@
 import React from "react";
-import RouteChangeTracker from "./utils/RouteChangeTracker";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
@@ -10,8 +9,6 @@ import KyRecommend from "./pages/KyRecommend";
 import Graduate from "./pages/Graduate";
 
 function App() {
-  // RouteChangeTracker();/
-
   return (
     <BrowserRouter>
       <Header />
