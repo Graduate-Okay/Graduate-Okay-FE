@@ -10,7 +10,7 @@ import KyRecommend from "./pages/KyRecommend";
 import Graduate from "./pages/Graduate";
 
 function App() {
-  RouteChangeTracker();
+  // RouteChangeTracker();/
 
   return (
     <BrowserRouter>
