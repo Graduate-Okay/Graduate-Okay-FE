@@ -1,19 +1,20 @@
 const deviceSizes = {
-  mobile: "375px",
-  tablet: "768px",
-  laptop: "1024px",
-  largeLaptop: "1440px",
+  mobile: 375,
+  tablet: 768,
+  laptop: 1024,
+  largeLaptop: 1440,
 };
 
 const device = {
-  mobile: `screen and (min-width : ${deviceSizes.mobile})`,
-  tablet: `screen and (min-width : ${deviceSizes.tablet})`,
-  laptop: `screen and (min-width : ${deviceSizes.laptop})`,
-  largeLaptop: `screen and (min-width : ${deviceSizes.largeLaptop})`,
+  mobile: `screen and (min-width : ${deviceSizes.mobile}px)`,
+  tablet: `screen and (min-width : ${deviceSizes.tablet}px)`,
+  laptop: `screen and (min-width : ${deviceSizes.laptop}px)`,
+  largeLaptop: `screen and (min-width : ${deviceSizes.largeLaptop}px)`,
 };
 
 const theme = {
   device,
+  deviceSizes,
 };
 
 export default theme;
