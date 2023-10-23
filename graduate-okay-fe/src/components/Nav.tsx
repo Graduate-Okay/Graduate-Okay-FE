@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import useCheckMobile from "../hooks/useCheckMobile";
 
 const Nav: React.FC = () => {
-  const [checkMobile, setCheckMobile] = useState(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-  });
-
-  const handleResize = () => {
-    setCheckMobile(window.innerWidth);
-  };
-
   return (
     <ThemeProvider theme={theme}>
-      {checkMobile < theme.deviceSizes.tablet ? null : (
+      {useCheckMobile() < theme.deviceSizes.tablet ? null : (
         <NavBar>
           <Link to="Notice">공지사항</Link>
           <Link to="KyRecommend">인기교양추천</Link>
