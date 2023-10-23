@@ -2,17 +2,13 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 
-/**
- * @todo https://inpa.tistory.com/entry/CSS-%F0%9F%92%8D-%EB%B2%84%ED%8A%BC-%EB%94%94%EC%9E%90%EC%9D%B8-%EB%AA%A8%EC%9D%8C
- * 에서 쓸 버튼 받기
- */
 const Graduate: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GraduateSection>
         <GraduateTitle>당신은 졸업이 가능한가요 ?</GraduateTitle>
         <GraduateForm method="post" action="/Graduate">
-          <GraduateButton className="section__button">
+          <GraduateButton>
             <label>학업성적확인서 PDF 업로드</label>
             <input
               type="file"
@@ -72,7 +68,7 @@ const GraduateSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 65vh;
+  height: 63vh;
   margin: auto;
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -97,6 +93,7 @@ const GraduateButton = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
+  cursor: pointer;
 `;
 
 const GraduateForm = styled.form`
@@ -108,6 +105,7 @@ const GraduateForm = styled.form`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const GraduateContents = styled.div`
