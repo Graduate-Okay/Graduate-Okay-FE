@@ -7,6 +7,7 @@ import Main from "./pages/Main";
 import Notice from "./pages/Notice";
 import KyRecommend from "./pages/KyRecommend";
 import Graduate from "./pages/Graduate";
+import Mypage from "./pages/Mypage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
         <Route path="/Graduate" element={<Graduate />} />
+        <Route path="/Mypage" element={<Mypage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
