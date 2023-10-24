@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import useCheckMobile from "../hooks/useCheckMobile";
 import BackButton from "../assets/imgs/BackButton.svg";
 
 const Header: React.FC = () => {
@@ -14,7 +15,9 @@ const Header: React.FC = () => {
     <ThemeProvider theme={theme}>
       <HeaderDiv>
         <SubDiv>
-          <img src={BackButton} alt="뒤로가기" onClick={() => navigate(-1)} />
+          {useCheckMobile() < theme.deviceSizes.tablet ? (
+            <img src={BackButton} alt="뒤로가기" onClick={() => navigate(-1)} />
+          ) : null}
         </SubDiv>
         <img src="imgs/logo.png" alt="헤더로고" onClick={moveMain} />
         <SubDiv
