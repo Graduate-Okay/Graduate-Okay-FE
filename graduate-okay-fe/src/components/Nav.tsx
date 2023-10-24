@@ -12,6 +12,7 @@ const Nav: React.FC = () => {
           <Link to="Notice">공지사항</Link>
           <Link to="KyRecommend">인기교양추천</Link>
           <Link to="Graduate">졸업요건조회</Link>
+          <Link to="mypage">마이페이지</Link>
         </NavBar>
       )}
     </ThemeProvider>

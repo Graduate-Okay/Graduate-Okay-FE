@@ -1,16 +1,21 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import MypageSVG from "../assets/imgs/mypage.svg";
 
-// 섹션 나타내는 탭
-// 섹션 하위 탭
 const Mypage: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <MypageSection>
         <MypageDiv>
           <UserInfo>
-            <UserDiv>사용자 정보</UserDiv>
+            <UserImg>
+              <img src={MypageSVG} alt="프로필" />
+            </UserImg>
+            <UserDiv>
+              <UserNickname>안녕하세요, $'닉네임'님</UserNickname>
+              <UserAdmission>한신대 00학번</UserAdmission>
+            </UserDiv>
           </UserInfo>
           <OptionList>
             <MypageHeader>
@@ -47,6 +52,7 @@ const MypageSection = styled.section`
   display: flex;
   width: 100%;
   height: 70vh;
+  align-items: center;
 `;
 
 const MypageDiv = styled.div`
@@ -55,23 +61,72 @@ const MypageDiv = styled.div`
   width: 85%;
   height: 100%;
   border: 1px solid #b2bec3;
+  border-radius: 2rem;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 50%;
+    height: 80%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 30%;
+    height: 80%;
+  }
 `;
 
 const UserInfo = styled.div`
   display: flex;
   width: 100%;
-  height: 30%;
+  height: 15%;
+`;
+
+const UserImg = styled.div`
+  display: flex;
+  width: 30%;
+  height: 80%;
+  justify-content: center;
+  margin: auto;
+
+  > img {
+    border: 1px solid black;
+    border-radius: 50%;
+  }
 `;
 
 const UserDiv = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  height: 100%;
+`;
+
+const UserNickname = styled.div`
+  display: flex;
+  font-weight: bold;
+  font-size: 1.4rem;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.6rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.8rem;
+  }
+`;
+
+const UserAdmission = styled.div`
+  display: flex;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.3rem;
+  }
 `;
 
 const OptionList = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70%;
+  height: 85%;
 `;
 
 const MypageRow = styled.div`
@@ -84,6 +139,9 @@ const MypageRow = styled.div`
   > p {
     margin-left: 0.5rem;
   }
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.3rem;
+  }
 `;
 
 const MypageHeader = styled.div`
@@ -94,4 +152,7 @@ const MypageHeader = styled.div`
   justify-contents: center;
   height: 3rem;
   margin-top: 2rem;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.6rem;
+  }
 `;
