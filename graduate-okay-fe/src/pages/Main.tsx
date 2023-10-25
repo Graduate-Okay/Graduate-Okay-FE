@@ -7,12 +7,34 @@ const Main: React.FC = () => {
     <ThemeProvider theme={theme}>
       <MainPageDiv>
         <ImgDiv>
-          <img
-            className="contentsPage-img"
-            src="imgs/background.jpg"
-            alt="background"
-          />
+          <p>타이틀</p>
+          <p>컨텐츠내용</p>
         </ImgDiv>
+        <IntroduceSection>
+          <IntroduceText>
+            졸업요건 검사 졸업가능에서 쉽고 간편하게
+          </IntroduceText>
+        </IntroduceSection>
+        <IntroduceSection>
+          <IntroduceText>
+            졸업요건 검사 졸업가능에서 쉽고 간편하게
+          </IntroduceText>
+        </IntroduceSection>
+        <IntroduceSection>
+          <IntroduceText>
+            졸업요건 검사 졸업가능에서 쉽고 간편하게
+          </IntroduceText>
+        </IntroduceSection>
+        <IntroduceSection>
+          <IntroduceText>
+            졸업요건 검사 졸업가능에서 쉽고 간편하게
+          </IntroduceText>
+        </IntroduceSection>
+        <IntroduceSection>
+          <IntroduceText>
+            졸업요건 검사 졸업가능에서 쉽고 간편하게
+          </IntroduceText>
+        </IntroduceSection>
       </MainPageDiv>
     </ThemeProvider>
   );
@@ -21,32 +43,38 @@ export default Main;
 
 const MainPageDiv = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 65vh;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-  justify-content: center;
-  align-items: center;
+  overflow-y: auto;
 `;
 
 const ImgDiv = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 10vh;
+  background-image: url("imgs/background.jpg");
+  background-size: 100%;
   justify-content: center;
   align-items: center;
-  > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 80%;
-    height: 80%;
-    margin: 0 auto;
-    margin-top: 5vh;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    margin-top: 3vh;
-  }
+`;
+
+const IntroduceSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const IntroduceText = styled.p`
+  display: flex;
+  font-size: 2.4rem;
+  margin: 0 auto;
+  align-items: center;
+  width: 40%;
+  height: 35vh;
+  word-break: keep-all;
+  text-align: center;
+  white-space: normal;
 `;

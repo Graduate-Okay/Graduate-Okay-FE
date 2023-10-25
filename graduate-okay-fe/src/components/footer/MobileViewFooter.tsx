@@ -34,8 +34,12 @@ export default MobileViewFooter;
 
 const FooterSection = styled.footer`
   display: flex;
+  position: fixed;
   width: 100%;
   height: 13vh;
+  left: 0px;
+  bottom: 0px;
+  background-color: white;
 `;
 
 const FooterDiv = styled.div`
