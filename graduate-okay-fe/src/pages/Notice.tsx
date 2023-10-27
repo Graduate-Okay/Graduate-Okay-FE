@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import axios from "axios";
 
 const Notice: React.FC = () => {
+  useEffect(() => {
+    getNotice();
+  }, []);
+
+  const getNotice = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_ADDRESS}/notice`
+      );
+      console.log(response.data);
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <NoticeDiv>
