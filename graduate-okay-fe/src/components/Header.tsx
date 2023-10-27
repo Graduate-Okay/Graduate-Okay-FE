@@ -7,9 +7,6 @@ import BackButton from "../assets/imgs/BackButton.svg";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const moveMain = () => {
-    navigate("/");
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -19,10 +16,10 @@ const Header: React.FC = () => {
             <img src={BackButton} alt="뒤로가기" onClick={() => navigate(-1)} />
           ) : null}
         </SubDiv>
-        <img src="imgs/logo.png" alt="헤더로고" onClick={moveMain} />
+        <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
         <SubDiv
           onClick={() => {
-            alert("준비중입니다");
+            navigate("/login");
           }}
         >
           <p>로그인</p>
