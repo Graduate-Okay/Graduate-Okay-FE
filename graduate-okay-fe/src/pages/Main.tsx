@@ -2,6 +2,10 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 
+interface IntroduceTextProps {
+  fontSize?: string;
+}
+
 const Main: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -11,26 +15,13 @@ const Main: React.FC = () => {
           <p>컨텐츠내용</p>
         </ImgDiv>
         <IntroduceSection>
-          <IntroduceText>
+          <IntroduceText fontSize={"2.6rem"}>
             졸업요건 검사 졸업가능에서 쉽고 간편하게
           </IntroduceText>
-        </IntroduceSection>
-        <IntroduceSection>
           <IntroduceText>
-            졸업요건 검사 졸업가능에서 쉽고 간편하게
+            나의 졸업 요건을 확인하고 아직 수강하지 않는 과목이 어떤 것인지
+            체크하고 인기교양을 추천받아 수강 계획을 구상할 수 있어요
           </IntroduceText>
-        </IntroduceSection>
-        <IntroduceSection>
-          <IntroduceText>
-            졸업요건 검사 졸업가능에서 쉽고 간편하게
-          </IntroduceText>
-        </IntroduceSection>
-        <IntroduceSection>
-          <IntroduceText>
-            졸업요건 검사 졸업가능에서 쉽고 간편하게
-          </IntroduceText>
-        </IntroduceSection>
-        <IntroduceSection>
           <IntroduceText>
             졸업요건 검사 졸업가능에서 쉽고 간편하게
           </IntroduceText>
@@ -47,7 +38,6 @@ const MainPageDiv = styled.div`
   width: 100%;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-  overflow-y: auto;
 `;
 
 const ImgDiv = styled.div`
@@ -67,13 +57,13 @@ const IntroduceSection = styled.section`
   width: 100%;
 `;
 
-const IntroduceText = styled.p`
+const IntroduceText = styled.p<IntroduceTextProps>`
   display: flex;
-  font-size: 2.4rem;
+  font-size: ${(props) => props.fontSize || "2rem"};
   margin: 0 auto;
   align-items: center;
-  width: 40%;
-  height: 35vh;
+  width: 50%;
+  height: 55vh;
   word-break: keep-all;
   text-align: center;
   white-space: normal;
