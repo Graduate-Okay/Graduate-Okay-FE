@@ -1,5 +1,4 @@
 {
-  "proxy": "http://13.209.203.234:8080/",
   "name": "graduate-okay-fe",
   "version": "0.1.0",
   "private": true,
