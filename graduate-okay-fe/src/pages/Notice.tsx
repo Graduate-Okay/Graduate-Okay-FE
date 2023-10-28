@@ -1,23 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import axios from "axios";
+import api from "../apis/api";
+import { INotice } from "../interfaces";
 
 const Notice: React.FC = () => {
+  const [notice, setNotice] = useState<INotice>();
+
   useEffect(() => {
     getNotice();
   }, []);
 
   const getNotice = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_ADDRESS}/notice`
-      );
-      console.log(response.data);
+      const response = await axios.get(`${api.notice}`);
+      setNotice(response.data);
     } catch (error) {
       throw new Error(`${error}`);
     }
   };
+
+  console.log(notice);
 
   return (
     <ThemeProvider theme={theme}>
