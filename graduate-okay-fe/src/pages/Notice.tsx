@@ -15,13 +15,11 @@ const Notice: React.FC = () => {
   const getNotice = async () => {
     try {
       const response = await axios.get(`${api.notice}`);
-      setNotice(response.data);
+      setNotice(response.data.data);
     } catch (error) {
       throw new Error(`${error}`);
     }
   };
-
-  console.log(notice);
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,25 +45,16 @@ const Notice: React.FC = () => {
             />
           </SearchForm>
         </NoticeTitle>
-
-        <div className="tabcontent">
-          <div className="Notice__content--title">
-            <div className="Notice__content--number">번호</div>
-            <div className="Notice__content--category">카테고리</div>
-            <div className="Notice__content--name">제목</div>
-            <div className="Notice__content--date">날짜</div>
-          </div>
-          {/* {inputData.map((inputData) => {
-                  return <NoticeRow Notice={inputData} />;
-                })} */}
-        </div>
-        <div className="Board__page">
-          {/* <Pagination
-                  searchHelper={searchHelper}
-                  pageName={pageName}
-                  handleButton={handleButton}
-                /> */}
-        </div>
+        <NoticeContent>
+          {notice?.noticeList.map((notice) => {
+            return (
+              <NoticeData key={notice.id}>
+                <NoticeName>{notice.title}</NoticeName>
+                <NoticeDate>{notice.createdAt}</NoticeDate>
+              </NoticeData>
+            );
+          })}
+        </NoticeContent>
       </NoticeDiv>
     </ThemeProvider>
   );
@@ -77,7 +66,7 @@ const NoticeDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 65vh;
+  height: 80vh;
 `;
 
 const NoticeTitle = styled.div`
@@ -115,4 +104,29 @@ const SearchButton = styled.input`
   background-color: #8f8de7;
   border: none;
   font-family: "JejuGothic";
+`;
+
+const NoticeContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 75%;
+  margin: 2vh auto;
+  justify-content: space-between;
+`;
+
+const NoticeData = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const NoticeName = styled.div`
+  display: flex;
+  font-size: 1.6rem;
+`;
+
+const NoticeDate = styled.div`
+  display: flex;
+  font-size: 1.2rem;
+  color: #a4b0be;
 `;
