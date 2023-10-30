@@ -4,9 +4,11 @@ import theme from "../constants/theme";
 import axios from "axios";
 import api from "../apis/api";
 import { INotice } from "../interfaces";
+import Pagination from "../components/Pagination";
 
 const Notice: React.FC = () => {
   const [notice, setNotice] = useState<INotice>();
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
   useEffect(() => {
     getNotice();
@@ -16,6 +18,7 @@ const Notice: React.FC = () => {
     try {
       const response = await axios.get(`${api.notice}`);
       setNotice(response.data.data);
+      setPageNumber(response.data.data.maxPageCount);
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -55,6 +58,7 @@ const Notice: React.FC = () => {
             );
           })}
         </NoticeContent>
+        <Pagination pageNumber={pageNumber} />
       </NoticeDiv>
     </ThemeProvider>
   );
