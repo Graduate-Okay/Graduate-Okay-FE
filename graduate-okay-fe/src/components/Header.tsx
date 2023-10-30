@@ -43,10 +43,15 @@ const HeaderDiv = styled.header`
     width: 80%;
     margin: 1.2rem auto;
   }
+  > img {
+    cursor: pointer;
+  }
 `;
 
 const SubDiv = styled.div`
   display: flex;
+  cursor: pointer;
+
   > p {
     font-size: 1.4rem;
     margin: auto 0;
