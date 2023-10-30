@@ -71,6 +71,11 @@ const NoticeDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 80vh;
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+    height: 90vh;
+    margin: 0 auto;
+  }
 `;
 
 const NoticeTitle = styled.div`
@@ -85,6 +90,7 @@ const NoticeTitle = styled.div`
     width: 90%;
     margin: 2vh auto;
     justify-content: space-between;
+    font-size: 1.4rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
     width: 75%;
@@ -127,10 +133,22 @@ const NoticeData = styled.div`
 const NoticeName = styled.div`
   display: flex;
   font-size: 1.6rem;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.9rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 2.1rem;
+  }
 `;
 
 const NoticeDate = styled.div`
   display: flex;
   font-size: 1.2rem;
   color: #a4b0be;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.3rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+  }
 `;

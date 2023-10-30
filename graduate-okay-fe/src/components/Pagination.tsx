@@ -37,6 +37,9 @@ const Page = styled.div`
   > img {
     width: 5%;
     cursor: pointer;
+    @media ${({ theme }) => theme.device.tablet} {
+      width: 30px;
+    }
   }
 `;
 
@@ -45,4 +48,7 @@ const Number = styled.span`
   width: 30px;
   justify-content: center;
   cursor: pointer;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
 `;
