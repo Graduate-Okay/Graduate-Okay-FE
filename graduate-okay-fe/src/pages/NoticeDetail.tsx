@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
@@ -8,21 +8,21 @@ import { INoticeDetail } from "../interfaces";
 
 const NoticeDetail: React.FC = () => {
   const params = useParams();
-  const paramsId = params.id;
   const [detail, setDetail] = useState<INoticeDetail>();
+  const paramsId = params.id;
 
-  useEffect(() => {
-    getDetail();
-  }, [paramsId]);
-
-  const getDetail = async () => {
+  const getDetail = useCallback(async () => {
     try {
       const response = await axios.get(`${api.notice}/${paramsId}`);
       setDetail(response.data.data);
     } catch (error) {
       throw new Error(`${error}`);
     }
-  };
+  }, [paramsId]);
+
+  useEffect(() => {
+    getDetail();
+  }, [getDetail]);
 
   return (
     <ThemeProvider theme={theme}>
