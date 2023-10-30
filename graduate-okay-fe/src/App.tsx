@@ -10,6 +10,7 @@ import Graduate from "./pages/Graduate";
 import Mypage from "./pages/Mypage";
 import Login from "./pages/Login";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
+import NoticeDetail from "./pages/NoticeDetail";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/notice" element={<Notice />} />
+        <Route path="/notice/:id" element={<NoticeDetail />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
         <Route path="/Graduate" element={<Graduate />} />
         <Route path="/Mypage" element={<Mypage />} />

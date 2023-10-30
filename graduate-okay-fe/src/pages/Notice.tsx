@@ -5,10 +5,12 @@ import axios from "axios";
 import api from "../apis/api";
 import { INotice } from "../interfaces";
 import Pagination from "../components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const Notice: React.FC = () => {
   const [notice, setNotice] = useState<INotice>();
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getNotice();
@@ -22,6 +24,10 @@ const Notice: React.FC = () => {
     } catch (error) {
       throw new Error(`${error}`);
     }
+  };
+
+  const routeDetail = (id: number) => {
+    navigate(`${id}`);
   };
 
   return (
@@ -51,7 +57,10 @@ const Notice: React.FC = () => {
         <NoticeContent>
           {notice?.noticeList.map((notice) => {
             return (
-              <NoticeData key={notice.id}>
+              <NoticeData
+                key={notice.id}
+                onClick={() => routeDetail(notice.id)}
+              >
                 <NoticeName>{notice.title}</NoticeName>
                 <NoticeDate>{notice.createdAt}</NoticeDate>
               </NoticeData>
@@ -128,6 +137,7 @@ const NoticeContent = styled.div`
 const NoticeData = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const NoticeName = styled.div`
