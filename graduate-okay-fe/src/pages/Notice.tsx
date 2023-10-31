@@ -36,8 +36,6 @@ const Notice: React.FC = () => {
     getNotice();
   }, [getNotice]);
 
-  console.log(currentPage);
-
   return (
     <ThemeProvider theme={theme}>
       <NoticeDiv>

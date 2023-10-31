@@ -1,8 +1,10 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <LoginSection>
@@ -16,8 +18,8 @@ const Login: React.FC = () => {
         </LoginStatus>
         <SubmitLogin onClick={() => alert("준비중입니다")}>LOGIN</SubmitLogin>
         <Account>
-          <p>회원가입</p>
-          <p>비밀번호찾기</p>
+          <p onClick={() => navigate(`/signup`)}>회원가입</p>
+          <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
         </Account>
       </LoginSection>
     </ThemeProvider>
@@ -109,6 +111,9 @@ const Account = styled.div`
   width: 100%;
   justify-content: space-around;
   font-size: 1.1rem;
+  > p {
+    cursor: pointer;
+  }
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;
     margin: 0 auto;

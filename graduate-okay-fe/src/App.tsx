@@ -11,6 +11,8 @@ import Mypage from "./pages/Mypage";
 import Login from "./pages/Login";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import NoticeDetail from "./pages/NoticeDetail";
+import Signup from "./pages/Signup";
+import Find from "./pages/Find";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/Graduate" element={<Graduate />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/find" element={<Find />} />
       </Routes>
       <Footer />
     </BrowserRouter>
