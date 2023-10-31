@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import axios from "axios";
@@ -9,50 +9,40 @@ import { useNavigate } from "react-router-dom";
 
 const Notice: React.FC = () => {
   const [notice, setNotice] = useState<INotice>();
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getNotice();
-  }, []);
-
-  const getNotice = async () => {
+  const getNotice = useCallback(async () => {
     try {
-      const response = await axios.get(`${api.notice}`);
+      const response = await axios.get(`${api.notice}?page=${currentPage}`);
       setNotice(response.data.data);
-      setPageNumber(response.data.data.maxPageCount);
+      setMaxPageNumber(response.data.data.maxPageCount);
     } catch (error) {
       throw new Error(`${error}`);
     }
+  }, [currentPage]);
+
+  const getCurrentPage = (page: number) => {
+    setCurrentPage(page);
+    return;
   };
 
   const routeDetail = (id: number) => {
     navigate(`${id}`);
   };
 
+  useEffect(() => {
+    getNotice();
+  }, [getNotice]);
+
+  console.log(currentPage);
+
   return (
     <ThemeProvider theme={theme}>
       <NoticeDiv>
         <NoticeTitle>
           <p>공지사항</p>
-          <SearchForm name="searchBar">
-            <select name="srchType" id="srchType">
-              <option value="title">제목</option>
-              <option value="content">내용</option>
-            </select>
-            <input
-              type="text"
-              placeholder="검색어를 입력하세요"
-              name="srchKeyword"
-              id="srchKeyword"
-            />
-            <SearchButton
-              type="submit"
-              id="submit"
-              name="submit"
-              value="검 색"
-            />
-          </SearchForm>
         </NoticeTitle>
         <NoticeContent>
           {notice?.noticeList.map((notice) => {
@@ -67,7 +57,10 @@ const Notice: React.FC = () => {
             );
           })}
         </NoticeContent>
-        <Pagination pageNumber={pageNumber} />
+        <Pagination
+          maxPageNumber={maxPageNumber}
+          getCurrentPage={getCurrentPage}
+        />
       </NoticeDiv>
     </ThemeProvider>
   );
@@ -82,7 +75,7 @@ const NoticeDiv = styled.div`
   height: 80vh;
   @media ${({ theme }) => theme.device.laptop} {
     width: 70%;
-    height: 90vh;
+    height: 80vh;
     margin: 0 auto;
   }
 `;
@@ -108,28 +101,11 @@ const NoticeTitle = styled.div`
   }
 `;
 
-const SearchForm = styled.form`
-  display: flex;
-  > input {
-    font-size: 1.4rem;
-  }
-`;
-
-const SearchButton = styled.input`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  background-color: #8f8de7;
-  border: none;
-  font-family: "JejuGothic";
-`;
-
 const NoticeContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 75%;
+  height: 70%;
   margin: 2vh auto;
   justify-content: space-between;
 `;

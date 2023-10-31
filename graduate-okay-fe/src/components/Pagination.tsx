@@ -5,16 +5,32 @@ import ArrowNext from "../assets/imgs/ArrowNext.svg";
 import ArrowPrev from "../assets/imgs/ArrowPrev.svg";
 
 interface PaginationProps {
-  pageNumber: number;
+  maxPageNumber: number;
+  getCurrentPage: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ pageNumber }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  maxPageNumber,
+  getCurrentPage,
+}) => {
   const paging = () => {
     const numberArray = [];
-    for (let i = 0; i < pageNumber; i++) {
-      numberArray.push(<Number key={i}>{i + 1}</Number>);
+    for (let i = 0; i < maxPageNumber; i++) {
+      numberArray.push(
+        <Number key={i} onClick={() => pageRouting(i)}>
+          {i + 1}
+        </Number>
+      );
     }
     return numberArray;
+  };
+
+  const pageRouting = async (i: number) => {
+    try {
+      await getCurrentPage(i);
+    } catch (error) {
+      throw new Error(`페이징 에러 : ${error}`);
+    }
   };
 
   return (
@@ -40,6 +56,9 @@ const Page = styled.div`
     @media ${({ theme }) => theme.device.tablet} {
       width: 30px;
     }
+    &:hover {
+      background-color: #d9d9d9;
+    }
   }
 `;
 
@@ -50,5 +69,8 @@ const Number = styled.span`
   cursor: pointer;
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.2rem;
+  }
+  &:hover {
+    background-color: #d9d9d9;
   }
 `;
