@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
+import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -16,15 +17,14 @@ const Login: React.FC = () => {
       alert("아이디와 비밀번호를 모두 입력해주세요");
       return;
     }
-    if (checkHS() !== "@hs.ac.kr") {
-      emailInput.value += "@hs.ac.kr";
-    }
+    const email = emailInput.value;
+    emailInput.value = CheckSchoolEmail(email);
+
     try {
       const response = await axios.post(`${api.user}/login`, {
         email: emailInput.value,
         password: passwordInput.value,
       });
-      if (response.status === 200) navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
@@ -34,9 +34,6 @@ const Login: React.FC = () => {
 
   const isEmpty = () => {
     return emailInput.value === "" || passwordInput.value === "";
-  };
-  const checkHS = () => {
-    return emailInput.value.slice(-9);
   };
 
   return (

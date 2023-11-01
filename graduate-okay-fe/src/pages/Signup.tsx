@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useInput from "../hooks/useInput";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import api from "../apis/api";
+import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 
 const Signup: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -14,9 +15,8 @@ const Signup: React.FC = () => {
       alert("이메일을 입력해주세요");
       return;
     }
-    if (checkHS() !== "@hs.ac.kr") {
-      emailInput.value += "@hs.ac.kr";
-    }
+    const email = emailInput.value;
+    emailInput.value = CheckSchoolEmail(email);
 
     try {
       setIsClick(true);
@@ -24,16 +24,14 @@ const Signup: React.FC = () => {
         email: emailInput.value,
       });
     } catch (error) {
-      throw new Error(`이메일 전송 에러 ${error}`);
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
     }
   };
 
   const isEmpty = () => {
     return emailInput.value === "" ? true : false;
-  };
-
-  const checkHS = () => {
-    return emailInput.value.slice(-9);
   };
 
   return (
