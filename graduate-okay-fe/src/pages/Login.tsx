@@ -46,6 +46,12 @@ const Login: React.FC = () => {
     return emailInput.value === "" || passwordInput.value === "";
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      submitLogin();
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <LoginSection>
@@ -63,6 +69,7 @@ const Login: React.FC = () => {
           type="password"
           value={passwordInput.value}
           onChange={passwordInput.onChange}
+          onKeyDown={handleKeyDown}
         />
         <LoginStatus>
           <input type="checkbox" />
