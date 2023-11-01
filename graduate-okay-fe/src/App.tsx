@@ -15,6 +15,8 @@ import Signup from "./pages/Signup";
 import Find from "./pages/Find";
 
 function App() {
+  const isLogin = !!localStorage.getItem("accessToken");
+
   return (
     <BrowserRouter>
       <RouteChangeTracker />
@@ -25,11 +27,11 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/:id" element={<NoticeDetail />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
-        <Route path="/Graduate" element={<Graduate />} />
-        <Route path="/Mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/find" element={<Find />} />
+        <Route path="/Graduate" element={isLogin ? <Graduate /> : <Login />} />
+        <Route path="/Mypage" element={isLogin ? <Mypage /> : <Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>
