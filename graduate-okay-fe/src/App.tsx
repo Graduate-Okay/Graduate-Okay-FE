@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/footer/Footer";
@@ -30,8 +30,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/find" element={<Find />} />
-        <Route path="/Graduate" element={isLogin ? <Graduate /> : <Login />} />
-        <Route path="/Mypage" element={isLogin ? <Mypage /> : <Login />} />
+        <Route
+          path="/Graduate"
+          element={isLogin ? <Graduate /> : <Navigate replace to="/login" />}
+        />
+        <Route
+          path="/Mypage"
+          element={isLogin ? <Mypage /> : <Navigate replace to="/login" />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>
