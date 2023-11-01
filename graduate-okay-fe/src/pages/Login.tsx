@@ -21,10 +21,20 @@ const Login: React.FC = () => {
     emailInput.value = CheckSchoolEmail(email);
 
     try {
-      const response = await axios.post(`${api.user}/login`, {
-        email: emailInput.value,
-        password: passwordInput.value,
-      });
+      await axios
+        .post(`${api.user}/login`, {
+          email: emailInput.value,
+          password: passwordInput.value,
+        })
+        .then((response) => {
+          localStorage.clear();
+          localStorage.setItem("id", response?.data.data.id);
+          localStorage.setItem("nickname", response?.data.data.nickname);
+          localStorage.setItem(
+            "accessToken",
+            response?.data.data.tokenInfo.accessToken
+          );
+        });
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
