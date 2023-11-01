@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import MypageSVG from "../assets/imgs/mypage.svg";
+import axios, { AxiosError } from "axios";
+import api from "../apis/api";
 
 const Mypage: React.FC = () => {
+  const [nickname, setNickname] = useState<string>("");
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  const getInfo = async () => {
+    try {
+      const response = await axios.get(`${api.user}/info`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      setNickname(response?.data.data.nickname);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <MypageSection>
@@ -13,7 +35,7 @@ const Mypage: React.FC = () => {
               <img src={MypageSVG} alt="프로필" />
             </UserImg>
             <UserDiv>
-              <UserNickname>안녕하세요, $'닉네임'님</UserNickname>
+              <UserNickname>안녕하세요, {nickname}님</UserNickname>
               <UserAdmission>한신대 00학번</UserAdmission>
             </UserDiv>
           </UserInfo>
