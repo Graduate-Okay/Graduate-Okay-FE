@@ -34,6 +34,12 @@ const Signup: React.FC = () => {
     return emailInput.value === "" ? true : false;
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      submitAuthNumber();
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <SignupSection>
@@ -43,6 +49,7 @@ const Signup: React.FC = () => {
           type="text"
           value={emailInput.value}
           onChange={emailInput.onChange}
+          onKeyDown={handleKeyDown}
           autoFocus
         />
         {isClick ? (
