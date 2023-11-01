@@ -2,21 +2,66 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { useNavigate } from "react-router-dom";
+import useInput from "../hooks/useInput";
+import axios, { AxiosError } from "axios";
+import api from "../apis/api";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const emailInput = useInput("");
+  const passwordInput = useInput("");
+
+  const submitLogin = async () => {
+    if (isEmpty()) {
+      alert("아이디와 비밀번호를 모두 입력해주세요");
+      return;
+    }
+    if (checkHS() !== "@hs.ac.kr") {
+      emailInput.value += "@hs.ac.kr";
+    }
+    try {
+      const response = await axios.post(`${api.user}/login`, {
+        email: emailInput.value,
+        password: passwordInput.value,
+      });
+      if (response.status === 200) navigate("/");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
+    }
+  };
+
+  const isEmpty = () => {
+    return emailInput.value === "" || passwordInput.value === "";
+  };
+  const checkHS = () => {
+    return emailInput.value.slice(-9);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <LoginSection>
         <LoginDiv>LOGIN</LoginDiv>
-        <LoginInput placeholder="아이디" type="text" autoFocus />
+        <LoginInput
+          placeholder="example@hs.ac.kr 또는 example"
+          type="text"
+          value={emailInput.value}
+          onChange={emailInput.onChange}
+          autoFocus
+        />
         <LoginSub>한신대학교 이메일 아이디로만 로그인이 가능합니다.</LoginSub>
-        <LoginInput placeholder="비밀번호" type="password" />
+        <LoginInput
+          placeholder="password"
+          type="password"
+          value={passwordInput.value}
+          onChange={passwordInput.onChange}
+        />
         <LoginStatus>
           <input type="checkbox" />
           <p>로그인 상태 유지</p>
         </LoginStatus>
-        <SubmitLogin onClick={() => alert("준비중입니다")}>LOGIN</SubmitLogin>
+        <SubmitLogin onClick={() => submitLogin()}>LOGIN</SubmitLogin>
         <Account>
           <p onClick={() => navigate(`/signup`)}>회원가입</p>
           <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
