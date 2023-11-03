@@ -6,13 +6,13 @@ import useInput from "../hooks/useInput";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
-import { setCookie } from "../common/cookie";
-import axiosCookie from "../common/axiosCookie";
+import { useCookies } from "react-cookie";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const emailInput = useInput("");
   const passwordInput = useInput("");
+  const [cookies, setCookie] = useCookies(["accessToken"]);
 
   const submitLogin = async () => {
     if (isEmpty()) {
@@ -36,7 +36,9 @@ const Login: React.FC = () => {
             "refreshToken",
             response?.data.data.tokenInfo.refreshToken
           );
-          setCookie("accessToken", response?.data.data.tokenInfo.accessToken);
+          setCookie("accessToken", response?.data.data.tokenInfo.accessToken, {
+            path: "/",
+          });
         });
 
       navigate("/");

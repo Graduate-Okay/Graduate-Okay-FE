@@ -4,9 +4,11 @@ import theme from "../constants/theme";
 import MypageSVG from "../assets/imgs/mypage.svg";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
+import { useCookies } from "react-cookie";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
+  const [cookies] = useCookies(["accessToken"]);
 
   useEffect(() => {
     getInfo();
@@ -16,7 +18,7 @@ const Mypage: React.FC = () => {
     try {
       const response = await axios.get(`${api.user}/info`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${cookies.accessToken}`,
         },
       });
       setNickname(response?.data.data.nickname);

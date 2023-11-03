@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/footer/Footer";
@@ -15,7 +16,7 @@ import Signup from "./pages/Signup";
 import Find from "./pages/Find";
 
 function App() {
-  const isLogin = !!localStorage.getItem("accessToken");
+  const [cookies] = useCookies(["accessToken"]);
 
   return (
     <BrowserRouter>
@@ -32,11 +33,19 @@ function App() {
         <Route path="/find" element={<Find />} />
         <Route
           path="/Graduate"
-          element={isLogin ? <Graduate /> : <Navigate replace to="/login" />}
+          element={
+            cookies.accessToken ? (
+              <Graduate />
+            ) : (
+              <Navigate replace to="/login" />
+            )
+          }
         />
         <Route
           path="/Mypage"
-          element={isLogin ? <Mypage /> : <Navigate replace to="/login" />}
+          element={
+            cookies.accessToken ? <Mypage /> : <Navigate replace to="/login" />
+          }
         />
       </Routes>
       <Footer />

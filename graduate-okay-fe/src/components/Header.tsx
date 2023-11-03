@@ -4,9 +4,18 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useCheckMobile from "../hooks/useCheckMobile";
 import BackButton from "../assets/imgs/BackButton.svg";
+import { useCookies } from "react-cookie";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+
+  const handlelogOut = () => {
+    alert("로그아웃되었습니다.");
+    removeCookie("accessToken");
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -17,13 +26,16 @@ const Header: React.FC = () => {
           ) : null}
         </SubDiv>
         <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
-        <SubDiv
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          <p>로그인</p>
-        </SubDiv>
+
+        {cookies.accessToken ? (
+          <SubDiv onClick={() => handlelogOut()}>
+            <p>로그아웃</p>
+          </SubDiv>
+        ) : (
+          <SubDiv onClick={() => navigate("/login")}>
+            <p>로그인</p>
+          </SubDiv>
+        )}
       </HeaderDiv>
     </ThemeProvider>
   );
