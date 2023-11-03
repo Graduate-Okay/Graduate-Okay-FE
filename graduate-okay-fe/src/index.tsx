@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { CookiesProvider } from "react-cookie";
 import App from "./App";
 import reset from "styled-reset";
 import { createGlobalStyle } from "styled-components";
@@ -38,7 +39,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <CookiesProvider>
+      <GlobalStyle />
+      <App />
+    </CookiesProvider>
   </React.StrictMode>
 );

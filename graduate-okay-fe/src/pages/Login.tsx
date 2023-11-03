@@ -6,6 +6,8 @@ import useInput from "../hooks/useInput";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
+import { setCookie } from "../common/cookie";
+import axiosCookie from "../common/axiosCookie";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -31,10 +33,13 @@ const Login: React.FC = () => {
           localStorage.setItem("id", response?.data.data.id);
           localStorage.setItem("nickname", response?.data.data.nickname);
           localStorage.setItem(
-            "accessToken",
-            response?.data.data.tokenInfo.accessToken
+            "refreshToken",
+            response?.data.data.tokenInfo.refreshToken
           );
+          setCookie("accessToken", response?.data.data.tokenInfo.accessToken);
         });
+
+      navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
