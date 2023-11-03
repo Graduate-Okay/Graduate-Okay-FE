@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import MypageSVG from "../assets/imgs/mypage.svg";
@@ -10,11 +10,7 @@ const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
   const [cookies] = useCookies(["accessToken"]);
 
-  useEffect(() => {
-    getInfo();
-  }, []);
-
-  const getInfo = async () => {
+  const getInfo = useCallback(async () => {
     try {
       const response = await axios.get(`${api.user}/info`, {
         headers: {
@@ -27,7 +23,12 @@ const Mypage: React.FC = () => {
         console.log(error);
       }
     }
-  };
+  }, [cookies.accessToken]);
+
+  useEffect(() => {
+    getInfo();
+  }, [getInfo]);
+
   return (
     <ThemeProvider theme={theme}>
       <MypageSection>
