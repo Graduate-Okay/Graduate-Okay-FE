@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
+  const [cookies, , removeCookie] = useCookies(["accessToken"]);
 
   const handlelogOut = () => {
     alert("로그아웃되었습니다.");

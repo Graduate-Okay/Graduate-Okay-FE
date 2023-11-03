@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const emailInput = useInput("");
   const passwordInput = useInput("");
-  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [, setCookie] = useCookies(["accessToken"]);
 
   const submitLogin = async () => {
     if (isEmpty()) {
