@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
+import axios from "axios";
+import api from "../apis/api";
+import { ISubjectData } from "../interfaces";
 
 const KyRecommend: React.FC = () => {
+  const [electives, setElectives] = useState<ISubjectData>();
+
+  const getElectives = useCallback(async () => {
+    try {
+      const response = await axios.get(`${api.subject}`);
+      setElectives(response?.data);
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }, []);
+
+  console.log(electives);
+
+  useEffect(() => {
+    getElectives();
+  }, [getElectives]);
+
   return (
     <ThemeProvider theme={theme}>
       <RecommendDiv>
