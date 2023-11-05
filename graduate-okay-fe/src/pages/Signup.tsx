@@ -9,8 +9,9 @@ import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 const Signup: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
   const emailInput = useInput("");
+  const authNumber = useInput("");
 
-  const submitAuthNumber = async () => {
+  const sendAuthNumber = async () => {
     if (isEmpty()) {
       alert("이메일을 입력해주세요");
       return;
@@ -30,13 +31,33 @@ const Signup: React.FC = () => {
     }
   };
 
+  const submitAuthNumber = async () => {
+    if (isEmpty()) {
+      alert("인증번호를 입력해주세요");
+      return;
+    }
+    try {
+      await axios
+        .get(`${api.user}/email`, {
+          params: {
+            number: authNumber.value,
+          },
+        })
+        .then((response) => console.log(response));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
+    }
+  };
+
   const isEmpty = () => {
     return emailInput.value === "" ? true : false;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      submitAuthNumber();
+      sendAuthNumber();
     }
   };
 
@@ -44,6 +65,7 @@ const Signup: React.FC = () => {
     <ThemeProvider theme={theme}>
       <SignupSection>
         <SignupDiv>회원가입</SignupDiv>
+        <SignupSub>한신대학교 이메일로만 가입이 가능합니다.</SignupSub>
         <SignupInput
           placeholder="이메일을 입력해주세요(example@hs.ac.kr 또는 example)"
           type="text"
@@ -56,15 +78,18 @@ const Signup: React.FC = () => {
           <SignupInput
             placeholder="인증번호를 입력해주세요"
             type="text"
+            value={authNumber.value}
+            onChange={authNumber.onChange}
+            onKeyDown={handleKeyDown}
             autoFocus
           />
         ) : null}
         {isClick ? (
-          <SubmitSignup onClick={() => alert("준비중")}>
+          <SubmitSignup onClick={() => submitAuthNumber()}>
             번호 인증하기
           </SubmitSignup>
         ) : (
-          <SubmitSignup onClick={() => submitAuthNumber()}>
+          <SubmitSignup onClick={() => sendAuthNumber()}>
             인증번호 보내기
           </SubmitSignup>
         )}
@@ -90,6 +115,14 @@ const SignupDiv = styled.div`
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
+`;
+
+const SignupSub = styled.div`
+  display: flex;
+  width: 100%;
+  height: 4vh;
+  justify-content: center;
+  font-size: 1rem;
 `;
 
 const SignupInput = styled.input`
