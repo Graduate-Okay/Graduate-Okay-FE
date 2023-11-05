@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import ArrowNext from "../assets/imgs/ArrowNext.svg";
@@ -13,12 +13,19 @@ const Pagination: React.FC<PaginationProps> = ({
   maxPageNumber,
   getCurrentPage,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageGroupSize = 10;
+
   const paging = () => {
     const numberArray = [];
-    for (let i = 0; i < maxPageNumber; i++) {
+    const startPage =
+      (Math.ceil(currentPage / pageGroupSize) - 1) * pageGroupSize + 1;
+    const endPage = Math.min(startPage + pageGroupSize - 1, maxPageNumber);
+
+    for (let i = startPage; i <= endPage; i++) {
       numberArray.push(
         <Number key={i} onClick={() => pageRouting(i)}>
-          {i + 1}
+          {i}
         </Number>
       );
     }
@@ -27,7 +34,8 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const pageRouting = async (i: number) => {
     try {
-      await getCurrentPage(i);
+      setCurrentPage(i);
+      await getCurrentPage(i - 1);
     } catch (error) {
       throw new Error(`페이징 에러 : ${error}`);
     }
@@ -36,9 +44,25 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <ThemeProvider theme={theme}>
       <Page>
-        <img src={ArrowPrev} alt="prev" />
+        <img
+          src={ArrowPrev}
+          alt="prev"
+          onClick={() => {
+            if (currentPage > 1) {
+              pageRouting(currentPage - 1);
+            }
+          }}
+        />
         {paging()}
-        <img src={ArrowNext} alt="next" />
+        <img
+          src={ArrowNext}
+          alt="next"
+          onClick={() => {
+            if (currentPage < maxPageNumber) {
+              pageRouting(currentPage + 1);
+            }
+          }}
+        />
       </Page>
     </ThemeProvider>
   );
