@@ -35,7 +35,7 @@ const KyRecommendDetail: React.FC = () => {
     <ThemeProvider theme={theme}>
       <DetailSection>
         <DetailIsRequired>
-          {detail?.isRequired ? null : <p>교양필수</p>}
+          {detail?.isRequired ? <p>교양필수</p> : null}
         </DetailIsRequired>
         <DetailTitle>
           {detail?.name} ({detail?.subName})
@@ -45,6 +45,10 @@ const KyRecommendDetail: React.FC = () => {
           <p>인재상 : {detail?.kyModalType || "X"},</p>
           <p>{detail?.credit}학점</p>
         </DetailInfo>
+        {/**
+         * @todo
+         * react-chart.js 로 별점 데이터 받아서 출력하기
+         */}
       </DetailSection>
     </ThemeProvider>
   );

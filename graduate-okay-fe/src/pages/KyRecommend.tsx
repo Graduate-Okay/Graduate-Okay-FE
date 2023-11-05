@@ -106,6 +106,7 @@ const RecommendTable = styled.table`
   margin-top: 1rem;
   margin-bottom: 1rem;
   white-space: nowrap;
+
   @media ${({ theme }) => theme.device.laptop} {
     width: 80%;
   }
