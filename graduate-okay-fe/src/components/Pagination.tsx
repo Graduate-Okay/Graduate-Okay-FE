@@ -74,6 +74,7 @@ const Page = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
   > img {
     width: 5%;
     cursor: pointer;
