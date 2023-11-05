@@ -14,3 +14,13 @@ export interface ISubject {
   kyCoreType: string;
   kyCount: number;
 }
+
+export interface ISubjectDetail extends ISubject {
+  reviewSummary: IReviewSummary[];
+}
+
+export interface IReviewSummary {
+  totalCount: number;
+  avgStarScore: number;
+  reviewIdList: number[];
+}
