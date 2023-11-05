@@ -14,6 +14,8 @@ import RouteChangeTracker from "./utils/RouteChangeTracker";
 import NoticeDetail from "./pages/NoticeDetail";
 import Signup from "./pages/Signup";
 import Find from "./pages/Find";
+import KyRecommendDetail from "./pages/KyRecommendDetail";
+import ModifyInfo from "./pages/ModifyInfo";
 
 function App() {
   const [cookies] = useCookies(["accessToken"]);
@@ -28,6 +30,7 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/:id" element={<NoticeDetail />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
+        <Route path="/KyRecommend/:id" element={<KyRecommendDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/find" element={<Find />} />
@@ -45,6 +48,16 @@ function App() {
           path="/Mypage"
           element={
             cookies.accessToken ? <Mypage /> : <Navigate replace to="/login" />
+          }
+        />
+        <Route
+          path="/mypage/modifyInfo"
+          element={
+            cookies.accessToken ? (
+              <ModifyInfo />
+            ) : (
+              <Navigate replace to="/login" />
+            )
           }
         />
       </Routes>

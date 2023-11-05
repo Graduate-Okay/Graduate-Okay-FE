@@ -5,10 +5,12 @@ import MypageSVG from "../assets/imgs/mypage.svg";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
   const [cookies] = useCookies(["accessToken"]);
+  const navigate = useNavigate();
 
   const getInfo = useCallback(async () => {
     try {
@@ -53,7 +55,7 @@ const Mypage: React.FC = () => {
               <p>나의 정보</p>
             </MypageHeader>
             <MypageRow>
-              <p>닉네임 변경</p>
+              <p onClick={() => navigate("/mypage/modifyInfo")}>프로필 수정</p>
             </MypageRow>
             <MypageRow>
               <p>비밀번호 변경</p>
@@ -61,7 +63,7 @@ const Mypage: React.FC = () => {
             <MypageHeader>
               <p>기타</p>
             </MypageHeader>
-            <MypageRow>
+            <MypageRow onClick={() => navigate("/notice")}>
               <p>공지사항</p>
             </MypageRow>
           </OptionList>
