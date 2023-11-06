@@ -16,30 +16,21 @@ const KyRecommend: React.FC = () => {
   const navigate = useNavigate();
   const search = useInput("");
   const params = {
+    page: currentPage,
     searchWord: search.value,
   };
 
   const getElectives = useCallback(async () => {
     try {
-      const response = await axios.get(`${api.subject}?page=${currentPage}`);
+      const response = await axios.get(
+        `${api.subject}?page=${params.page}&searchWord=${params.searchWord}`
+      );
       setElectives(response?.data.data);
       setMaxPageNumber(response?.data.data.maxPageCount);
     } catch (error) {
       throw new Error(`${error}`);
     }
-  }, [currentPage]);
-
-  const getSearch = async () => {
-    try {
-      const response = await axios.get(`${api.subject}`, {
-        params,
-      });
-      setElectives(response?.data.data);
-      setMaxPageNumber(response?.data.data.maxPageCount);
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  };
+  }, [params.page, params.searchWord]);
 
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -52,7 +43,7 @@ const KyRecommend: React.FC = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      getSearch();
+      getElectives();
       e.preventDefault();
     }
   };
