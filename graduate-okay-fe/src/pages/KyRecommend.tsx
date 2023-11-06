@@ -57,11 +57,7 @@ const KyRecommend: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NoticeSearch name="searchBar">
-        <select name="srchType" id="srchType">
-          <option value="Name">과목명</option>
-          <option value="Creadit">학점</option>
-        </select>
+      <SubjectSearch>
         <input
           type="text"
           placeholder="🔍︎과목명을 입력하세요"
@@ -69,7 +65,7 @@ const KyRecommend: React.FC = () => {
           value={search.value}
           onKeyDown={handleKeyDown}
         />
-      </NoticeSearch>
+      </SubjectSearch>
       <RecommendDiv>
         <TableWrapper>
           <RecommendTable>
@@ -173,8 +169,25 @@ const TableContent = styled.td`
   }
 `;
 
-const NoticeSearch = styled.form`
+const SubjectSearch = styled.form`
   display: flex;
   flex-direction: row;
-  height: 2.5rem;
+  width: 90%;
+  height: 2.3rem;
+  justify-content: right;
+  margin: 0 auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+    margin: 2vh auto;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+  }
+  > input {
+    width: 43%;
+
+    @media ${({ theme }) => theme.device.laptop} {
+      width: 30%;
+    }
+  }
 `;
