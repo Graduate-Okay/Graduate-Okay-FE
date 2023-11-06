@@ -6,12 +6,18 @@ import api from "../apis/api";
 import { ISubjectData, ISubject } from "../interfaces";
 import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
+import useInput from "../hooks/useInput";
 
+// 검색어 입력하면 디바운싱으로 검색 !
 const KyRecommend: React.FC = () => {
   const [electives, setElectives] = useState<ISubjectData | null>(null);
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
+  const search = useInput("");
+  const params = {
+    searchWord: search.value,
+  };
 
   const getElectives = useCallback(async () => {
     try {
@@ -23,6 +29,18 @@ const KyRecommend: React.FC = () => {
     }
   }, [currentPage]);
 
+  const getSearch = async () => {
+    try {
+      const response = await axios.get(`${api.subject}`, {
+        params,
+      });
+      setElectives(response?.data.data);
+      setMaxPageNumber(response?.data.data.maxPageCount);
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  };
+
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
     return;
@@ -32,12 +50,32 @@ const KyRecommend: React.FC = () => {
     navigate(`${subjectId}`);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      getSearch();
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
     getElectives();
   }, [getElectives]);
 
   return (
     <ThemeProvider theme={theme}>
+      <NoticeSearch name="searchBar">
+        <select name="srchType" id="srchType">
+          <option value="Name">과목명</option>
+          <option value="Creadit">학점</option>
+        </select>
+        <input
+          type="text"
+          placeholder="🔍︎과목명을 입력하세요"
+          onChange={search.onChange}
+          value={search.value}
+          onKeyDown={handleKeyDown}
+        />
+      </NoticeSearch>
       <RecommendDiv>
         <TableWrapper>
           <RecommendTable>
@@ -87,7 +125,7 @@ export default KyRecommend;
 const RecommendDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 65vh;
+  height: 80vh;
   flex-direction: column;
   align-items: center;
   margin-top: 3%;
@@ -139,4 +177,10 @@ const TableContent = styled.td`
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.3rem;
   }
+`;
+
+const NoticeSearch = styled.form`
+  display: flex;
+  flex-direction: row;
+  height: 2.5rem;
 `;
