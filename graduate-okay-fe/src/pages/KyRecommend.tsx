@@ -7,17 +7,20 @@ import { ISubjectData, ISubject } from "../interfaces";
 import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
+import useDebounce from "../hooks/useDebounce";
 
-// 검색어 입력하면 디바운싱으로 검색 !
 const KyRecommend: React.FC = () => {
   const [electives, setElectives] = useState<ISubjectData | null>(null);
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
   const search = useInput("");
+
+  const debouncedSearch = useDebounce(search.value, 400);
+
   const params = {
     page: currentPage,
-    searchWord: search.value,
+    searchWord: debouncedSearch,
   };
 
   const getElectives = useCallback(async () => {
