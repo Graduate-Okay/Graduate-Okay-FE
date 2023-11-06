@@ -30,10 +30,19 @@ function App() {
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/:id" element={<NoticeDetail />} />
         <Route path="/KyRecommend" element={<KyRecommend />} />
-        <Route path="/KyRecommend/:id" element={<KyRecommendDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/find" element={<Find />} />
+        <Route
+          path="/KyRecommend/:id"
+          element={
+            cookies.accessToken ? (
+              <KyRecommendDetail />
+            ) : (
+              <Navigate replace to="/login" />
+            )
+          }
+        />
         <Route
           path="/Graduate"
           element={
