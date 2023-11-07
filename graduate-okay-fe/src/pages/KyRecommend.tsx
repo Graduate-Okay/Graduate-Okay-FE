@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
-import axios from "axios";
-import api from "../apis/api";
-import { ISubjectData, ISubject } from "../interfaces";
-import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Pagination from "../components/Pagination";
+import { ISubjectData, ISubject } from "../interfaces";
+import theme from "../constants/theme";
+import api from "../apis/api";
 import useInput from "../hooks/useInput";
 import useDebounce from "../hooks/useDebounce";
+import Downbutton from "../assets/imgs/ArrowDown.svg";
 
 const KyRecommend: React.FC = () => {
   const [electives, setElectives] = useState<ISubjectData | null>(null);
@@ -35,6 +36,10 @@ const KyRecommend: React.FC = () => {
     }
   }, [params.page, params.searchWord]);
 
+  const handleDropdown = () => {
+    alert("준비 중입니다.");
+  };
+
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
     return;
@@ -42,13 +47,6 @@ const KyRecommend: React.FC = () => {
 
   const routeDetail = (subjectId: number) => {
     navigate(`${subjectId}`);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      getElectives();
-      e.preventDefault();
-    }
   };
 
   useEffect(() => {
@@ -63,9 +61,15 @@ const KyRecommend: React.FC = () => {
           placeholder="🔍︎과목명을 입력하세요"
           onChange={search.onChange}
           value={search.value}
-          onKeyDown={handleKeyDown}
         />
       </SubjectSearch>
+      <SearchOptions>
+        <p>과목 수 : {electives?.totalCount}건</p>
+        <DropOptions onClick={handleDropdown}>
+          <p>가나다 순</p>
+          <img src={Downbutton} alt="드롭버튼" />
+        </DropOptions>
+      </SearchOptions>
       <RecommendDiv>
         <TableWrapper>
           <RecommendTable>
@@ -118,7 +122,6 @@ const RecommendDiv = styled.div`
   height: 80vh;
   flex-direction: column;
   align-items: center;
-  margin-top: 3%;
 `;
 
 const TableWrapper = styled.div`
@@ -131,7 +134,6 @@ const TableWrapper = styled.div`
 
 const RecommendTable = styled.table`
   margin: 0 auto;
-  margin-top: 1rem;
   margin-bottom: 1rem;
   white-space: nowrap;
 
@@ -189,5 +191,32 @@ const SubjectSearch = styled.form`
     @media ${({ theme }) => theme.device.laptop} {
       width: 30%;
     }
+  }
+`;
+
+const SearchOptions = styled.div`
+  display: flex;
+  width: 90%;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+    font-size: 1.2rem;
+  }
+`;
+
+const DropOptions = styled.div`
+  display: flex;
+  width: 8rem;
+  align-items: center;
+  cursor: pointer;
+  justify-content: end;
+  > img {
+    width: 2rem;
   }
 `;
