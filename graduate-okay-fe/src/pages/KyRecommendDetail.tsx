@@ -42,7 +42,7 @@ const KyRecommendDetail: React.FC = () => {
         </DetailTitle>
         <DetailInfo>
           <p>핵심역량 : {detail?.kyCoreType || "X"},</p>
-          <p>인재상 : {detail?.kyModalType || "X"},</p>
+          <p>인재상 : {detail?.kyModelType || "X"},</p>
           <p>{detail?.credit}학점</p>
         </DetailInfo>
         {/**

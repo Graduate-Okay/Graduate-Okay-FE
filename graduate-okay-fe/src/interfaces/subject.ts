@@ -10,7 +10,7 @@ export interface ISubject {
   subName: string;
   isRequired: boolean;
   credit: number;
-  kyModalType: string;
+  kyModelType: string;
   kyCoreType: string;
   kyCount: number;
 }
