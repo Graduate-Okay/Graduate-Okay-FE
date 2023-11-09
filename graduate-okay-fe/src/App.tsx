@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
+import Spinner from "./components/Spinner";
 const Header = React.lazy(() => import("./components/Header"));
 const Nav = React.lazy(() => import("./components/Nav"));
 const Footer = React.lazy(() => import("./components/footer/Footer"));
@@ -23,7 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <RouteChangeTracker />
-      <Suspense fallback={<div>로딩중...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Header />
         <Nav />
         <Routes>
