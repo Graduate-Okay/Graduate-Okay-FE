@@ -1,22 +1,22 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
-const Header = React.lazy(() => import("./components/Header"));
-const Nav = React.lazy(() => import("./components/Nav"));
-const Footer = React.lazy(() => import("./components/footer/Footer"));
-const Notice = React.lazy(() => import("./pages/Notice"));
-const Main = React.lazy(() => import("./pages/Main"));
-const KyRecommend = React.lazy(() => import("./pages/KyRecommend"));
-const Graduate = React.lazy(() => import("./pages/Graduate"));
-const Mypage = React.lazy(() => import("./pages/Mypage"));
-const Login = React.lazy(() => import("./pages/Login"));
-const NoticeDetail = React.lazy(() => import("./pages/NoticeDetail"));
-const Signup = React.lazy(() => import("./pages/Signup"));
-const Find = React.lazy(() => import("./pages/Find"));
-const KyRecommendDetail = React.lazy(() => import("./pages/KyRecommendDetail"));
-const ModifyInfo = React.lazy(() => import("./pages/ModifyInfo"));
+const Header = lazy(() => import("./components/Header"));
+const Nav = lazy(() => import("./components/Nav"));
+const Footer = lazy(() => import("./components/footer/Footer"));
+const Notice = lazy(() => import("./pages/Notice"));
+const Main = lazy(() => import("./pages/Main"));
+const KyRecommend = lazy(() => import("./pages/KyRecommend"));
+const Graduate = lazy(() => import("./pages/Graduate"));
+const Mypage = lazy(() => import("./pages/Mypage"));
+const Login = lazy(() => import("./pages/Login"));
+const NoticeDetail = lazy(() => import("./pages/NoticeDetail"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Find = lazy(() => import("./pages/Find"));
+const KyRecommendDetail = lazy(() => import("./pages/KyRecommendDetail"));
+const ModifyInfo = lazy(() => import("./pages/ModifyInfo"));
 
 function App() {
   const [cookies] = useCookies(["accessToken"]);
