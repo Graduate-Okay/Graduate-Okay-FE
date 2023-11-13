@@ -34,8 +34,35 @@
   </tbody>
 </table>
 
-## 개선 기능
-- 디바운스로 성능 개선
+## 개선 기능 💡 
+
+<details>
+<summary>열기/접기</summary>
+
+## 디바운싱 적용
+검색 기능 사용 시, input으로 값이 들어올 때마다 API를 호출하는 문제가 발생했습니다. <br/>
+따로 버튼을 누르지 않아도 검색이 되도록 구현 방향을 잡았기 때문에 `Debounce`를 적용하여 입력을 측정하여 일정 시간이 넘기전에 입력을 받으면 API호출을 하지 않도록 작성했습니다.<br/>
+![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/3dd7d168-3882-4fcf-becd-0490d78b010d) 
+```ts
+const useDebounce = (value: string, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+```
+
+</details>
+
 - 반응형 웹
 - TS
 - 
