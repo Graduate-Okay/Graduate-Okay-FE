@@ -12,10 +12,6 @@ const Main: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <MainPageDiv>
-        <ImgDiv>
-          <p>타이틀</p>
-          <p>컨텐츠내용</p>
-        </ImgDiv>
         <IntroduceSection>
           <IntroduceDiv>
             <TextDiv>
@@ -55,17 +51,6 @@ const MainPageDiv = styled.div`
   width: 100%;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-`;
-
-const ImgDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 10vh;
-  background-image: url("imgs/background.jpg");
-  background-size: 100%;
-  justify-content: center;
-  align-items: center;
 `;
 
 const IntroduceSection = styled.section`
