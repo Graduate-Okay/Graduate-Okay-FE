@@ -1,9 +1,35 @@
-import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import React, { useState } from "react";
+import styled, { ThemeProvider, css } from "styled-components";
 import theme from "../constants/theme";
 import dropdown from "../constants/dropdown";
 
-const Dropdown: React.FC = () => {
+interface DropdownProps {
+  getOption: (
+    selectedKyCore: string | null,
+    selectedKyModel: string | null
+  ) => void;
+}
+
+interface OptionProps {
+  selected?: boolean;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
+  const [selectedKyCore, setSelectedKyCore] = useState<string | null>(null);
+  const [selectedKyModel, setSelectedKyModel] = useState<string | null>(null);
+
+  const handleKyCoreClick = (value: string) => {
+    setSelectedKyCore(value);
+  };
+
+  const handleKyModelClick = (value: string) => {
+    setSelectedKyModel(value);
+  };
+
+  const applyFilters = () => {
+    getOption(selectedKyCore, selectedKyModel);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <DropdownDiv>
@@ -13,7 +39,15 @@ const Dropdown: React.FC = () => {
           </OptionTitle>
           <OptionContents>
             {dropdown.KY_CORE_TYPE.map((item) => {
-              return <p>{item.value}</p>;
+              return (
+                <Option
+                  key={item.id}
+                  selected={selectedKyCore === item.value}
+                  onClick={() => handleKyCoreClick(item.value)}
+                >
+                  {item.value}
+                </Option>
+              );
             })}
           </OptionContents>
         </OptionDiv>
@@ -23,11 +57,19 @@ const Dropdown: React.FC = () => {
           </OptionTitle>
           <OptionContents>
             {dropdown.KY_MODEL_TYPE.map((item) => {
-              return <p>{item.value}</p>;
+              return (
+                <Option
+                  key={item.id}
+                  selected={selectedKyModel === item.value}
+                  onClick={() => handleKyModelClick(item.value)}
+                >
+                  {item.value}
+                </Option>
+              );
             })}
           </OptionContents>
         </OptionDiv>
-        <OptionSelectButton>적용하기</OptionSelectButton>
+        <OptionSelectButton onClick={applyFilters}>적용하기</OptionSelectButton>
       </DropdownDiv>
     </ThemeProvider>
   );
@@ -67,21 +109,6 @@ const OptionTitle = styled.div`
 const OptionContents = styled.div`
   display: flex;
   font-size: 1rem;
-  > p {
-    display: flex;
-    border: 1px solid black;
-    border-radius: 2rem;
-    width: 25%;
-    height: 2.5vh;
-    align-items: center;
-    justify-content: center;
-    @media ${({ theme }) => theme.device.tablet} {
-      font-size: 1.1rem;
-    }
-    @media ${({ theme }) => theme.device.laptop} {
-      width: 10%;
-    }
-  }
 `;
 
 const OptionSelectButton = styled.button`
@@ -98,4 +125,29 @@ const OptionSelectButton = styled.button`
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.1rem;
   }
+`;
+
+const Option = styled.p<OptionProps>`
+  display: flex;
+  border: 1px solid black;
+  border-radius: 2rem;
+  width: 25%;
+  height: 2.5vh;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.1rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 10%;
+  }
+
+  ${({ theme, selected }) =>
+    selected &&
+    css`
+      background-color: ${theme.colors.gray};
+      color: white;
+    `}
 `;

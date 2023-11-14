@@ -19,6 +19,10 @@ const KY_CORE_TYPE = [
     id: 4,
     value: "소통",
   },
+  {
+    id: 5,
+    value: "인문",
+  },
 ];
 
 const KY_MODEL_TYPE = [

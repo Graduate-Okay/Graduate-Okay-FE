@@ -17,6 +17,7 @@ const KyRecommend: React.FC = () => {
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isDropdownView, setIsDropdownView] = useState<boolean>(false);
+  // const [option, setOption] = useState();
   const navigate = useNavigate();
   const search = useInput("");
 
@@ -52,6 +53,16 @@ const KyRecommend: React.FC = () => {
     navigate(`${subjectId}`);
   };
 
+  const getOption = (
+    selectedKyCore: string | null,
+    selectedKyModel: string | null
+  ) => {
+    console.log("selectedkycore : ", selectedKyCore);
+    console.log("selectedKyModel : ", selectedKyModel);
+
+    return;
+  };
+
   useEffect(() => {
     getElectives();
   }, [getElectives]);
@@ -83,7 +94,7 @@ const KyRecommend: React.FC = () => {
           </DropTitle>
         </DropOptions>
       </SearchOptions>
-      {isDropdownView && <Dropdown />}
+      {isDropdownView && <Dropdown getOption={getOption} />}
       <RecommendDiv>
         <TableWrapper>
           <RecommendTable>

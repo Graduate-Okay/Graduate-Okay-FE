@@ -1,3 +1,10 @@
+const colors = {
+  black: "#1e272e",
+  blue: "#0fbcf9",
+  white: "white",
+  gray: "#808e9b",
+};
+
 const deviceSizes = {
   mobile: 375,
   tablet: 768,
@@ -15,6 +22,7 @@ const device = {
 const theme = {
   device,
   deviceSizes,
+  colors,
 };
 
 export default theme;
