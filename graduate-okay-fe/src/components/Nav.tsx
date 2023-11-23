@@ -9,10 +9,10 @@ const Nav: React.FC = () => {
     <ThemeProvider theme={theme}>
       {useCheckMobile() < theme.deviceSizes.tablet ? null : (
         <NavBar>
-          <Link to="Notice">공지사항</Link>
-          <Link to="KyRecommend">인기교양추천</Link>
-          <Link to="Graduate">졸업요건조회</Link>
-          <Link to="mypage">마이페이지</Link>
+          <Link to="/notice">공지사항</Link>
+          <Link to="/kyRecommend">인기교양추천</Link>
+          <Link to="/graduate">졸업요건조회</Link>
+          <Link to="/mypage">마이페이지</Link>
         </NavBar>
       )}
     </ThemeProvider>
@@ -22,7 +22,7 @@ const Nav: React.FC = () => {
 export default Nav;
 
 const NavBar = styled.nav`
-  font-family: "JejuGothic";
+  font-family: ${theme.fonts.JejuGothic};
   font-weight: lighter;
   display: flex;
   align-items: center;

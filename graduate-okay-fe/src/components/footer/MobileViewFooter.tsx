@@ -6,19 +6,19 @@ import RecommendSVG from "../../assets/imgs/recommend.svg";
 import mypage from "../../assets/imgs/mypage.svg";
 import lookup from "../../assets/imgs/lookup.svg";
 
-const MobileViewFooter = () => {
+const MobileViewFooter: React.FC = () => {
   const navigate = useNavigate();
   return (
     <FooterSection>
-      <FooterDiv onClick={() => navigate("/Notice")}>
+      <FooterDiv onClick={() => navigate("/notice")}>
         <img src={NoticeSVG} alt="공지사항" />
         <p>공지사항</p>
       </FooterDiv>
-      <FooterDiv onClick={() => navigate("/KyRecommend")}>
+      <FooterDiv onClick={() => navigate("/kyRecommend")}>
         <img src={RecommendSVG} alt="교양추천" />
         <p>인기교양추천</p>
       </FooterDiv>
-      <FooterDiv onClick={() => navigate("/Graduate")}>
+      <FooterDiv onClick={() => navigate("/graduate")}>
         <img src={lookup} alt="졸업요건조회" />
         <p>졸업요건조회</p>
       </FooterDiv>

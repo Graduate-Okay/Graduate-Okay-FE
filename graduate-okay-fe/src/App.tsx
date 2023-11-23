@@ -31,12 +31,12 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/notice" element={<Notice />} />
           <Route path="/notice/:id" element={<NoticeDetail />} />
-          <Route path="/KyRecommend" element={<KyRecommend />} />
+          <Route path="/kyRecommend" element={<KyRecommend />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/find" element={<Find />} />
           <Route
-            path="/KyRecommend/:id"
+            path="/kyRecommend/:id"
             element={
               cookies.accessToken ? (
                 <KyRecommendDetail />
@@ -46,7 +46,7 @@ function App() {
             }
           />
           <Route
-            path="/Graduate"
+            path="/graduate"
             element={
               cookies.accessToken ? (
                 <Graduate />
@@ -56,7 +56,7 @@ function App() {
             }
           />
           <Route
-            path="/Mypage"
+            path="/mypage"
             element={
               cookies.accessToken ? (
                 <Mypage />
