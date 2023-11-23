@@ -5,6 +5,10 @@ const colors = {
   gray: "#808e9b",
 };
 
+const fonts = {
+  JejuGothic: "JejuGothic",
+};
+
 const deviceSizes = {
   mobile: 375,
   tablet: 768,
@@ -23,6 +27,7 @@ const theme = {
   device,
   deviceSizes,
   colors,
+  fonts,
 };
 
 export default theme;
