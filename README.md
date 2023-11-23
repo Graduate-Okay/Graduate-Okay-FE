@@ -37,11 +37,13 @@
 ## 개선 기능 💡 
 
 <details>
-<summary>열기/접기</summary>
+<summary>검색 시 디바운싱 적용</summary>
 
 ## 디바운싱 적용
 검색 기능 사용 시, input으로 값이 들어올 때마다 API를 호출하는 문제가 발생했습니다. <br/>
-따로 버튼을 누르지 않아도 검색이 되도록 구현 방향을 잡았기 때문에 `Debounce`를 적용하여 입력을 측정하여 일정 시간이 넘기전에 입력을 받으면 API호출을 하지 않도록 작성했습니다.<br/>
+이를 해결하기 위해 따로 버튼을 누르지 않아도 검색이 되도록 구현 방향을 잡았습니다. <br/>
+`Debounce`를 적용하여 입력을 측정하여 일정 시간이 넘기전에 입력을 받으면 API호출을 하지 않도록 작성했습니다.<br/>
+
 ![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/3dd7d168-3882-4fcf-becd-0490d78b010d) 
 ```ts
 const useDebounce = (value: string, delay: number) => {
@@ -63,9 +65,55 @@ const useDebounce = (value: string, delay: number) => {
 
 </details>
 
-- 반응형 웹
-- TS
-- 
+<details>
+<summary>반응형 웹</summary>
+다양한 기기에서 동일한 사용자 경험을 제공하고자 미디어 쿼리와 윈도우 크기를 받아와 반응형 디자인을 적용했습니다.
+  
+![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/065fa207-1d04-4c9f-bf24-3cbb5bbf48c3)
+```ts
+import { useState, useEffect } from "react";
+
+const useCheckMobile = () => {
+  const [checkMobile, setCheckMobile] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
+
+  const handleResize = () => {
+    setCheckMobile(window.innerWidth);
+  };
+
+  return checkMobile;
+};
+export default useCheckMobile;
+```
+```ts
+const deviceSizes = {
+  mobile: 375,
+  tablet: 768,
+  laptop: 1024,
+  largeLaptop: 1440,
+};
+
+const device = {
+  mobile: `screen and (min-width : ${deviceSizes.mobile}px)`,
+  tablet: `screen and (min-width : ${deviceSizes.tablet}px)`,
+  laptop: `screen and (min-width : ${deviceSizes.laptop}px)`,
+  largeLaptop: `screen and (min-width : ${deviceSizes.largeLaptop}px)`,
+};
+
+const theme = {
+  device,
+  deviceSizes,
+  colors,
+  fonts,
+};
+```
+
+</details>
+
+
 
 ## 로컬 환경 테스트
 ```terminal
