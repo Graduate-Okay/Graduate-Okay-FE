@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";
 import App from "./App";
 import reset from "styled-reset";
@@ -37,11 +39,17 @@ const GlobalStyle = createGlobalStyle`
     font-family : 'JejuGothic';
   }
 `;
+
+const queryClient = new QueryClient();
+
 root.render(
   <React.StrictMode>
-    <CookiesProvider>
-      <GlobalStyle />
-      <App />
-    </CookiesProvider>
+    <QueryClientProvider client={queryClient}>
+      <CookiesProvider>
+        <GlobalStyle />
+        <App />
+      </CookiesProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
