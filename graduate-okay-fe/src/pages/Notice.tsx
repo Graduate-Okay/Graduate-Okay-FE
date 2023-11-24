@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { INoticeDetail } from "../interfaces";
 import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
-import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { noticeQuery } from "../queries/noticeQuery";
 
 const Notice: React.FC = () => {
-  const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
 
-  const { data, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["notice", currentPage],
     queryFn: () => noticeQuery(currentPage),
-    placeholderData: keepPreviousData,
   });
-
-  if (error) {
-    throw error;
-  }
 
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -30,12 +24,6 @@ const Notice: React.FC = () => {
   const routeDetail = (id: number) => {
     navigate(`${id}`);
   };
-
-  useEffect(() => {
-    if (data) {
-      setMaxPageNumber(data.data.maxPageCount);
-    }
-  }, [data]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,7 +46,7 @@ const Notice: React.FC = () => {
             })}
         </NoticeContent>
         <Pagination
-          maxPageNumber={maxPageNumber}
+          maxPageNumber={data?.data.maxPageCount}
           getCurrentPage={getCurrentPage}
         />
       </NoticeDiv>
