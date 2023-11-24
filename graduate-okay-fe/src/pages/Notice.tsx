@@ -1,27 +1,26 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
-import axios from "axios";
-import api from "../apis/api";
-import { INotice } from "../interfaces";
+import { INoticeDetail } from "../interfaces";
 import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { noticeQuery } from "../queries/noticeQuery";
 
 const Notice: React.FC = () => {
-  const [notice, setNotice] = useState<INotice>();
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
 
-  const getNotice = useCallback(async () => {
-    try {
-      const response = await axios.get(`${api.notice}?page=${currentPage}`);
-      setNotice(response.data.data);
-      setMaxPageNumber(response.data.data.maxPageCount);
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  }, [currentPage]);
+  const { data, error } = useQuery({
+    queryKey: ["notice", currentPage],
+    queryFn: () => noticeQuery(currentPage),
+    placeholderData: keepPreviousData,
+  });
+
+  if (error) {
+    throw error;
+  }
 
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -33,8 +32,10 @@ const Notice: React.FC = () => {
   };
 
   useEffect(() => {
-    getNotice();
-  }, [getNotice]);
+    if (data) {
+      setMaxPageNumber(data.data.maxPageCount);
+    }
+  }, [data]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,17 +44,18 @@ const Notice: React.FC = () => {
           <p>공지사항</p>
         </NoticeTitle>
         <NoticeContent>
-          {notice?.noticeList.map((notice) => {
-            return (
-              <NoticeData
-                key={notice.id}
-                onClick={() => routeDetail(notice.id)}
-              >
-                <NoticeName>{notice.title}</NoticeName>
-                <NoticeDate>{notice.createdAt}</NoticeDate>
-              </NoticeData>
-            );
-          })}
+          {data &&
+            data?.data.noticeList.map((notice: INoticeDetail) => {
+              return (
+                <NoticeData
+                  key={notice.id}
+                  onClick={() => routeDetail(notice.id)}
+                >
+                  <NoticeName>{notice.title}</NoticeName>
+                  <NoticeDate>{notice.createdAt}</NoticeDate>
+                </NoticeData>
+              );
+            })}
         </NoticeContent>
         <Pagination
           maxPageNumber={maxPageNumber}
