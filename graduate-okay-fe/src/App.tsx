@@ -17,6 +17,7 @@ const Signup = lazy(() => import("./pages/Signup"));
 const Find = lazy(() => import("./pages/Find"));
 const KyRecommendDetail = lazy(() => import("./pages/KyRecommendDetail"));
 const ModifyInfo = lazy(() => import("./pages/ModifyInfo"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 function App() {
   const [cookies] = useCookies(["accessToken"]);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/find" element={<Find />} />
+          <Route path="/admin" element={<Admin />} />
           <Route
             path="/kyRecommend/:id"
             element={
