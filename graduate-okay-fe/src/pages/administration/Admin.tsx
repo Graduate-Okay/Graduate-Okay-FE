@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
-import api from "../../apis/api";
+import { adminLoginQuery } from "../../queries/adminLoginQuery";
 
 const Admin: React.FC = () => {
   const navigate = useNavigate();
@@ -19,22 +19,15 @@ const Admin: React.FC = () => {
       return;
     }
     try {
-      await axios
-        .post(`${api.admin}/login`, {
-          loginId: loginIdInput.value,
-          password: passwordInput.value,
-        })
-        .then((response) => {
-          localStorage.clear();
-          localStorage.setItem(
-            "refreshToken",
-            response?.data.data.tokenInfo.refreshToken
-          );
-          setCookie("accessToken", response?.data.data.tokenInfo.accessToken, {
-            path: "/",
-          });
-        });
-
+      const data = await adminLoginQuery(
+        loginIdInput.value,
+        passwordInput.value
+      );
+      localStorage.clear();
+      localStorage.setItem("refreshToken", data.data.tokenInfo.refreshToken);
+      setCookie("accessToken", data.data.tokenInfo.accessToken, {
+        path: "/",
+      });
       navigate("/administration");
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -50,6 +43,7 @@ const Admin: React.FC = () => {
   const isEmpty = () => {
     return loginIdInput.value === "" || passwordInput.value === "";
   };
+
   return (
     <ThemeProvider theme={theme}>
       <LoginSection>
