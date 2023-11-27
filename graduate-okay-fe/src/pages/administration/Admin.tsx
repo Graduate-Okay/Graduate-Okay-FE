@@ -3,9 +3,9 @@ import styled, { ThemeProvider } from "styled-components";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import theme from "../constants/theme";
-import useInput from "../hooks/useInput";
-import api from "../apis/api";
+import theme from "../../constants/theme";
+import useInput from "../../hooks/useInput";
+import api from "../../apis/api";
 
 const Admin: React.FC = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Admin: React.FC = () => {
           });
         });
 
-      //   navigate("/");
+      navigate("/administration");
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
@@ -55,14 +55,14 @@ const Admin: React.FC = () => {
       <LoginSection>
         <LoginDiv>ADMIN LOGIN</LoginDiv>
         <LoginInput
-          placeholder="example"
+          placeholder="ID"
           type="text"
           value={loginIdInput.value}
           onChange={loginIdInput.onChange}
           autoFocus
         />
         <LoginInput
-          placeholder="password"
+          placeholder="PASSWORD"
           type="password"
           value={passwordInput.value}
           onChange={passwordInput.onChange}
