@@ -8,7 +8,7 @@ const Graduate: React.FC = () => {
       <GraduateSection>
         <GraduateTitle>당신은 졸업이 가능한가요 ?</GraduateTitle>
         <GraduateForm method="post" action="/Graduate">
-          <GraduateButton>
+          <GraduateButton onClick={() => alert("준비중입니다")}>
             <label>학업성적확인서 PDF 업로드</label>
             <input
               type="file"
