@@ -4,10 +4,7 @@ import theme from "../constants/theme";
 import dropdown from "../constants/dropdown";
 
 interface DropdownProps {
-  getOption: (
-    selectedKyCore: string | null,
-    selectedKyModel: string | null
-  ) => void;
+  getOption: (searchType: string | null) => void;
 }
 
 interface OptionProps {
@@ -15,19 +12,14 @@ interface OptionProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
-  const [selectedKyCore, setSelectedKyCore] = useState<string | null>(null);
-  const [selectedKyModel, setSelectedKyModel] = useState<string | null>(null);
+  const [searchType, setSearchType] = useState<string | null>(null);
 
-  const handleKyCoreClick = (value: string) => {
-    setSelectedKyCore(value);
-  };
-
-  const handleKyModelClick = (value: string) => {
-    setSelectedKyModel(value);
+  const handleSearchType = (value: string) => {
+    setSearchType(value);
   };
 
   const applyFilters = () => {
-    getOption(selectedKyCore, selectedKyModel);
+    getOption(searchType);
   };
 
   return (
@@ -42,8 +34,8 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
               return (
                 <Option
                   key={item.id}
-                  selected={selectedKyCore === item.value}
-                  onClick={() => handleKyCoreClick(item.value)}
+                  selected={searchType === item.type}
+                  onClick={() => handleSearchType(item.type)}
                 >
                   {item.value}
                 </Option>
@@ -60,8 +52,8 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
               return (
                 <Option
                   key={item.id}
-                  selected={selectedKyModel === item.value}
-                  onClick={() => handleKyModelClick(item.value)}
+                  selected={searchType === item.type}
+                  onClick={() => handleSearchType(item.type)}
                 >
                   {item.value}
                 </Option>

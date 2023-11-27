@@ -17,7 +17,7 @@ const KyRecommend: React.FC = () => {
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isDropdownView, setIsDropdownView] = useState<boolean>(false);
-  // const [option, setOption] = useState();
+  const [type, setType] = useState<string | null>("PEACE");
   const navigate = useNavigate();
   const search = useInput("");
 
@@ -26,19 +26,20 @@ const KyRecommend: React.FC = () => {
   const params = {
     page: currentPage,
     searchWord: debouncedSearch,
+    type: type,
   };
 
   const getElectives = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${api.subject}?page=${params.page}&searchWord=${params.searchWord}`
+        `${api.subject}?page=${params.page}&searchWord=${params.searchWord}&type=${params.type}`
       );
       setElectives(response?.data.data);
       setMaxPageNumber(response?.data.data.maxPageCount);
     } catch (error) {
       throw new Error(`${error}`);
     }
-  }, [params.page, params.searchWord]);
+  }, [params.page, params.searchWord, params.type]);
 
   const handleDropdown = () => {
     setIsDropdownView(!isDropdownView);
@@ -53,14 +54,8 @@ const KyRecommend: React.FC = () => {
     navigate(`${subjectId}`);
   };
 
-  const getOption = (
-    selectedKyCore: string | null,
-    selectedKyModel: string | null
-  ) => {
-    console.log("selectedkycore : ", selectedKyCore);
-    console.log("selectedKyModel : ", selectedKyModel);
-
-    return;
+  const getOption = (searchType: string | null) => {
+    setType(searchType);
   };
 
   useEffect(() => {
