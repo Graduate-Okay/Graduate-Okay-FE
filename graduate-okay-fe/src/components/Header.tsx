@@ -71,4 +71,8 @@ const SubDiv = styled.div`
   > img {
     width: 3.8rem;
   }
+
+  &:hover {
+    opacity: 0.5;
+  }
 `;

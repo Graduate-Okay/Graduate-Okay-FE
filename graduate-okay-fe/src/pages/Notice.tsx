@@ -102,6 +102,9 @@ const NoticeData = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  &:hover {
+    background-color: #ecf0f1;
+  }
 `;
 
 const NoticeName = styled.div`

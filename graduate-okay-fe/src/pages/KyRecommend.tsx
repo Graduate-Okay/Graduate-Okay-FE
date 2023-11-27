@@ -190,6 +190,9 @@ const TableRow = styled.tr`
   text-align: center;
   font-size: 1rem;
   height: 2.5rem;
+  &:hover {
+    background-color: #ecf0f1;
+  }
 `;
 
 const TableHeader = styled.th`

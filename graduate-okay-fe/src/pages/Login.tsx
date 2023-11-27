@@ -160,9 +160,6 @@ const SubmitLogin = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #9b59b6;
-  &:hover {
-    background-color: #d6d6f5;
-  }
 
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;
@@ -179,6 +176,9 @@ const Account = styled.div`
   font-size: 1.1rem;
   > p {
     cursor: pointer;
+  }
+  &:hover {
+    opacity: 0.5;
   }
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;

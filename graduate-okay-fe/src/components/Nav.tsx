@@ -44,4 +44,10 @@ const NavBar = styled.nav`
     margin: 1rem auto;
     width: 60%;
   }
+
+  a {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
