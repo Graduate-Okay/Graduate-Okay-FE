@@ -74,7 +74,7 @@ const KyRecommend: React.FC = () => {
         <p>과목명, 학점, 수강 횟수 클릭 시 오름/내림차순으로 정렬합니다.</p>
       </ExplainDiv>
       <SubjectSearch>
-        <input
+        <InputSearch
           type="text"
           placeholder="🔍︎과목명을 입력하세요"
           onChange={search.onChange}
@@ -230,10 +230,22 @@ const SubjectSearch = styled.form`
   @media ${({ theme }) => theme.device.laptop} {
     width: 70%;
   }
-  > input {
-    width: 43%;
+`;
 
-    @media ${({ theme }) => theme.device.laptop} {
+const InputSearch = styled.input`
+  display: flex;
+  width: 40%;
+  padding: 0.5rem;
+  transition: width 0.3s ease;
+
+  &:focus {
+    width: 50%;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 15%;
+
+    &:focus {
       width: 20%;
     }
   }
