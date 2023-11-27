@@ -7,6 +7,10 @@ import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import { adminLoginQuery } from "../../queries/adminLoginQuery";
 
+/**
+ * @todo
+ * 추후에 관리자용 웹 레포지토리로 분리하기
+ */
 const Admin: React.FC = () => {
   const navigate = useNavigate();
   const loginIdInput = useInput("");
