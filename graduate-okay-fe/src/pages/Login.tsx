@@ -161,6 +161,11 @@ const SubmitLogin = styled.div`
   align-items: center;
   background-color: #9b59b6;
 
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;
   }
