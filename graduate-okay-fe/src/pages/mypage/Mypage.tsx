@@ -54,11 +54,11 @@ const Mypage: React.FC = () => {
               <p>나의 정보</p>
             </MypageHeader>
             <MypageRow>
-              <p onClick={() => navigate("/mypage/modifyInfo")}>프로필 수정</p>
+              <p onClick={() => navigate("/mypage/modifyInfo")}>
+                정보 수정하기
+              </p>
             </MypageRow>
-            <MypageRow>
-              <p>비밀번호 변경</p>
-            </MypageRow>
+
             <MypageHeader>
               <p>기타</p>
             </MypageHeader>
