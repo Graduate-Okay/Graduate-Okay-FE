@@ -12,6 +12,10 @@ import Downbutton from "../assets/imgs/ArrowDown.svg";
 import Upbutton from "../assets/imgs/ArrowUp.svg";
 import Dropdown from "../components/Dropdown";
 
+/**
+ * @todo type null값 들어와도 검색되도록 수정요청 필요
+ * 수정되면 초기화하기 버튼 생성해서 setType에 null넣으면 초기화 기능 완료
+ */
 const KyRecommend: React.FC = () => {
   const [electives, setElectives] = useState<ISubjectData | null>(null);
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
