@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
-import MypageSVG from "../assets/imgs/mypage.svg";
-import axios, { AxiosError } from "axios";
-import api from "../apis/api";
+import theme from "../../constants/theme";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import MypageSVG from "../../assets/imgs/mypage.svg";
+import api from "../../apis/api";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -41,7 +41,6 @@ const Mypage: React.FC = () => {
             </UserImg>
             <UserDiv>
               <UserNickname>안녕하세요, {nickname}님</UserNickname>
-              <UserAdmission>한신대 00학번</UserAdmission>
             </UserDiv>
           </UserInfo>
           <OptionList>
@@ -49,7 +48,7 @@ const Mypage: React.FC = () => {
               <p>나의 졸업요건 조회</p>
             </MypageHeader>
             <MypageRow>
-              <p>졸업결과 확인하기</p>
+              <p onClick={() => navigate("/graduate")}>졸업결과 확인하기</p>
             </MypageRow>
             <MypageHeader>
               <p>나의 정보</p>
@@ -63,8 +62,11 @@ const Mypage: React.FC = () => {
             <MypageHeader>
               <p>기타</p>
             </MypageHeader>
-            <MypageRow onClick={() => navigate("/notice")}>
-              <p>공지사항</p>
+            <MypageRow>
+              <p onClick={() => navigate("/notice")}>공지사항</p>
+            </MypageRow>
+            <MypageRow>
+              <p onClick={() => alert("준비중입니다!")}>회원탈퇴</p>
             </MypageRow>
           </OptionList>
         </MypageDiv>
@@ -140,16 +142,6 @@ const UserNickname = styled.div`
   }
 `;
 
-const UserAdmission = styled.div`
-  display: flex;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.2rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.3rem;
-  }
-`;
-
 const OptionList = styled.div`
   display: flex;
   flex-direction: column;
@@ -165,7 +157,12 @@ const MypageRow = styled.div`
 
   > p {
     margin-left: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      color: gray;
+    }
   }
+
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.3rem;
   }

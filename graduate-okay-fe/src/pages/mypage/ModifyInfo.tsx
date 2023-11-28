@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
+import theme from "../../constants/theme";
 
 const ModifyInfo: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <ModifyInfoSection>
-        <ModifyInfoDiv></ModifyInfoDiv>
+        <ModifyInfoDiv>
+          <SubmitLogin>닉네임 변경</SubmitLogin>
+          <SubmitLogin>비밀번호 변경</SubmitLogin>
+        </ModifyInfoDiv>
       </ModifyInfoSection>
     </ThemeProvider>
   );
@@ -37,5 +40,29 @@ const ModifyInfoDiv = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     width: 30%;
     height: 80%;
+  }
+`;
+
+const SubmitLogin = styled.div`
+  display: flex;
+  width: 70%;
+  height: 3rem;
+  margin: auto;
+  border-radius: 3px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background-color: #9b59b6;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 50%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 30%;
   }
 `;

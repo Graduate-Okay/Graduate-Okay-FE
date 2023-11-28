@@ -10,13 +10,13 @@ const Notice = lazy(() => import("./pages/Notice"));
 const Main = lazy(() => import("./pages/Main"));
 const KyRecommend = lazy(() => import("./pages/KyRecommend"));
 const Graduate = lazy(() => import("./pages/Graduate"));
-const Mypage = lazy(() => import("./pages/Mypage"));
+const Mypage = lazy(() => import("./pages/mypage/Mypage"));
 const Login = lazy(() => import("./pages/Login"));
 const NoticeDetail = lazy(() => import("./pages/NoticeDetail"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Find = lazy(() => import("./pages/Find"));
 const KyRecommendDetail = lazy(() => import("./pages/KyRecommendDetail"));
-const ModifyInfo = lazy(() => import("./pages/ModifyInfo"));
+const ModifyInfo = lazy(() => import("./pages/mypage/ModifyInfo"));
 const Admin = lazy(() => import("./pages/administration/Admin"));
 const Administration = lazy(
   () => import("./pages/administration/Administration")
