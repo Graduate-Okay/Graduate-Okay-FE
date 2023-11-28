@@ -1,14 +1,57 @@
 import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
+import useInput from "../../hooks/useInput";
+import axios, { AxiosError } from "axios";
+import api from "../../apis/api";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const ModifyInfo: React.FC = () => {
   const [change, setChange] = useState<string>();
+  const input = useInput("");
+  const [cookies] = useCookies(["accessToken"]);
+  const navigate = useNavigate();
 
   const handleClick = (value: string) => {
     setChange(value);
   };
 
+  const changeInfomation = async () => {
+    if (isEmpty()) {
+      alert("입력칸이 비어있습니다.");
+      return;
+    }
+    try {
+      const payload = {
+        [change!]: input.value,
+      };
+      await axios
+        .patch(`${api.user}/info`, payload, {
+          headers: {
+            Authorization: `Bearer ${cookies.accessToken}`,
+          },
+        })
+        .then(() => {
+          alert("변경이 완료되었습니다.");
+          navigate("/mypage");
+        });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
+    }
+  };
+
+  const isEmpty = () => {
+    return input.value === "";
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      changeInfomation();
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <ModifyInfoSection>
@@ -17,8 +60,17 @@ const ModifyInfo: React.FC = () => {
             <ChangeInfo>
               <Title>{change}</Title>
               <Content>
-                <LoginInput placeholder={change} />
-                <ChangeButton>변경하기</ChangeButton>
+                <LoginInput
+                  placeholder={change}
+                  type={change}
+                  value={input.value}
+                  onChange={input.onChange}
+                  onKeyDown={handleKeyDown}
+                  autoFocus
+                />
+                <ChangeButton onClick={() => changeInfomation()}>
+                  변경하기
+                </ChangeButton>
               </Content>
             </ChangeInfo>
           ) : (
