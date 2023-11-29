@@ -67,6 +67,8 @@ const useDebounce = (value: string, delay: number) => {
 
 <details>
 <summary>반응형 웹</summary>
+
+## 반응형 웹 적용
 다양한 기기에서 동일한 사용자 경험을 제공하고자 미디어 쿼리와 윈도우 크기를 받아와 반응형 디자인을 적용했습니다.
   
 ![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/065fa207-1d04-4c9f-bf24-3cbb5bbf48c3)
@@ -113,7 +115,29 @@ const theme = {
 
 </details>
 
+## UI
 
+<details>
+<summary>메인 페이지</summary>
+
+## 메인 페이지 
+
+왼쪽 : 모바일, 오른쪽 : 테블릿 이상 사이즈
+
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/6ebd7319-efc0-4359-96bd-3b8d65158aa0' alt='gif' />
+      </td>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0a39d6c1-aac2-446b-ad71-ed3c9959fa21'  alt='gif' />   
+      </td>
+     </tr>
+  </tbody>
+</table>
+
+</details>
 
 ## 로컬 환경 테스트
 ```terminal
