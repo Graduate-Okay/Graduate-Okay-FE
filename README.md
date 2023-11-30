@@ -139,6 +139,11 @@ const theme = {
 
 </details>
 
+## 유즈케이스
+![제목 없는 다이어그램 drawio](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/8fd77727-4bb4-45e9-80e2-1d406292f136)
+
+
+
 ## 로컬 환경 테스트
 ```terminal
 git clone https://github.com/Graduate-Okay/Graduate-Okay-FE.git
