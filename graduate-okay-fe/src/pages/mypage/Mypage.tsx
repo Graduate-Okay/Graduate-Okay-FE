@@ -22,10 +22,29 @@ const Mypage: React.FC = () => {
       setNickname(response?.data.data.nickname);
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
+        alert(error?.response?.data?.message);
       }
     }
   }, [cookies.accessToken]);
+
+  const handleWithdrawal = async () => {
+    try {
+      const response = await axios.delete(`${api.user}/withdrawal`, {
+        headers: {
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+      });
+      if (response?.data.status === "OK") {
+        alert("정상적으로 회원탈퇴되었습니다.");
+        localStorage.clear();
+        navigate("/");
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error?.response?.data?.message);
+      }
+    }
+  };
 
   useEffect(() => {
     getInfo();
@@ -66,7 +85,7 @@ const Mypage: React.FC = () => {
               <p onClick={() => navigate("/notice")}>공지사항</p>
             </MypageRow>
             <MypageRow>
-              <p onClick={() => alert("준비중입니다!")}>회원탈퇴</p>
+              <p onClick={() => handleWithdrawal()}>회원탈퇴</p>
             </MypageRow>
           </OptionList>
         </MypageDiv>
