@@ -8,14 +8,17 @@ import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 
 const Signup: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
+  const [isAuth, setIsAuth] = useState<boolean>(false);
   const emailInput = useInput("");
   const authNumber = useInput("");
+  const passwordInput = useInput("");
 
   const sendAuthNumber = async () => {
     if (isEmpty()) {
       alert("이메일을 입력해주세요");
       return;
     }
+    alert("인증번호를 전송했습니다. 메일을 확인해주세요");
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
 
@@ -37,13 +40,37 @@ const Signup: React.FC = () => {
       return;
     }
     try {
-      await axios
-        .get(`${api.user}/email`, {
-          params: {
-            number: authNumber.value,
-          },
-        })
-        .then((response) => console.log(response));
+      const response = await axios.get(`${api.user}/email`, {
+        params: {
+          number: authNumber.value,
+        },
+      });
+      if (response?.data.status === "OK") {
+        setIsAuth(true);
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
+    }
+  };
+
+  const submitPassword = async () => {
+    if (isEmpty()) {
+      alert("비밀번호를 입력해주세요");
+      return;
+    }
+    const email = emailInput.value;
+    emailInput.value = CheckSchoolEmail(email);
+
+    try {
+      const response = await axios.post(`${api.user}/join`, {
+        email: emailInput.value,
+        password: passwordInput.value,
+      });
+      if (response?.data.status === "CREATED") {
+        alert("회원가입이 완료되었습니다.");
+      }
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
@@ -81,10 +108,21 @@ const Signup: React.FC = () => {
             value={authNumber.value}
             onChange={authNumber.onChange}
             onKeyDown={handleKeyDown}
-            autoFocus
           />
         ) : null}
-        {isClick ? (
+        {isAuth ? (
+          <SignupInput
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            value={passwordInput.value}
+            onChange={passwordInput.onChange}
+            onKeyDown={handleKeyDown}
+          />
+        ) : null}
+
+        {isAuth ? (
+          <SubmitSignup onClick={() => submitPassword()}>회원가입</SubmitSignup>
+        ) : isClick ? (
           <SubmitSignup onClick={() => submitAuthNumber()}>
             번호 인증하기
           </SubmitSignup>
