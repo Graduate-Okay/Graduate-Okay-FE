@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useInput from "../hooks/useInput";
@@ -7,6 +8,7 @@ import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 
 const Signup: React.FC = () => {
+  const navigate = useNavigate();
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const emailInput = useInput("");
@@ -71,6 +73,7 @@ const Signup: React.FC = () => {
       if (response?.data.status === "CREATED") {
         alert("회원가입이 완료되었습니다.");
       }
+      navigate("/");
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data?.message);
@@ -108,6 +111,7 @@ const Signup: React.FC = () => {
             value={authNumber.value}
             onChange={authNumber.onChange}
             onKeyDown={handleKeyDown}
+            autoFocus
           />
         ) : null}
         {isAuth ? (
@@ -117,6 +121,7 @@ const Signup: React.FC = () => {
             value={passwordInput.value}
             onChange={passwordInput.onChange}
             onKeyDown={handleKeyDown}
+            autoFocus
           />
         ) : null}
 

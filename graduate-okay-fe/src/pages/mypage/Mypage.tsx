@@ -9,7 +9,7 @@ import api from "../../apis/api";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
-  const [cookies] = useCookies(["accessToken"]);
+  const [cookies, , removeCookie] = useCookies(["accessToken"]);
   const navigate = useNavigate();
 
   const getInfo = useCallback(async () => {
@@ -28,6 +28,10 @@ const Mypage: React.FC = () => {
   }, [cookies.accessToken]);
 
   const handleWithdrawal = async () => {
+    const withdrawal = window.confirm("정말 탈퇴하시겠습니까?");
+    if (!withdrawal) {
+      return;
+    }
     try {
       const response = await axios.delete(`${api.user}/withdrawal`, {
         headers: {
@@ -36,6 +40,7 @@ const Mypage: React.FC = () => {
       });
       if (response?.data.status === "OK") {
         alert("정상적으로 회원탈퇴되었습니다.");
+        removeCookie("accessToken");
         localStorage.clear();
         navigate("/");
       }

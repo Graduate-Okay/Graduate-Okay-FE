@@ -14,7 +14,6 @@ const Mypage = lazy(() => import("./pages/mypage/Mypage"));
 const Login = lazy(() => import("./pages/Login"));
 const NoticeDetail = lazy(() => import("./pages/NoticeDetail"));
 const Signup = lazy(() => import("./pages/Signup"));
-const Find = lazy(() => import("./pages/Find"));
 const KyRecommendDetail = lazy(() => import("./pages/KyRecommendDetail"));
 const ModifyInfo = lazy(() => import("./pages/mypage/ModifyInfo"));
 const Admin = lazy(() => import("./pages/administration/Admin"));
@@ -38,7 +37,6 @@ function App() {
           <Route path="/kyRecommend" element={<KyRecommend />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/find" element={<Find />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/administration" element={<Administration />} />
           <Route

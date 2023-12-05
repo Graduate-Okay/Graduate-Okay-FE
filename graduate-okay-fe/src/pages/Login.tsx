@@ -77,6 +77,7 @@ const Login: React.FC = () => {
           value={passwordInput.value}
           onChange={passwordInput.onChange}
           onKeyDown={handleKeyDown}
+          autoFocus
         />
         <LoginStatus>
           <input type="checkbox" />
