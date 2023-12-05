@@ -139,6 +139,66 @@ const theme = {
 
 </details>
 
+<details>
+<summary>공지사항 페이지</summary>
+  
+## 공지사항 페이지
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/d6e0f781-9002-4c12-b82a-3d86360ae2b1' alt='gif' />
+      </td>
+     </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+<summary>인기교양추천 페이지</summary>
+  
+## 인기교양추천 페이지
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="50%">
+        <img src = '' alt='gif' />
+      </td>
+     </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+<summary>졸업요건조회 페이지</summary>
+  
+## 졸업요건조회 페이지
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="50%">
+        <img src = '' alt='gif' />
+      </td>
+     </tr>
+  </tbody>
+</table>
+</details>
+
+<details>
+<summary>마이 페이지</summary>
+  
+## 로그인 & 마이 페이지
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="50%">
+        <img src = '' alt='gif' />
+      </td>
+     </tr>
+  </tbody>
+</table>
+</details>
+
 ## 유즈케이스
 ![제목 없는 다이어그램 drawio](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/8fd77727-4bb4-45e9-80e2-1d406292f136)
 
