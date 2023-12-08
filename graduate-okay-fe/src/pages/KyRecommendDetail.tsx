@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
   const [review, setReview] = useState<IReview>();
+  const [message, setMessage] = useState<string>("");
   const params = useParams();
   const paramsId = params.id;
   const [cookies] = useCookies(["accessToken"]);
@@ -37,7 +38,7 @@ const KyRecommendDetail: React.FC = () => {
       setReview(response.data);
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
+        setMessage(error.response?.data?.message);
       }
     }
   }, [paramsId, cookies.accessToken]);
@@ -65,6 +66,12 @@ const KyRecommendDetail: React.FC = () => {
          * @todo
          * react-chart.js 로 별점 데이터 받아서 출력하기
          */}
+        <ReviewSection>
+          <HandleReview>
+            <p>리뷰 쓰기🖋️</p>
+          </HandleReview>
+          {review ? <div>{review.content}</div> : <div>{message}</div>}
+        </ReviewSection>
       </DetailSection>
     </ThemeProvider>
   );
@@ -119,5 +126,23 @@ const DetailInfo = styled.div`
   border-bottom: 1px solid #a4b0be;
   > p {
     margin-right: 0.5rem;
+  }
+`;
+
+const ReviewSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const HandleReview = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  height: 2rem;
+  font-size: 1.1rem;
+
+  &:hover {
+    opacity: 0.5;
   }
 `;
