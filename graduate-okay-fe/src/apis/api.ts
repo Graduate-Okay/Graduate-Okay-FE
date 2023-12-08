@@ -4,6 +4,7 @@ const api = {
   user: `${address}/user`,
   subject: `${address}/subject`,
   admin: `${address}/admin`,
+  review: `${address}/review`,
 };
 
 export default api;

@@ -2,13 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { useParams } from "react-router-dom";
-import { ISubjectDetail } from "../interfaces";
-import axios from "axios";
+import { IReview, ISubjectDetail } from "../interfaces";
+import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
+  const [review, setReview] = useState<IReview>();
   const params = useParams();
   const paramsId = params.id;
   const [cookies] = useCookies(["accessToken"]);
@@ -26,11 +27,26 @@ const KyRecommendDetail: React.FC = () => {
     }
   }, [paramsId, cookies.accessToken]);
 
+  const getReview = useCallback(async () => {
+    try {
+      const response = await axios.get(`${api.review}/${paramsId}`, {
+        headers: {
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+      });
+      setReview(response.data);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data?.message);
+      }
+    }
+  }, [paramsId, cookies.accessToken]);
+
   useEffect(() => {
     getDetail();
-  }, [getDetail]);
+    getReview();
+  }, [getDetail, getReview]);
 
-  console.log(detail);
   return (
     <ThemeProvider theme={theme}>
       <DetailSection>
