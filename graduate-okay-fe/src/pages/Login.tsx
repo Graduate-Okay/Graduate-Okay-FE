@@ -79,10 +79,7 @@ const Login: React.FC = () => {
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        <LoginStatus>
-          <input type="checkbox" />
-          <p>로그인 상태 유지</p>
-        </LoginStatus>
+
         <SubmitLogin onClick={() => submitLogin()}>LOGIN</SubmitLogin>
         <Account>
           <p onClick={() => navigate(`/signup`)}>회원가입</p>
@@ -132,19 +129,6 @@ const LoginInput = styled.input`
 
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 30%;
-  }
-`;
-
-const LoginStatus = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 0.5rem;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 50%;
-    margin: 0 auto;
   }
   @media ${({ theme }) => theme.device.laptop} {
     width: 30%;
