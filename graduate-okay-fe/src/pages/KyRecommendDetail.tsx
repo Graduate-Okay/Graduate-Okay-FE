@@ -6,11 +6,13 @@ import { IReview, ISubjectDetail } from "../interfaces";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
+import ReviewModal from "./ReviewModal";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
   const [review, setReview] = useState<IReview>();
   const [message, setMessage] = useState<string>("");
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const params = useParams();
   const paramsId = params.id;
   const [cookies] = useCookies(["accessToken"]);
@@ -68,11 +70,12 @@ const KyRecommendDetail: React.FC = () => {
          */}
         <ReviewSection>
           <HandleReview>
-            <p>리뷰 쓰기🖋️</p>
+            <p onClick={() => setOpenModal(!openModal)}>리뷰 쓰기🖋️</p>
           </HandleReview>
           {review ? <div>{review.content}</div> : <div>{message}</div>}
         </ReviewSection>
       </DetailSection>
+      {openModal ? <ReviewModal /> : null}
     </ThemeProvider>
   );
 };
