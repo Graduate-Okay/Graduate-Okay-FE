@@ -12,7 +12,7 @@ const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
   const [review, setReview] = useState<IReview>();
   const [message, setMessage] = useState<string>("");
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const params = useParams();
   const paramsId = params.id;
   const [cookies] = useCookies(["accessToken"]);
@@ -45,6 +45,10 @@ const KyRecommendDetail: React.FC = () => {
     }
   }, [paramsId, cookies.accessToken]);
 
+  const handleCloseModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
     getDetail();
     getReview();
@@ -70,12 +74,14 @@ const KyRecommendDetail: React.FC = () => {
          */}
         <ReviewSection>
           <HandleReview>
-            <p onClick={() => setOpenModal(!openModal)}>리뷰 쓰기🖋️</p>
+            <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
           </HandleReview>
           {review ? <div>{review.content}</div> : <div>{message}</div>}
         </ReviewSection>
       </DetailSection>
-      {openModal ? <ReviewModal /> : null}
+      {isOpen ? (
+        <ReviewModal onClose={handleCloseModal} title={detail?.name} />
+      ) : null}
     </ThemeProvider>
   );
 };
