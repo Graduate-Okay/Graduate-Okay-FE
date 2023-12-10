@@ -21,7 +21,7 @@ const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
             <ReviewClose onClick={onClose}>🗙</ReviewClose>
           </ModalHeader>
           <ModalContent>
-            <SubjectTitle>과목명 - {title}</SubjectTitle>
+            <SubjectTitle>{title}</SubjectTitle>
             <InputDiv>
               <TitleInput
                 type="text"
@@ -31,7 +31,6 @@ const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
                 autoFocus
               />
               <ContentInput
-                type="text"
                 placeholder="내용을 입력해주세요"
                 onChange={reviewContent.onChange}
                 value={reviewContent.value}
@@ -117,8 +116,12 @@ const TitleInput = styled.input`
   width: 100%;
   padding: 0.5rem;
 `;
-const ContentInput = styled(TitleInput)`
+const ContentInput = styled.textarea`
+  display: flex;
+  width: 100%;
+  padding: 0.5rem;
   height: 70%;
+  resize: none;
 `;
 
 const InputDiv = styled.div`
@@ -130,7 +133,7 @@ const InputDiv = styled.div`
 
 const SubjectTitle = styled.div`
   display: flex;
-  color: gray;
+  font-weight: bold;
   font-size: 1.2rem;
   height: 10%;
   align-items: center;

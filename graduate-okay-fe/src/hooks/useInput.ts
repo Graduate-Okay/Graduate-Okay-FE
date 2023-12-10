@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from "react";
 
 interface InputHook {
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 /**
@@ -11,7 +11,9 @@ interface InputHook {
  */
 const useInput = (initialValue: string): InputHook => {
   const [value, setValue] = useState(initialValue);
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setValue(e.target.value);
   };
 
