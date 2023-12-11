@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
 import ReviewModal from "./ReviewModal";
+import StarRate from "../components/StarRate";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
@@ -68,12 +69,13 @@ const KyRecommendDetail: React.FC = () => {
           <p>인재상 : {detail?.kyModelType || "X"},</p>
           <p>{detail?.credit}학점</p>
         </DetailInfo>
-        {/**
-         * @todo
-         * react-chart.js 로 별점 데이터 받아서 출력하기
-         */}
         <ReviewSection>
           <HandleReview>
+            <StarDiv>
+              <StarRate review={detail?.reviewSummary?.[0] || undefined} />
+              <p>4.0/5.0</p>
+              <p>111건</p>
+            </StarDiv>
             <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
           </HandleReview>
           {review ? <div>{review.content}</div> : <div>{message}</div>}
@@ -146,12 +148,21 @@ const ReviewSection = styled.section`
 
 const HandleReview = styled.div`
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
   align-items: center;
   height: 2rem;
   font-size: 1.1rem;
 
   &:hover {
     opacity: 0.5;
+  }
+`;
+
+const StarDiv = styled.div`
+  display: flex;
+  align-items: center;
+  > p {
+    width: 100%;
+    margin: 0px 5px;
   }
 `;
