@@ -2,6 +2,8 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useInput from "../hooks/useInput";
+import axios, { AxiosError } from "axios";
+import api from "../apis/api";
 
 interface ModalProps {
   onClose: () => void;
@@ -11,6 +13,19 @@ interface ModalProps {
 const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
   const reviewTitle = useInput("");
   const reviewContent = useInput("");
+
+  const submitReview = async () => {
+    try {
+      await axios.post(`${api.review}`, {
+        title: reviewTitle.value,
+        content: reviewContent.value,
+      });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,7 +53,7 @@ const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
             </InputDiv>
           </ModalContent>
           <ModalFooter>
-            <p>등록하기</p>
+            <p onClick={submitReview}>등록하기</p>
           </ModalFooter>
         </ModalDiv>
       </ModalSection>
@@ -79,13 +94,12 @@ const ModalDiv = styled.div`
 const ModalHeader = styled.div`
   display: flex;
   font-size: 1.6rem;
-  width: 100%;
+  width: 95%;
   align-items: center;
   flex-grow: 1;
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.8rem;
-    width: 95%;
   }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 2rem;
