@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
-import useInput from "../hooks/useInput";
+import theme from "../../constants/theme";
+import useInput from "../../hooks/useInput";
 import axios, { AxiosError } from "axios";
-import api from "../apis/api";
+import api from "../../apis/api";
 
 interface ModalProps {
   onClose: () => void;

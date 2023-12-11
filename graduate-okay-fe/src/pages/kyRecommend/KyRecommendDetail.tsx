@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
+import theme from "../../constants/theme";
 import { useParams } from "react-router-dom";
-import { IReview, ISubjectDetail } from "../interfaces";
+import { IReview, ISubjectDetail } from "../../interfaces";
 import axios, { AxiosError } from "axios";
-import api from "../apis/api";
+import api from "../../apis/api";
 import { useCookies } from "react-cookie";
 import ReviewModal from "./ReviewModal";
-import StarRate from "../components/StarRate";
+import StarRate from "./StarRate";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();

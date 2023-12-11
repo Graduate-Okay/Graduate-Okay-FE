@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { IReviewSummary } from "../interfaces";
+import { IReviewSummary } from "../../interfaces";
 
 interface StarRateProps {
   review?: IReviewSummary;
@@ -11,7 +11,7 @@ const StarRate: React.FC<StarRateProps> = ({ review }) => {
   const AVG_RATE = rate ? rate : 0;
   const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
-  const calcStarRates = () => {
+  const calcStarRates = useCallback(() => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
     let starVerScore = (AVG_RATE * 70) / 5;
     let idx = 0;
@@ -21,12 +21,13 @@ const StarRate: React.FC<StarRateProps> = ({ review }) => {
       starVerScore -= 14;
     }
     tempStarRatesArr[idx] = starVerScore;
+
     return tempStarRatesArr;
-  };
+  }, [AVG_RATE]);
 
   useEffect(() => {
     setRatesResArr(calcStarRates);
-  }, []);
+  }, [calcStarRates]);
 
   return (
     <StarRateWrap>

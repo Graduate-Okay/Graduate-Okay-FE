@@ -8,13 +8,15 @@ const Nav = lazy(() => import("./components/Nav"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Notice = lazy(() => import("./pages/Notice"));
 const Main = lazy(() => import("./pages/Main"));
-const KyRecommend = lazy(() => import("./pages/KyRecommend"));
+const KyRecommend = lazy(() => import("./pages/kyRecommend/KyRecommend"));
 const Graduate = lazy(() => import("./pages/Graduate"));
 const Mypage = lazy(() => import("./pages/mypage/Mypage"));
 const Login = lazy(() => import("./pages/Login"));
 const NoticeDetail = lazy(() => import("./pages/NoticeDetail"));
 const Signup = lazy(() => import("./pages/Signup"));
-const KyRecommendDetail = lazy(() => import("./pages/KyRecommendDetail"));
+const KyRecommendDetail = lazy(
+  () => import("./pages/kyRecommend/KyRecommendDetail")
+);
 const ModifyInfo = lazy(() => import("./pages/mypage/ModifyInfo"));
 const Admin = lazy(() => import("./pages/administration/Admin"));
 const Administration = lazy(

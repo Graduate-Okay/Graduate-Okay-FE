@@ -2,15 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Pagination from "../components/Pagination";
-import { ISubjectData, ISubject } from "../interfaces";
-import theme from "../constants/theme";
-import api from "../apis/api";
-import useInput from "../hooks/useInput";
-import useDebounce from "../hooks/useDebounce";
-import Downbutton from "../assets/imgs/ArrowDown.svg";
-import Upbutton from "../assets/imgs/ArrowUp.svg";
-import Dropdown from "../components/Dropdown";
+import Pagination from "../../components/Pagination";
+import { ISubjectData, ISubject } from "../../interfaces";
+import theme from "../../constants/theme";
+import api from "../../apis/api";
+import useInput from "../../hooks/useInput";
+import useDebounce from "../../hooks/useDebounce";
+import Downbutton from "../../assets/imgs/ArrowDown.svg";
+import Upbutton from "../../assets/imgs/ArrowUp.svg";
+import Dropdown from "../../components/Dropdown";
 
 /**
  * @todo type null값 들어와도 검색되도록 수정요청 필요
