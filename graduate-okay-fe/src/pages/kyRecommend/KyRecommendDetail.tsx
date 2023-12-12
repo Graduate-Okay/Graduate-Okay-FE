@@ -67,14 +67,14 @@ const KyRecommendDetail: React.FC = () => {
         <DetailInfo>
           <p>핵심역량 : {detail?.kyCoreType || "X"},</p>
           <p>인재상 : {detail?.kyModelType || "X"},</p>
-          <p>{detail?.credit}학점</p>
+          <p>{detail?.credit || 0}학점</p>
         </DetailInfo>
         <ReviewSection>
           <HandleReview>
             <StarDiv>
               <StarRate review={detail?.reviewSummary?.[0] || undefined} />
-              <p>4.0/5.0</p>
-              <p>111건</p>
+              <p>{detail?.reviewSummary[0]?.avgStarScore || 0}/5.0</p>
+              <p>{detail?.reviewSummary[0]?.totalCount || 0}건</p>
             </StarDiv>
             <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
           </HandleReview>
@@ -152,9 +152,10 @@ const HandleReview = styled.div`
   align-items: center;
   height: 2rem;
   font-size: 1.1rem;
-
-  &:hover {
-    opacity: 0.5;
+  > p {
+    &:hover {
+      opacity: 0.5;
+    }
   }
 `;
 

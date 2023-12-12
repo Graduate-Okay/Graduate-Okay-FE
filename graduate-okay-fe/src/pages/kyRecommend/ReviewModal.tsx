@@ -4,6 +4,7 @@ import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import axios, { AxiosError } from "axios";
 import api from "../../apis/api";
+import option from "../../constants/option";
 
 interface ModalProps {
   onClose: () => void;
@@ -38,12 +39,13 @@ const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
           <ModalContent>
             <SubjectTitle>{title}</SubjectTitle>
             <InputDiv>
+              <p>한학기 동안 전반적인 수업이 어땠나요?</p>
+              <SelectBox options={option.REVIEW_OPTIONS} />
               <TitleInput
                 type="text"
                 placeholder="제목을 입력해주세요"
                 onChange={reviewTitle.onChange}
                 value={reviewTitle.value}
-                autoFocus
               />
               <ContentInput
                 placeholder="내용을 입력해주세요"
@@ -125,15 +127,29 @@ const ModalContent = styled.div`
   width: 70%;
 `;
 
+const SelectBox = (props: any) => {
+  return (
+    <select>
+      {props.options.map((option: any) => {
+        return (
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        );
+      })}
+    </select>
+  );
+};
+
 const TitleInput = styled.input`
   display: flex;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.2rem;
 `;
 const ContentInput = styled.textarea`
   display: flex;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.2rem;
   height: 70%;
   resize: none;
 `;
@@ -142,7 +158,7 @@ const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 60%;
+  height: 80%;
 `;
 
 const SubjectTitle = styled.div`
