@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import axios, { AxiosError } from "axios";
+import { useCookies } from "react-cookie";
 import api from "../../apis/api";
 import option from "../../constants/option";
 
 interface ModalProps {
   onClose: () => void;
   title?: string;
+  id?: number;
 }
 
-const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
+interface OptionProps {
+  value: number;
+  name: string;
+}
+
+const ReviewModal: React.FC<ModalProps> = ({ onClose, title, id }) => {
   const reviewTitle = useInput("");
   const reviewContent = useInput("");
+  const [selectedValue, setSelectedValue] = useState<number | string>("");
+  const [cookies] = useCookies(["accessToken"]);
 
   const submitReview = async () => {
     try {
-      await axios.post(`${api.review}`, {
-        title: reviewTitle.value,
-        content: reviewContent.value,
-      });
+      await axios
+        .post(
+          `${api.review}`,
+          {
+            subjectId: id,
+            title: reviewTitle.value,
+            content: reviewContent.value,
+            starScore: Number(selectedValue),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.accessToken}`,
+            },
+          }
+        )
+        .then(() => {
+          alert("리뷰 등록이 완료되었습니다.");
+          onClose();
+        });
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data.message);
@@ -40,7 +64,18 @@ const ReviewModal: React.FC<ModalProps> = ({ onClose, title }) => {
             <SubjectTitle>{title}</SubjectTitle>
             <InputDiv>
               <p>한학기 동안 전반적인 수업이 어땠나요?</p>
-              <SelectBox options={option.REVIEW_OPTIONS} />
+              <select
+                value={selectedValue}
+                onChange={(e) => setSelectedValue(e.target.value)}
+              >
+                {option.REVIEW_OPTIONS.map((option: OptionProps) => {
+                  return (
+                    <option key={option.value} value={option.value}>
+                      {option.name}
+                    </option>
+                  );
+                })}
+              </select>
               <TitleInput
                 type="text"
                 placeholder="제목을 입력해주세요"
@@ -126,20 +161,6 @@ const ModalContent = styled.div`
   flex-grow: 10;
   width: 70%;
 `;
-
-const SelectBox = (props: any) => {
-  return (
-    <select>
-      {props.options.map((option: any) => {
-        return (
-          <option key={option.value} value={option.value}>
-            {option.name}
-          </option>
-        );
-      })}
-    </select>
-  );
-};
 
 const TitleInput = styled.input`
   display: flex;

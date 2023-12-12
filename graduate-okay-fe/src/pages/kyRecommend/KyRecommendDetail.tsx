@@ -82,7 +82,11 @@ const KyRecommendDetail: React.FC = () => {
         </ReviewSection>
       </DetailSection>
       {isOpen ? (
-        <ReviewModal onClose={handleCloseModal} title={detail?.name} />
+        <ReviewModal
+          onClose={handleCloseModal}
+          title={detail?.name}
+          id={detail?.subjectId}
+        />
       ) : null}
     </ThemeProvider>
   );
