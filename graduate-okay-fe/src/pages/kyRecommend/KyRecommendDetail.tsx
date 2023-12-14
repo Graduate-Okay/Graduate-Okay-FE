@@ -72,9 +72,9 @@ const KyRecommendDetail: React.FC = () => {
         <ReviewSection>
           <HandleReview>
             <StarDiv>
-              <StarRate review={detail?.reviewSummary?.[0] || undefined} />
-              <p>{detail?.reviewSummary[0]?.avgStarScore || 0}/5.0</p>
-              <p>{detail?.reviewSummary[0]?.totalCount || 0}건</p>
+              <StarRate review={detail?.reviewSummary || undefined} />
+              <p>{detail?.reviewSummary?.avgStarScore || 0}/5.0</p>
+              <p>{detail?.reviewSummary?.totalCount || 0}건</p>
             </StarDiv>
             <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
           </HandleReview>

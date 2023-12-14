@@ -16,7 +16,7 @@ export interface ISubject {
 }
 
 export interface ISubjectDetail extends ISubject {
-  reviewSummary: IReviewSummary[];
+  reviewSummary: IReviewSummary;
 }
 
 export interface IReviewSummary {
