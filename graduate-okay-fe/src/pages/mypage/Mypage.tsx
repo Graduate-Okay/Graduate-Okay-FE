@@ -82,6 +82,9 @@ const Mypage: React.FC = () => {
                 정보 수정하기
               </p>
             </MypageRow>
+            <MypageRow>
+              <p>리뷰 관리</p>
+            </MypageRow>
 
             <MypageHeader>
               <p>기타</p>

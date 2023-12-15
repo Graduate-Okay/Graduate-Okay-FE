@@ -12,6 +12,7 @@ import StarRate from "./StarRate";
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
   const [review, setReview] = useState<IReview>();
+  const [reviewList, setReviewList] = useState<number[]>();
   const [message, setMessage] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const params = useParams();
@@ -26,11 +27,15 @@ const KyRecommendDetail: React.FC = () => {
         },
       });
       setDetail(response?.data.data);
+      setReviewList(response?.data.data.reviewSummary.reviewIdList);
     } catch (error) {
       throw new Error(`${error}`);
     }
   }, [paramsId, cookies.accessToken]);
 
+  /**
+   * @todo paramsId -> reviewList에있는 배열 값이 들어가야함
+   */
   const getReview = useCallback(async () => {
     try {
       const response = await axios.get(`${api.review}/${paramsId}`, {
@@ -78,7 +83,11 @@ const KyRecommendDetail: React.FC = () => {
             </StarDiv>
             <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
           </HandleReview>
-          {review ? <div>{review.content}</div> : <div>{message}</div>}
+          {review ? (
+            <Review>{review.content}</Review>
+          ) : (
+            <Review>{message}</Review>
+          )}
         </ReviewSection>
       </DetailSection>
       {isOpen ? (
@@ -170,4 +179,8 @@ const StarDiv = styled.div`
     width: 100%;
     margin: 0px 5px;
   }
+`;
+
+const Review = styled.div`
+  display: flex;
 `;
