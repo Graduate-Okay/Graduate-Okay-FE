@@ -55,6 +55,8 @@ const KyRecommendDetail: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  console.log(reviewList);
+
   useEffect(() => {
     getDetail();
     getReview();
