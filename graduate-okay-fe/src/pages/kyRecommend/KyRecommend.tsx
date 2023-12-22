@@ -21,7 +21,7 @@ const KyRecommend: React.FC = () => {
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isDropdownView, setIsDropdownView] = useState<boolean>(false);
-  const [type, setType] = useState<string | null>("PEACE");
+  const [type, setType] = useState<string | null>("");
   const navigate = useNavigate();
   const search = useInput("");
 

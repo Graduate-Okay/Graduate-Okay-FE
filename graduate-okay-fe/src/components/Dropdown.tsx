@@ -22,6 +22,10 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
     getOption(searchType);
   };
 
+  const cleanFilter = () => {
+    getOption("");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <DropdownDiv>
@@ -61,7 +65,14 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
             })}
           </OptionContents>
         </OptionDiv>
-        <OptionSelectButton onClick={applyFilters}>적용하기</OptionSelectButton>
+        <DropdownButton>
+          <OptionSelectButton onClick={cleanFilter}>
+            옵션 초기화
+          </OptionSelectButton>
+          <OptionSelectButton onClick={applyFilters}>
+            적용하기
+          </OptionSelectButton>
+        </DropdownButton>
       </DropdownDiv>
     </ThemeProvider>
   );
@@ -142,4 +153,10 @@ const Option = styled.p<OptionProps>`
       background-color: ${theme.colors.gray};
       color: white;
     `}
+`;
+
+const DropdownButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
