@@ -4,7 +4,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6789c66e-df70-4553-9451-84c768d4853e/deploy-status)](https://app.netlify.com/sites/graduate-okay/deploys)
 
-| [졸업가능 서비스 바로가기](https://graduate-okay.netlify.app) | 
+| [졸업가능 서비스 바로가기](https://hs-graduate-ok.site/) | 
 |:---:|
 
 ## 프로젝트 개요 👀
