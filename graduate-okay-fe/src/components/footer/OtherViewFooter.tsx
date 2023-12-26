@@ -35,7 +35,7 @@ const FooterSection = styled.footer`
   display: flex;
   width: 100%;
   height: 20vh;
-  background-color: #8f8de7;
+  background-color: ${({ theme }) => theme.colors.mainColor};
   font-size: 1.1rem;
 `;
 

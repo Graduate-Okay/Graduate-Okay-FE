@@ -200,5 +200,5 @@ const ModalFooter = styled.div`
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  background-color: #8f8de7;
+  background-color: ${({ theme }) => theme.colors.mainColor};
 `;

@@ -3,6 +3,7 @@ const colors = {
   blue: "#0fbcf9",
   white: "white",
   gray: "#808e9b",
+  mainColor: "#8f8de7",
 };
 
 const fonts = {
