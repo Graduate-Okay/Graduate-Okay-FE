@@ -1,8 +1,9 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
+import authService from "./utils/authService";
 const Header = lazy(() => import("./components/Header"));
 const Nav = lazy(() => import("./components/Nav"));
 const Footer = lazy(() => import("./components/footer/Footer"));
@@ -24,8 +25,22 @@ const Administration = lazy(
 );
 
 function App() {
-  const [cookies] = useCookies(["accessToken"]);
+  const [cookies, setCookie] = useCookies(["accessToken"]);
+  const isAccessTokenValid = authService.isAccessTokenExpired(
+    cookies.accessToken
+  );
+  console.log(isAccessTokenValid);
 
+  useEffect(() => {
+    if (isAccessTokenValid) {
+      authService
+        .refreshAccessToken(localStorage.getItem("refreshToken"))
+        .then((response) => {
+          localStorage.setItem("refreshToken", response?.data.refreshToken);
+          setCookie("accessToken", response?.data.accessToken);
+        });
+    }
+  }, [isAccessTokenValid, setCookie]);
   return (
     <BrowserRouter>
       <RouteChangeTracker />
