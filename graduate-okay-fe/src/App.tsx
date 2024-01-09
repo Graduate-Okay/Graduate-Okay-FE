@@ -29,18 +29,21 @@ function App() {
   const isAccessTokenValid = authService.isAccessTokenExpired(
     cookies.accessToken
   );
-  console.log(isAccessTokenValid);
+  const refreshToken = localStorage.getItem("refreshToken");
 
   useEffect(() => {
-    if (isAccessTokenValid) {
+    if (isAccessTokenValid && refreshToken) {
       authService
         .refreshAccessToken(localStorage.getItem("refreshToken"))
         .then((response) => {
-          localStorage.setItem("refreshToken", response?.data.refreshToken);
-          setCookie("accessToken", response?.data.accessToken);
+          if (response && response.data) {
+            localStorage.setItem("refreshToken", response?.data.refreshToken);
+            setCookie("accessToken", response?.data.accessToken);
+          }
         });
     }
-  }, [isAccessTokenValid, setCookie]);
+  }, [isAccessTokenValid, setCookie, refreshToken]);
+
   return (
     <BrowserRouter>
       <RouteChangeTracker />
