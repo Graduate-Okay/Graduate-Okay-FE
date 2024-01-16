@@ -86,6 +86,7 @@ const Login: React.FC = () => {
           <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
         </Account>
       </LoginSection>
+      {/* <AuthForm /> */}
     </ThemeProvider>
   );
 };
