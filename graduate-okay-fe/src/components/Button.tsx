@@ -20,8 +20,8 @@ export default Button;
 
 const ButtonArea = styled.div`
   display: flex;
-  width: 13rem;
-  height: 4rem;
+  width: 10rem;
+  height: 3.5rem;
   border-radius: 30px;
   background-color: ${({ theme }) => theme.colors.mainColor};
   justify-content: center;
@@ -31,5 +31,5 @@ const ButtonArea = styled.div`
 const Text = styled.p`
   display: flex;
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 `;

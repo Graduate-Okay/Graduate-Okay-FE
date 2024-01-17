@@ -34,13 +34,13 @@ const Main: React.FC = () => {
             </ButtonDiv>
             <TextDiv width={"95%"} justifyContent={"center"}>
               <IntroduceText
-                fontSize={"2rem"}
+                fontSize={"1.8rem"}
                 color={"white"}
                 fontWeight={"bold"}
               >
                 "졸업가능?"
               </IntroduceText>
-              <IntroduceText fontSize={"2rem"} color={"white"}>
+              <IntroduceText fontSize={"1.8rem"} color={"white"}>
                 에서 쉽고 간편하게 확인하자!
               </IntroduceText>
             </TextDiv>
@@ -51,11 +51,11 @@ const Main: React.FC = () => {
               <Button text={"인기교양추천"} />
             </ButtonDiv>
             <TextDiv width={"95%"} justifyContent={"flex-end"}>
-              <IntroduceText fontSize={"2rem"}>인기교양 추천도</IntroduceText>
-              <IntroduceText fontSize={"2rem"} fontWeight={"bold"}>
+              <IntroduceText fontSize={"1.8rem"}>인기교양 추천도</IntroduceText>
+              <IntroduceText fontSize={"1.8rem"} fontWeight={"bold"}>
                 "졸업가능?"
               </IntroduceText>
-              <IntroduceText fontSize={"2rem"}>에서!</IntroduceText>
+              <IntroduceText fontSize={"1.8rem"}>에서!</IntroduceText>
             </TextDiv>
           </IntroduceDiv>
         </IntroduceSection>
@@ -76,19 +76,19 @@ const IntroduceSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-top: 0.6rem;
 `;
 
 const IntroduceDiv = styled.div<IntroduceDivProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 38vh;
-  background: url(${(props) => props.backgroundImage}) center;
+  height: 36vh;
+  background-image: url(${(props) => props.backgroundImage});
   background-color: ${(props) => props.backgroundColor};
-
-  @media ${({ theme }) => theme.device.tablet} {
-    flex-direction: row;
-  }
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
 `;
 
 const BackgroundImg = styled.img`
@@ -102,14 +102,6 @@ const TextDiv = styled.div<TextProps>`
   flex-direction: row;
   width: ${(props) => (props ? props.width : "100%")};
   justify-content: ${(props) => props.justifyContent};
-
-  // @media ${({ theme }) => theme.device.tablet} {
-  //   width: 50%;
-  //   justify-content: center;
-  // }
-  // @media ${({ theme }) => theme.device.laptop} {
-  //   margin: auto;
-  // }
 `;
 
 const IntroduceText = styled.p<IntroduceTextProps>`
@@ -117,19 +109,14 @@ const IntroduceText = styled.p<IntroduceTextProps>`
   font-size: ${(props) => props.fontSize || "2rem"};
   color: ${(props) => props.color};
   font-weight: ${(props) => props.fontWeight};
-  align-items: center;
   word-break: keep-all;
   text-align: center;
   white-space: normal;
-
-  @media ${({ theme }) => theme.device.tablet} {
-    flex-direction: row;
-  }
 `;
 
 const ButtonDiv = styled.div<TextProps>`
   display: flex;
   width: ${(props) => props.width};
   justify-content: ${(props) => props.justifyContent};
-  margin: 1rem auto;
+  margin-bottom: 0.5rem;
 `;
