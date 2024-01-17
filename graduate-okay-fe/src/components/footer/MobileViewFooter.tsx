@@ -1,31 +1,37 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import recommend from "../../assets/imgs/recommend.svg";
-import mypage from "../../assets/imgs/mypage.svg";
-import graduate from "../../assets/imgs/graduate.svg";
-import home from "../../assets/imgs/home.svg";
+import { ReactComponent as Home } from "../../assets/imgs/home.svg";
+import { ReactComponent as Mypage } from "../../assets/imgs/mypage.svg";
+import { ReactComponent as Graduate } from "../../assets/imgs/graduate.svg";
+import { ReactComponent as Recommend } from "../../assets/imgs/recommend.svg";
+import theme from "../../constants/theme";
 
 const MobileViewFooter: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const getFillValue = (path: string) => {
+    return location.pathname === path ? theme.colors.selectFooter : "#cacaca";
+  };
 
   return (
     <FooterSection>
       <FooterDiv onClick={() => navigate("/")}>
-        <img src={home} alt="홈" />
-        <p>홈</p>
+        <Home fill={getFillValue("/")} />
+        <Text color={getFillValue("/")}>홈</Text>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/kyRecommend")}>
-        <img src={recommend} alt="인기교양추천" />
-        <p>인기교양추천</p>
+        <Recommend fill={getFillValue("/kyRecommend")} />
+        <Text color={getFillValue("/kyRecommend")}>인기교양추천</Text>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/graduate")}>
-        <img src={graduate} alt="졸업요건조회" />
-        <p>졸업요건조회</p>
+        <Graduate fill={getFillValue("/graduate")} />
+        <Text color={getFillValue("/graduate")}>졸업요건조회</Text>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/mypage")}>
-        <img src={mypage} alt="마이페이지" />
-        <p>마이페이지</p>
+        <Mypage fill={getFillValue("/mypage")} />
+        <Text color={getFillValue("/mypage")}>마이페이지</Text>
       </FooterDiv>
     </FooterSection>
   );
@@ -52,13 +58,10 @@ const FooterDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-top: auto;
+  cursor: pointer;
+`;
 
-  > img {
-    height: 35%;
-  }
-
-  > p {
-    font-size: 1.2rem;
-    color: #cacaca;
-  }
+const Text = styled.p<{ color: string }>`
+  font-size: 1.2rem;
+  color: ${(props) => props.color};
 `;

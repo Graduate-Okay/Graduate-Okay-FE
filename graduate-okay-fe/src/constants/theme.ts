@@ -4,6 +4,7 @@ const colors = {
   white: "white",
   gray: "#808e9b",
   mainColor: "#8f8de7",
+  selectFooter: "#a489f0",
 };
 
 const fonts = {

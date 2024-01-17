@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 // import useCheckMobile from "../hooks/useCheckMobile";
@@ -8,10 +8,12 @@ import { useCookies } from "react-cookie";
 
 interface TextProps {
   borderRight?: boolean;
+  color?: string;
 }
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cookies, , removeCookie] = useCookies(["accessToken"]);
 
   const handlelogOut = () => {
@@ -19,6 +21,10 @@ const Header: React.FC = () => {
     removeCookie("accessToken");
     localStorage.clear();
     navigate("/");
+  };
+
+  const getFillValue = (path: string) => {
+    return location.pathname === path ? theme.colors.selectFooter : "black";
   };
 
   return (
@@ -31,13 +37,22 @@ const Header: React.FC = () => {
           ) : null}
         </SubDiv> */}
         <SubDiv>
-          <Text onClick={() => navigate("/notice")} borderRight={true}>
+          <Text
+            onClick={() => navigate("/notice")}
+            borderRight={true}
+            color={getFillValue("/notice")}
+          >
             공지사항
           </Text>
           {cookies.accessToken ? (
             <Text onClick={() => handlelogOut()}>로그아웃</Text>
           ) : (
-            <Text onClick={() => navigate("/login")}>로그인</Text>
+            <Text
+              onClick={() => navigate("/login")}
+              color={getFillValue("/login")}
+            >
+              로그인
+            </Text>
           )}
         </SubDiv>
 
@@ -87,6 +102,7 @@ const Text = styled.p<TextProps>`
   margin: auto 0;
   cursor: pointer;
   border-right: ${(props) => props.borderRight && "1px solid black"};
+  color: ${(props) => props.color};
 
   &:hover {
     opacity: 0.5;
