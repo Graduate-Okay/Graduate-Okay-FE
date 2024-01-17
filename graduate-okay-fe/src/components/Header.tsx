@@ -2,9 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
-import useCheckMobile from "../hooks/useCheckMobile";
-import BackButton from "../assets/imgs/BackButton.svg";
+// import useCheckMobile from "../hooks/useCheckMobile";
+// import BackButton from "../assets/imgs/BackButton.svg";
 import { useCookies } from "react-cookie";
+
+interface TextProps {
+  borderRight?: boolean;
+}
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -20,14 +24,24 @@ const Header: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <HeaderDiv>
-        <SubDiv>
+        <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
+        {/* <SubDiv>
           {useCheckMobile() < theme.deviceSizes.tablet ? (
             <img src={BackButton} alt="뒤로가기" onClick={() => navigate(-1)} />
           ) : null}
+        </SubDiv> */}
+        <SubDiv>
+          <Text onClick={() => navigate("/notice")} borderRight={true}>
+            공지사항
+          </Text>
+          {cookies.accessToken ? (
+            <Text onClick={() => handlelogOut()}>로그아웃</Text>
+          ) : (
+            <Text onClick={() => navigate("/login")}>로그인</Text>
+          )}
         </SubDiv>
-        <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
 
-        {cookies.accessToken ? (
+        {/* {cookies.accessToken ? (
           <SubDiv onClick={() => handlelogOut()}>
             <p>로그아웃</p>
           </SubDiv>
@@ -35,7 +49,7 @@ const Header: React.FC = () => {
           <SubDiv onClick={() => navigate("/login")}>
             <p>로그인</p>
           </SubDiv>
-        )}
+        )} */}
       </HeaderDiv>
     </ThemeProvider>
   );
@@ -46,15 +60,16 @@ export default Header;
 const HeaderDiv = styled.header`
   display: flex;
   align-content: center;
-  justify-content: space-around;
-  width: 100%;
-  height: 9vh;
-  margin-top: 1.2rem;
+  justify-content: space-between;
+  width: 90%;
+  height: 6vh;
+  margin: 1rem auto;
 
   @media ${({ theme }) => theme.device.tablet} {
     width: 80%;
     margin: 1.2rem auto;
   }
+
   > img {
     cursor: pointer;
   }
@@ -62,15 +77,16 @@ const HeaderDiv = styled.header`
 
 const SubDiv = styled.div`
   display: flex;
-  cursor: pointer;
+`;
 
-  > p {
-    font-size: 1.4rem;
-    margin: auto 0;
-  }
-  > img {
-    width: 3.8rem;
-  }
+const Text = styled.p<TextProps>`
+  display: flex;
+  font-size: 1.2rem;
+  width: 60px;
+  justify-content: center;
+  margin: auto 0;
+  cursor: pointer;
+  border-right: ${(props) => props.borderRight && "1px solid black"};
 
   &:hover {
     opacity: 0.5;
