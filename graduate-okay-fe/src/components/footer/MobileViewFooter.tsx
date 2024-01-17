@@ -1,25 +1,26 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import NoticeSVG from "../../assets/imgs/notice.svg";
-import RecommendSVG from "../../assets/imgs/recommend.svg";
+import recommend from "../../assets/imgs/recommend.svg";
 import mypage from "../../assets/imgs/mypage.svg";
-import lookup from "../../assets/imgs/lookup.svg";
+import graduate from "../../assets/imgs/graduate.svg";
+import home from "../../assets/imgs/home.svg";
 
 const MobileViewFooter: React.FC = () => {
   const navigate = useNavigate();
+
   return (
     <FooterSection>
-      <FooterDiv onClick={() => navigate("/notice")}>
-        <img src={NoticeSVG} alt="공지사항" />
-        <p>공지사항</p>
+      <FooterDiv onClick={() => navigate("/")}>
+        <img src={home} alt="홈" />
+        <p>홈</p>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/kyRecommend")}>
-        <img src={RecommendSVG} alt="교양추천" />
+        <img src={recommend} alt="인기교양추천" />
         <p>인기교양추천</p>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/graduate")}>
-        <img src={lookup} alt="졸업요건조회" />
+        <img src={graduate} alt="졸업요건조회" />
         <p>졸업요건조회</p>
       </FooterDiv>
       <FooterDiv onClick={() => navigate("/mypage")}>
@@ -36,25 +37,28 @@ const FooterSection = styled.footer`
   display: flex;
   position: fixed;
   width: 100%;
-  height: 13vh;
+  height: 11vh;
   left: 0px;
   bottom: 0px;
   background-color: white;
+  border-top: 1px solid #cacaca;
 `;
 
 const FooterDiv = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   width: 100%;
-  height: 100%;
-  justify-content: center;
+  height: 90%;
+  justify-content: space-around;
   align-items: center;
+  margin-top: auto;
 
   > img {
-    height: 40%;
+    height: 35%;
   }
+
   > p {
     font-size: 1.2rem;
+    color: #cacaca;
   }
 `;
