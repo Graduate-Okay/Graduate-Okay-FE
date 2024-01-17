@@ -3,8 +3,8 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import Button from "../components/Button";
 import BackgroundImage from "../assets/imgs/MainBackground.svg";
-import capAndCircle from "../assets/imgs/capAndCircle.svg";
 import pencilAndCircle from "../assets/imgs/pencilAndCircle.svg";
+import { ReactComponent as CapAndCircle } from "../assets/imgs/capAndCircle.svg";
 
 interface IntroduceTextProps {
   fontSize?: string;
@@ -28,11 +28,11 @@ const Main: React.FC = () => {
       <MainPageDiv>
         <IntroduceSection>
           <IntroduceDiv backgroundImage={BackgroundImage}>
-            <BackgroundImg src={capAndCircle} alt="배경이미지" />
+            <CapAndCircle />
             <ButtonDiv width={"95%"} justifyContent={"flex-start"}>
               <Button text={"졸업요건 검사"} />
             </ButtonDiv>
-            <TextDiv width={"95%"} justifyContent={"center"}>
+            <TextDiv width={"95%"} justifyContent={"flex-start"}>
               <IntroduceText
                 fontSize={"1.8rem"}
                 color={"white"}
@@ -69,32 +69,31 @@ const MainPageDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 1.2rem;
 `;
 
 const IntroduceSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 0.6rem;
 `;
 
 const IntroduceDiv = styled.div<IntroduceDivProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 36vh;
+  height: 40vh;
   background-image: url(${(props) => props.backgroundImage});
   background-color: ${(props) => props.backgroundColor};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
+  align-items: center;
 `;
 
 const BackgroundImg = styled.img`
   display: flex;
   width: 100%;
-  height: 70%;
+  height: 75%;
 `;
 
 const TextDiv = styled.div<TextProps>`

@@ -41,7 +41,7 @@ const FooterSection = styled.footer`
   left: 0px;
   bottom: 0px;
   background-color: white;
-  border-top: 1px solid #cacaca;
+  border-top: 1px solid #d9d9d9;
 `;
 
 const FooterDiv = styled.div`
