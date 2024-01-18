@@ -6,6 +6,7 @@ import useInput from "../hooks/useInput";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
+import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -95,9 +96,12 @@ const Signup: React.FC = () => {
     <ThemeProvider theme={theme}>
       <SignupSection>
         <SignupDiv>회원가입</SignupDiv>
-        <SignupSub>한신대학교 이메일로만 가입이 가능합니다.</SignupSub>
+        <LoginDiv>
+          <Logo width="167" height="38" fill="#a489f0" />
+        </LoginDiv>
+        <SignupSub>한신대학교 이메일만 가입이 가능합니다.</SignupSub>
+        <LoginTitle>이메일</LoginTitle>
         <SignupInput
-          placeholder="이메일을 입력해주세요(example@hs.ac.kr 또는 example)"
           type="text"
           value={emailInput.value}
           onChange={emailInput.onChange}
@@ -105,36 +109,38 @@ const Signup: React.FC = () => {
           autoFocus
         />
         {isClick ? (
-          <SignupInput
-            placeholder="인증번호를 입력해주세요"
-            type="text"
-            value={authNumber.value}
-            onChange={authNumber.onChange}
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
+          <>
+            <LoginTitle>인증번호를 입력해주세요.</LoginTitle>
+            <SignupInput
+              type="text"
+              value={authNumber.value}
+              onChange={authNumber.onChange}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+          </>
         ) : null}
         {isAuth ? (
-          <SignupInput
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            value={passwordInput.value}
-            onChange={passwordInput.onChange}
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
+          <>
+            <LoginTitle>비밀번호 입력</LoginTitle>
+            <SignupInput
+              type="password"
+              value={passwordInput.value}
+              onChange={passwordInput.onChange}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+          </>
         ) : null}
 
         {isAuth ? (
-          <SubmitSignup onClick={() => submitPassword()}>회원가입</SubmitSignup>
+          <SubmitSignup onClick={() => submitPassword()}>가입하기</SubmitSignup>
         ) : isClick ? (
           <SubmitSignup onClick={() => submitAuthNumber()}>
-            번호 인증하기
+            인증하기
           </SubmitSignup>
         ) : (
-          <SubmitSignup onClick={() => sendAuthNumber()}>
-            인증번호 보내기
-          </SubmitSignup>
+          <SubmitSignup onClick={() => sendAuthNumber()}>인증하기</SubmitSignup>
         )}
       </SignupSection>
     </ThemeProvider>
@@ -156,8 +162,7 @@ const SignupDiv = styled.div`
   width: 100%;
   height: 8vh;
   justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.6rem;
 `;
 
 const SignupSub = styled.div`
@@ -174,6 +179,9 @@ const SignupInput = styled.input`
   height: 3vh;
   margin: 0 auto;
   margin-top: 1.5vh;
+  border: none;
+  border-bottom: 1px solid #adadad;
+
   &:focus {
     outline: none;
     border-color: #d6d6f5;
@@ -189,14 +197,16 @@ const SignupInput = styled.input`
 
 const SubmitSignup = styled.div`
   display: flex;
-  width: 60%;
-  height: 3rem;
+  width: 80%;
+  height: 4.2rem;
   margin: 3rem auto;
-  border-radius: 3px;
+  border-radius: 30px;
   color: white;
   justify-content: center;
   align-items: center;
-  background-color: #9b59b6;
+  background-color: #a489f0;
+  font-size: 1.2rem;
+
   &:hover {
     background-color: #d6d6f5;
   }
@@ -207,4 +217,26 @@ const SubmitSignup = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     width: 30%;
   }
+`;
+
+const LoginDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 6vh;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 4vh;
+`;
+
+const LoginTitle = styled.div`
+  display: flex;
+  font-size: 1.4rem;
+  width: 90%;
+  height: 3vh;
+  align-items: center;
+
+  margin-left: auto;
 `;

@@ -109,7 +109,7 @@ const LoginDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 14vh;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   font-size: 1.6rem;
   font-weight: bold;
@@ -148,7 +148,7 @@ const SubmitLogin = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #a489f0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 
   &:hover {
     cursor: pointer;
