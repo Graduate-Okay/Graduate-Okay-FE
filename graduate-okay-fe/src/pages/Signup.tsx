@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
+import HandleSection from "../components/HandleSection";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ const Signup: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <SignupSection>
-        <SignupDiv>회원가입</SignupDiv>
+        <HandleSection prevBtn={true} title="회원가입" closeBtn={false} />
         <LoginDiv>
           <Logo width="167" height="38" fill="#a489f0" />
         </LoginDiv>
@@ -155,14 +156,6 @@ const SignupSection = styled.section`
   width: 90%;
   height: 60vh;
   margin: 5% auto;
-`;
-
-const SignupDiv = styled.div`
-  display: flex;
-  width: 100%;
-  height: 8vh;
-  justify-content: center;
-  font-size: 1.6rem;
 `;
 
 const SignupSub = styled.div`
