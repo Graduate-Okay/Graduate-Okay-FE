@@ -3,8 +3,8 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import Button from "../components/Button";
 import BackgroundImage from "../assets/imgs/MainBackground.svg";
-import pencilAndCircle from "../assets/imgs/pencilAndCircle.svg";
 import { ReactComponent as CapAndCircle } from "../assets/imgs/capAndCircle.svg";
+import { ReactComponent as PencilAndCircle } from "../assets/imgs/pencilAndCircle.svg";
 
 interface IntroduceTextProps {
   fontSize?: string;
@@ -22,13 +22,19 @@ interface TextProps {
   justifyContent?: string;
 }
 
+interface SVGProps {
+  justifyContent?: string;
+}
+
 const Main: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <MainPageDiv>
         <IntroduceSection>
           <IntroduceDiv backgroundImage={BackgroundImage}>
-            <CapAndCircle />
+            <SVGDiv justifyContent="flex-end">
+              <CapAndCircle width={250} height={230} />
+            </SVGDiv>
             <ButtonDiv width={"95%"} justifyContent={"flex-start"}>
               <Button text={"졸업요건 검사"} />
             </ButtonDiv>
@@ -46,7 +52,9 @@ const Main: React.FC = () => {
             </TextDiv>
           </IntroduceDiv>
           <IntroduceDiv backgroundColor={"#ece5ff"}>
-            <BackgroundImg src={pencilAndCircle} alt="배경이미지" />
+            <SVGDiv justifyContent="flex-start">
+              <PencilAndCircle width={250} height={250} />
+            </SVGDiv>
             <ButtonDiv width={"95%"} justifyContent={"flex-end"}>
               <Button text={"인기교양추천"} />
             </ButtonDiv>
@@ -90,12 +98,6 @@ const IntroduceDiv = styled.div<IntroduceDivProps>`
   align-items: center;
 `;
 
-const BackgroundImg = styled.img`
-  display: flex;
-  width: 100%;
-  height: 75%;
-`;
-
 const TextDiv = styled.div<TextProps>`
   display: flex;
   flex-direction: row;
@@ -118,4 +120,11 @@ const ButtonDiv = styled.div<TextProps>`
   width: ${(props) => props.width};
   justify-content: ${(props) => props.justifyContent};
   margin-bottom: 0.5rem;
+`;
+
+const SVGDiv = styled.div<SVGProps>`
+  display: flex;
+  width: 100%;
+  height: 70%;
+  justify-content: ${(props) => props.justifyContent};
 `;
