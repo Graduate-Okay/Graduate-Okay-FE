@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { useCookies } from "react-cookie";
+import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -62,17 +63,20 @@ const Login: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <LoginSection>
-        <LoginDiv>LOGIN</LoginDiv>
+        <LoginDiv>
+          <Logo width="167" height="38" fill="#a489f0" />
+        </LoginDiv>
+        <LoginTitle>이메일</LoginTitle>
         <LoginInput
-          placeholder="example@hs.ac.kr 또는 example"
           type="text"
           value={emailInput.value}
           onChange={emailInput.onChange}
+          title="학교 이메일로만 로그인 가능합니다."
           autoFocus
         />
-        <LoginSub>한신대학교 이메일 아이디로만 로그인이 가능합니다.</LoginSub>
+        <Announcement>학교 이메일로만 로그인이 가능합니다.</Announcement>
+        <LoginTitle>비밀번호</LoginTitle>
         <LoginInput
-          placeholder="password"
           type="password"
           value={passwordInput.value}
           onChange={passwordInput.onChange}
@@ -80,13 +84,12 @@ const Login: React.FC = () => {
           autoFocus
         />
 
-        <SubmitLogin onClick={() => submitLogin()}>LOGIN</SubmitLogin>
+        <SubmitLogin onClick={() => submitLogin()}>로그인</SubmitLogin>
         <Account>
           <p onClick={() => navigate(`/signup`)}>회원가입</p>
           <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
         </Account>
       </LoginSection>
-      {/* <AuthForm /> */}
     </ThemeProvider>
   );
 };
@@ -103,18 +106,14 @@ const LoginSection = styled.section`
 
 const LoginDiv = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 8vh;
-  justify-content: center;
-  font-size: 2rem;
+  height: 14vh;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.6rem;
   font-weight: bold;
-`;
-
-const LoginSub = styled.div`
-  display: flex;
-  width: 80%;
-  margin-top: 0.5rem;
-  justify-content: center;
+  margin-bottom: 4vh;
 `;
 
 const LoginInput = styled.input`
@@ -123,6 +122,9 @@ const LoginInput = styled.input`
   height: 3vh;
   margin: 0 auto;
   margin-top: 1.5vh;
+  border: none;
+  border-bottom: 1px solid #adadad;
+
   &:focus {
     outline: none;
     border-color: #d6d6f5;
@@ -138,14 +140,15 @@ const LoginInput = styled.input`
 
 const SubmitLogin = styled.div`
   display: flex;
-  width: 90%;
-  height: 3rem;
+  width: 80%;
+  height: 4.2rem;
   margin: 3rem auto;
-  border-radius: 3px;
+  border-radius: 30px;
   color: white;
   justify-content: center;
   align-items: center;
-  background-color: #9b59b6;
+  background-color: #a489f0;
+  font-size: 1.6rem;
 
   &:hover {
     cursor: pointer;
@@ -167,6 +170,7 @@ const Account = styled.div`
   font-size: 1.1rem;
   > p {
     cursor: pointer;
+    font-size: 1.2rem;
   }
   &:hover {
     opacity: 0.5;
@@ -178,4 +182,23 @@ const Account = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     width: 30%;
   }
+`;
+
+const Announcement = styled.div`
+  display: flex;
+  color: gray;
+  font-size: 1.1rem;
+  width: 90%;
+  height: 5vh;
+  align-items: center;
+  margin-left: auto;
+`;
+
+const LoginTitle = styled.div`
+  display: flex;
+  font-size: 1.4rem;
+  width: 90%;
+  height: 3vh;
+  align-items: center;
+  margin-left: auto;
 `;
