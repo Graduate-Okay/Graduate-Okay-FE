@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import theme from "../constants/theme";
 import { ReactComponent as Prev } from "../assets/imgs/arrow/prev.svg";
 import { ReactComponent as Close } from "../assets/imgs/arrow/close.svg";
@@ -26,10 +27,20 @@ const HandleSection: React.FC<handleSectionProps> = ({
   closeBtn,
   color,
 }) => {
+  const navigate = useNavigate();
+
+  const handlePrev = () => {
+    navigate(-1);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <HandleSectionDiv>
-        <SVGWrapper justifyContent="flex-start" visibility={prevBtn}>
+        <SVGWrapper
+          justifyContent="flex-start"
+          visibility={prevBtn}
+          onClick={handlePrev}
+        >
           <Prev width={15} height={15} />
         </SVGWrapper>
         <Title color={color}>{title}</Title>
