@@ -6,6 +6,9 @@ import Pagination from "../components/Pagination";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { noticeQuery } from "../queries/noticeQuery";
+import HandleSection from "../components/HandleSection";
+import { ReactComponent as Alarm } from "../assets/imgs/alarm.svg";
+import { ReactComponent as Next } from "../assets/imgs/arrow/next.svg";
 
 const Notice: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -13,7 +16,7 @@ const Notice: React.FC = () => {
 
   const { data } = useQuery({
     queryKey: ["notice", currentPage],
-    queryFn: () => noticeQuery(currentPage),
+    queryFn: () => noticeQuery(currentPage, 7),
   });
 
   const getCurrentPage = (page: number) => {
@@ -28,9 +31,12 @@ const Notice: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <NoticeDiv>
-        <NoticeTitle>
-          <p>공지사항</p>
-        </NoticeTitle>
+        <HandleSection
+          prevBtn={false}
+          title="공지사항"
+          closeBtn={false}
+          color="#a489f0"
+        />
         <NoticeContent>
           {data &&
             data?.data.noticeList.map((notice: INoticeDetail) => {
@@ -39,8 +45,12 @@ const Notice: React.FC = () => {
                   key={notice.id}
                   onClick={() => routeDetail(notice.id)}
                 >
-                  <NoticeName>{notice.title}</NoticeName>
-                  <NoticeDate>{notice.createdAt}</NoticeDate>
+                  <Alarm />
+                  <NoticeText>
+                    <NoticeName>{notice.title}</NoticeName>
+                    <NoticeDate>{notice.createdAt}</NoticeDate>
+                  </NoticeText>
+                  <Next />
                 </NoticeData>
               );
             })}
@@ -68,27 +78,6 @@ const NoticeDiv = styled.div`
   }
 `;
 
-const NoticeTitle = styled.div`
-  display: flex;
-  width: 100%;
-  height: 4vh;
-  color: #7978cd;
-  font-size: 1.2rem;
-  align-items: center;
-  justify-content: space-around;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 90%;
-    margin: 2vh auto;
-    justify-content: space-between;
-    font-size: 1.4rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 75%;
-    margin: 2vh auto;
-    font-size: 1.6rem;
-  }
-`;
-
 const NoticeContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,13 +89,19 @@ const NoticeContent = styled.div`
 
 const NoticeData = styled.div`
   display: flex;
-  flex-direction: column;
   cursor: pointer;
+  border: 1px solid #cacaca;
+  border-radius: 30px;
+  width: 34rem;
+  align-items: center;
   &:hover {
     background-color: #ecf0f1;
   }
 `;
-
+const NoticeText = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const NoticeName = styled.div`
   display: flex;
   font-size: 1.6rem;
