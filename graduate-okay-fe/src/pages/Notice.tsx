@@ -45,12 +45,14 @@ const Notice: React.FC = () => {
                   key={notice.id}
                   onClick={() => routeDetail(notice.id)}
                 >
-                  <Alarm />
-                  <NoticeText>
-                    <NoticeName>{notice.title}</NoticeName>
-                    <NoticeDate>{notice.createdAt}</NoticeDate>
-                  </NoticeText>
-                  <Next />
+                  <DataGroup>
+                    <Alarm />
+                    <NoticeText>
+                      <NoticeName>{notice.title}</NoticeName>
+                      <NoticeDate>{notice.createdAt}</NoticeDate>
+                    </NoticeText>
+                    <Next />
+                  </DataGroup>
                 </NoticeData>
               );
             })}
@@ -71,6 +73,9 @@ const NoticeDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 80vh;
+  justify-content: center;
+  align-items: center;
+
   @media ${({ theme }) => theme.device.laptop} {
     width: 70%;
     height: 80vh;
@@ -82,7 +87,7 @@ const NoticeContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 70%;
+  height: 75%;
   margin: 2vh auto;
   justify-content: space-between;
 `;
@@ -92,16 +97,30 @@ const NoticeData = styled.div`
   cursor: pointer;
   border: 1px solid #cacaca;
   border-radius: 30px;
-  width: 34rem;
+  width: 100%;
+  height: 11%;
   align-items: center;
   &:hover {
     background-color: #ecf0f1;
   }
 `;
+
+const DataGroup = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  > svg {
+    width: 15%;
+  }
+`;
+
 const NoticeText = styled.div`
   display: flex;
   flex-direction: column;
+  width: 70%;
 `;
+
 const NoticeName = styled.div`
   display: flex;
   font-size: 1.6rem;

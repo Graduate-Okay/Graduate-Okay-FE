@@ -8,6 +8,7 @@ interface handleSectionProps {
   prevBtn: boolean;
   title: string;
   closeBtn: boolean;
+  color?: string;
 }
 
 interface SVGProps {
@@ -15,29 +16,34 @@ interface SVGProps {
   visibility: boolean;
 }
 
+interface TextProps {
+  color?: string;
+}
+
 const HandleSection: React.FC<handleSectionProps> = ({
   prevBtn,
   title,
   closeBtn,
+  color,
 }) => {
   return (
     <ThemeProvider theme={theme}>
-      <SignupDiv>
+      <HandleSectionDiv>
         <SVGWrapper justifyContent="flex-start" visibility={prevBtn}>
           <Prev width={15} height={15} />
         </SVGWrapper>
-        <Title>{title}</Title>
+        <Title color={color}>{title}</Title>
         <SVGWrapper justifyContent="flex-end" visibility={closeBtn}>
           <Close width={15} height={15} />
         </SVGWrapper>
-      </SignupDiv>
+      </HandleSectionDiv>
     </ThemeProvider>
   );
 };
 
 export default HandleSection;
 
-const SignupDiv = styled.div`
+const HandleSectionDiv = styled.div`
   display: flex;
   width: 100%;
   height: 6vh;
@@ -53,10 +59,11 @@ const SignupDiv = styled.div`
   }
 `;
 
-const Title = styled.p`
+const Title = styled.p<TextProps>`
   display: flex;
   flex-grow: 5;
   justify-content: center;
+  color: ${(props) => props.color};
 `;
 
 const SVGWrapper = styled.div<SVGProps>`
