@@ -5,6 +5,8 @@ import theme from "../constants/theme";
 import axios, { AxiosError } from "axios";
 import api from "../apis/api";
 import { INoticeDetail } from "../interfaces";
+import HandleSection from "../components/HandleSection";
+import { ReactComponent as Alarm } from "../assets/imgs/alarm.svg";
 
 const NoticeDetail: React.FC = () => {
   const params = useParams();
@@ -29,9 +31,19 @@ const NoticeDetail: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <DetailSection>
-        <DetailHeader>공지사항</DetailHeader>
-        <DetailTitle>{detail?.title}</DetailTitle>
-        <DetailDate>{detail?.createdAt}</DetailDate>
+        <HandleSection
+          prevBtn={true}
+          title="공지사항"
+          closeBtn={false}
+          color="#a489f0"
+        />
+        <DataGroup>
+          <Alarm />
+          <NoticeText>
+            <NoticeName>{detail?.title}</NoticeName>
+            <NoticeDate>{detail?.createdAt}</NoticeDate>
+          </NoticeText>
+        </DataGroup>
         <DetailContent>{detail?.content}</DetailContent>
       </DetailSection>
     </ThemeProvider>
@@ -46,41 +58,9 @@ const DetailSection = styled.section`
   width: 90%;
   height: 65vh;
   margin: 2vh auto;
+
   @media ${({ theme }) => theme.device.laptop} {
     width: 60%;
-  }
-`;
-
-const DetailHeader = styled.div`
-  display: flex;
-  font-size: 1.4rem;
-  color: #7978cd;
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.6rem;
-    margin-top: 2rem;
-  }
-`;
-
-const DetailTitle = styled.div`
-  display: flex;
-  height: 5vh;
-  align-items: center;
-  font-size: 1.8rem;
-  margin-top: 5vh;
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 2.4rem;
-  }
-`;
-
-const DetailDate = styled.div`
-  display: flex;
-  color: #a4b0be;
-  height: 3vh;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #a4b0be;
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.4rem;
-    height: 4vh;
   }
 `;
 
@@ -89,7 +69,52 @@ const DetailContent = styled.div`
   width: 100%;
   font-size: 1.4rem;
   margin-top: 2rem;
+
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.8rem;
+  }
+`;
+
+const DataGroup = styled.div`
+  display: flex;
+  width: 100%;
+  height: 15%;
+  align-items: center;
+  border-bottom: 1px solid #a4b0be;
+
+  > svg {
+    width: 15%;
+  }
+`;
+
+const NoticeText = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+`;
+
+const NoticeName = styled.div`
+  display: flex;
+  font-size: 1.6rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.9rem;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 2.1rem;
+  }
+`;
+
+const NoticeDate = styled.div`
+  display: flex;
+  font-size: 1.2rem;
+  color: #a4b0be;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.3rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
   }
 `;
