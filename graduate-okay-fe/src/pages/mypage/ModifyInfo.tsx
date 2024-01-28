@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
@@ -10,22 +10,26 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as ProfileWithSetting } from "../../assets/imgs/profile/profileWithSetting.svg";
 
 const ModifyInfo: React.FC = () => {
-  const [change, setChange] = useState<string>();
   const loginInput = useInput("");
   const passwordInput = useInput("");
-
   const [cookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
 
-  const handleClick = (value: string) => {
-    setChange(value);
-  };
-
   const changeInfomation = async () => {
     try {
-      const payload = {
-        [change!]: loginInput.value,
-      };
+      const payload: { [key: string]: string } = {};
+      if (loginInput.value) {
+        payload.nickname = loginInput.value;
+      }
+      if (passwordInput.value) {
+        payload.password = passwordInput.value;
+      }
+      if (!loginInput.value && !passwordInput.value) {
+        alert("입력 값을 확인해주세요.");
+        return;
+      }
+      console.log(payload);
+
       await axios
         .patch(`${api.user}/info`, payload, {
           headers: {
@@ -48,6 +52,7 @@ const ModifyInfo: React.FC = () => {
       changeInfomation();
     }
   };
+
   return (
     <ThemeProvider theme={theme}>
       <ModifyInfoSection>
@@ -58,13 +63,13 @@ const ModifyInfo: React.FC = () => {
           color="#a489f0"
         />
         <ModifyInfoDiv>
-          <ProfileWithSetting />
+          <ProfileWithSetting onClick={() => alert("준비 중입니다!")} />
           <ChangeInfo>
             <Content>
               <Title>닉네임</Title>
               <Input
                 placeholder={"변경할 닉네임을 적어주세요."}
-                type={change}
+                type="nickname"
                 value={loginInput.value}
                 onChange={loginInput.onChange}
                 onKeyDown={handleKeyDown}
@@ -74,7 +79,7 @@ const ModifyInfo: React.FC = () => {
               <Title>비밀번호 변경</Title>
               <Input
                 placeholder={"새로운 비밀번호를 입력해주세요."}
-                type={change}
+                type="password"
                 value={passwordInput.value}
                 onChange={passwordInput.onChange}
                 onKeyDown={handleKeyDown}
