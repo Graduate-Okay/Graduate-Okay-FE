@@ -7,6 +7,8 @@ import axios, { AxiosError } from "axios";
 import api from "../../apis/api";
 import HandleSection from "../../components/HandleSection";
 import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg";
+import { ReactComponent as GraduationCap } from "../../assets/imgs/graduationCap.svg";
+import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -65,21 +67,23 @@ const Mypage: React.FC = () => {
           closeBtn={false}
           color="#a489f0"
         />
-        <MypageDiv>
+        <MyDiv>
           <UserInfo>
-            <UserImg>
-              <Profile />
-            </UserImg>
-            <UserDiv>
-              <UserNickname>안녕하세요, {nickname}님</UserNickname>
-            </UserDiv>
+            <GraduationCap width={50} height={50} />
+            <UserText>안녕하세요!</UserText>
+            <UserText>'{nickname}'님</UserText>
           </UserInfo>
+          <Profile />
+        </MyDiv>
+        <Divide />
+        <MypageDiv>
           <OptionList>
             <MypageHeader>
-              <p>나의 졸업요건 조회</p>
+              <p>졸업요건 조회</p>
             </MypageHeader>
             <MypageRow>
               <p onClick={() => navigate("/graduate")}>졸업결과 확인하기</p>
+              <Next />
             </MypageRow>
             <MypageHeader>
               <p>나의 정보</p>
@@ -88,19 +92,22 @@ const Mypage: React.FC = () => {
               <p onClick={() => navigate("/mypage/modifyInfo")}>
                 정보 수정하기
               </p>
+              <Next />
             </MypageRow>
             <MypageRow>
               <p>리뷰 관리</p>
+              <Next />
             </MypageRow>
-
             <MypageHeader>
               <p>기타</p>
             </MypageHeader>
             <MypageRow>
               <p onClick={() => navigate("/notice")}>공지사항</p>
+              <Next />
             </MypageRow>
             <MypageRow>
               <p onClick={() => handleWithdrawal()}>회원탈퇴</p>
+              <Next />
             </MypageRow>
           </OptionList>
         </MypageDiv>
@@ -122,59 +129,15 @@ const MypageSection = styled.section`
 const MypageDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 85%;
-  height: 100%;
-  border: 1px solid #b2bec3;
-  border-radius: 2rem;
-  margin: 0 auto;
-
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 50%;
-    height: 80%;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 30%;
-    height: 80%;
-  }
+  width: 90%;
+  height: 67%;
 `;
 
 const UserInfo = styled.div`
   display: flex;
-  width: 100%;
-  height: 15%;
-`;
-
-const UserImg = styled.div`
-  display: flex;
-  width: 30%;
-  height: 80%;
-  justify-content: center;
-  margin: auto;
-
-  > img {
-    border: 1px solid black;
-    border-radius: 50%;
-  }
-`;
-
-const UserDiv = styled.div`
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 70%;
-  height: 100%;
-`;
-
-const UserNickname = styled.div`
-  display: flex;
-  font-weight: bold;
-  font-size: 1.4rem;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.6rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.8rem;
-  }
+  width: 50%;
+  height: 50%;
 `;
 
 const OptionList = styled.div`
@@ -187,15 +150,17 @@ const MypageRow = styled.div`
   display: flex;
   width: 100%;
   height: 3rem;
+  justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
+  cursor: pointer;
+
+  &:hover {
+    color: gray;
+  }
 
   > p {
     margin-left: 0.5rem;
-    cursor: pointer;
-    &:hover {
-      color: gray;
-    }
   }
 
   @media ${({ theme }) => theme.device.tablet} {
@@ -206,7 +171,7 @@ const MypageRow = styled.div`
 const MypageHeader = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
   justify-contents: center;
   height: 3rem;
@@ -214,4 +179,25 @@ const MypageHeader = styled.div`
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.6rem;
   }
+`;
+
+const MyDiv = styled.div`
+  display: flex;
+  width: 90%;
+  height: 25%;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const UserText = styled.p`
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 600;
+`;
+
+const Divide = styled.div`
+  display: flex;
+  width: 100%;
+  height: 3%;
+  background-color: #f4f3f8;
 `;
