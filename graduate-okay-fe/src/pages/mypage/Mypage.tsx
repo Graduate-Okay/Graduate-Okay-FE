@@ -4,8 +4,9 @@ import theme from "../../constants/theme";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
-import MypageSVG from "../../assets/imgs/mypage.svg";
 import api from "../../apis/api";
+import HandleSection from "../../components/HandleSection";
+import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
@@ -58,10 +59,16 @@ const Mypage: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <MypageSection>
+        <HandleSection
+          prevBtn={false}
+          title="마이페이지"
+          closeBtn={false}
+          color="#a489f0"
+        />
         <MypageDiv>
           <UserInfo>
             <UserImg>
-              <img src={MypageSVG} alt="프로필" />
+              <Profile />
             </UserImg>
             <UserDiv>
               <UserNickname>안녕하세요, {nickname}님</UserNickname>
@@ -106,8 +113,9 @@ export default Mypage;
 
 const MypageSection = styled.section`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 70vh;
+  height: 75vh;
   align-items: center;
 `;
 
