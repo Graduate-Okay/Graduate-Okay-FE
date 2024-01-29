@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import "./index.css";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
 import authService from "./utils/authService";
