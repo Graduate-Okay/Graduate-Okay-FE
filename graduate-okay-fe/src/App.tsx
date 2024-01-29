@@ -5,7 +5,6 @@ import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
 import authService from "./utils/authService";
 const Header = lazy(() => import("./components/Header"));
-const Nav = lazy(() => import("./components/Nav"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Notice = lazy(() => import("./pages/Notice"));
 const Main = lazy(() => import("./pages/Main"));
@@ -49,7 +48,6 @@ function App() {
       <RouteChangeTracker />
       <Suspense fallback={<Spinner />}>
         <Header />
-        <Nav />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/notice" element={<Notice />} />

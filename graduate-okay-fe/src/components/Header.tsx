@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
-// import useCheckMobile from "../hooks/useCheckMobile";
-// import BackButton from "../assets/imgs/BackButton.svg";
+import useCheckMobile from "../hooks/useCheckMobile";
 import { useCookies } from "react-cookie";
 
 interface TextProps {
@@ -31,11 +30,13 @@ const Header: React.FC = () => {
     <ThemeProvider theme={theme}>
       <HeaderDiv>
         <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
-        {/* <SubDiv>
-          {useCheckMobile() < theme.deviceSizes.tablet ? (
-            <img src={BackButton} alt="뒤로가기" onClick={() => navigate(-1)} />
-          ) : null}
-        </SubDiv> */}
+        {useCheckMobile() < theme.deviceSizes.tablet ? null : (
+          <NavBar>
+            <Link to="/kyRecommend">인기교양추천</Link>
+            <Link to="/graduate">졸업요건조회</Link>
+            <Link to="/mypage">마이페이지</Link>
+          </NavBar>
+        )}
         <SubDiv>
           <Text
             onClick={() => navigate("/notice")}
@@ -55,16 +56,6 @@ const Header: React.FC = () => {
             </Text>
           )}
         </SubDiv>
-
-        {/* {cookies.accessToken ? (
-          <SubDiv onClick={() => handlelogOut()}>
-            <p>로그아웃</p>
-          </SubDiv>
-        ) : (
-          <SubDiv onClick={() => navigate("/login")}>
-            <p>로그인</p>
-          </SubDiv>
-        )} */}
       </HeaderDiv>
     </ThemeProvider>
   );
@@ -106,5 +97,20 @@ const Text = styled.p<TextProps>`
 
   &:hover {
     opacity: 0.5;
+  }
+`;
+
+const NavBar = styled.nav`
+  font-family: ${theme.fonts.JejuGothic};
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 2rem;
+  width: 50%;
+
+  a {
+    &:hover {
+      opacity: 0.5;
+    }
   }
 `;
