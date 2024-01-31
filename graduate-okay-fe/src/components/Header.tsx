@@ -95,6 +95,10 @@ const Text = styled.p<TextProps>`
   border-right: ${(props) => props.borderRight && "1px solid black"};
   color: ${(props) => props.color};
 
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+  }
+
   &:hover {
     opacity: 0.5;
   }
