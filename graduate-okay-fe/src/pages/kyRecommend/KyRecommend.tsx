@@ -71,7 +71,11 @@ const KyRecommend: React.FC = () => {
         <ContentSection>
           <SearchOptions>
             <SubjectLength>과목수</SubjectLength>
-            <p>총 {electives?.totalCount}건</p>
+            <Length>
+              <p>총</p>
+              <LengthNumber>{electives?.totalCount}</LengthNumber>
+              <p>건</p>
+            </Length>
           </SearchOptions>
           <RecommendDiv>
             <Title>
@@ -213,4 +217,17 @@ const SearchOptions = styled.div`
   height: 15%;
   align-items: center;
   margin-left: auto;
+`;
+
+const Length = styled.div`
+  display: flex;
+  width: 7rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+`;
+
+const LengthNumber = styled.p`
+  display: flex;
+  color: #5315fc;
 `;
