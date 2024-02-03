@@ -8,6 +8,8 @@ import api from "../../apis/api";
 import { useCookies } from "react-cookie";
 import ReviewModal from "./ReviewModal";
 import StarRate from "./StarRate";
+import HandleSection from "../../components/HandleSection";
+import Button from "../../components/Button";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
@@ -57,6 +59,8 @@ const KyRecommendDetail: React.FC = () => {
 
   console.log(reviewList);
 
+  console.log(message);
+
   useEffect(() => {
     getDetail();
     getReview();
@@ -65,6 +69,13 @@ const KyRecommendDetail: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <DetailSection>
+        <HandleSection
+          prevBtn={true}
+          title="인기교양추천"
+          closeBtn={false}
+          color="#a489f0"
+        />
+        <Credit>{detail?.credit || 0}학점</Credit>
         <DetailIsRequired>
           {detail?.isRequired ? <p>교양필수</p> : null}
         </DetailIsRequired>
@@ -72,23 +83,30 @@ const KyRecommendDetail: React.FC = () => {
           {detail?.name} ({detail?.subName})
         </DetailTitle>
         <DetailInfo>
-          <p>핵심역량 : {detail?.kyCoreType || "X"},</p>
-          <p>인재상 : {detail?.kyModelType || "X"},</p>
-          <p>{detail?.credit || 0}학점</p>
+          <TypeText>핵심역량</TypeText>
+          <Type>{detail?.kyCoreType || "없음"}</Type>
+          <TypeText>인재상</TypeText>
+          <Type>{detail?.kyModelType || "없음"}</Type>
         </DetailInfo>
         <ReviewSection>
           <HandleReview>
             <StarDiv>
               <StarRate review={detail?.reviewSummary || undefined} />
-              <p>{detail?.reviewSummary?.avgStarScore || 0}/5.0</p>
-              <p>{detail?.reviewSummary?.totalCount || 0}건</p>
+              <AvgScore>{detail?.reviewSummary?.avgStarScore || 0}</AvgScore>
             </StarDiv>
-            <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p>
+            <p>강의평 {detail?.reviewSummary?.totalCount || 0}건</p>
+            {/* <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p> */}
           </HandleReview>
           {review ? (
             <Review>{review.content}</Review>
           ) : (
-            <Review>{message}</Review>
+            <Review>
+              <NoneReview>
+                <p>강의평이 존재하지 않습니다.</p>
+                <p>첫 번째로 강의를 평가해보세요.</p>
+              </NoneReview>
+              <Button text="강의 평가하기" />
+            </Review>
           )}
         </ReviewSection>
       </DetailSection>
@@ -109,11 +127,46 @@ const DetailSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 65vh;
+  height: 70vh;
   margin: 2vh auto;
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 70%;
-  }
+`;
+
+const Credit = styled.div`
+  display: flex;
+  width: 6rem;
+  height: 3rem;
+  background-color: #a489f0;
+  border-radius: 13px;
+  color: white;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Type = styled.div`
+  display: flex;
+  width: 5rem;
+  height: 2rem;
+  border: 1px solid #313131;
+  border-radius: 13px;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TypeText = styled.p`
+  display: flex;
+  font-weight: bold;
+  width: 5rem;
+  text-align: center;
+  justify-content: center;
+`;
+
+const AvgScore = styled.p`
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 20%;
 `;
 
 const DetailIsRequired = styled.div`
@@ -146,13 +199,9 @@ const DetailTitle = styled.div`
 
 const DetailInfo = styled.div`
   display: flex;
-  color: #a4b0be;
-  height: 3.3vh;
-  font-size: 1.1rem;
+  height: 4vh;
+  align-items: center;
   border-bottom: 1px solid #a4b0be;
-  > p {
-    margin-right: 0.5rem;
-  }
 `;
 
 const ReviewSection = styled.section`
@@ -165,7 +214,7 @@ const HandleReview = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 2rem;
+  height: 5rem;
   font-size: 1.1rem;
   > p {
     &:hover {
@@ -177,6 +226,7 @@ const HandleReview = styled.div`
 const StarDiv = styled.div`
   display: flex;
   align-items: center;
+  width: 60%;
   > p {
     width: 100%;
     margin: 0px 5px;
@@ -185,4 +235,21 @@ const StarDiv = styled.div`
 
 const Review = styled.div`
   display: flex;
+  width: 90%;
+  height: 15vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+`;
+
+const NoneReview = styled.div`
+  display: flex;
+  width: 100%;
+  height: 70%;
+  flex-direction: column;
+  background-color: #f4f3f8;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 `;

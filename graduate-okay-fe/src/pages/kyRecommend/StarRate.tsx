@@ -37,8 +37,8 @@ const StarRate: React.FC<StarRateProps> = ({ review }) => {
             <span key={`${item}_${idx}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="19"
+                width="30"
+                height="23"
                 viewBox="0 0 14 13"
                 fill="#cacaca"
               >
