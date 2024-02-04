@@ -4,12 +4,13 @@ import theme from "../constants/theme";
 
 interface buttonProps {
   text: string;
+  handleOnClick?: () => void;
 }
 
-const Button: React.FC<buttonProps> = ({ text }) => {
+const Button: React.FC<buttonProps> = ({ text, handleOnClick }) => {
   return (
     <ThemeProvider theme={theme}>
-      <ButtonArea>
+      <ButtonArea onClick={handleOnClick}>
         <Text>{text}</Text>
       </ButtonArea>
     </ThemeProvider>

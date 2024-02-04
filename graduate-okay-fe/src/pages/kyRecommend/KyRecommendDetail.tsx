@@ -10,6 +10,7 @@ import ReviewModal from "./ReviewModal";
 import StarRate from "./StarRate";
 import HandleSection from "../../components/HandleSection";
 import Button from "../../components/Button";
+import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 
 const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubjectDetail>();
@@ -40,25 +41,29 @@ const KyRecommendDetail: React.FC = () => {
    */
   const getReview = useCallback(async () => {
     try {
-      const response = await axios.get(`${api.review}/${paramsId}`, {
+      const response = await axios.get(`${api.review}/8`, {
         headers: {
           Authorization: `Bearer ${cookies.accessToken}`,
         },
       });
-      setReview(response.data);
+      setReview(response.data.data);
     } catch (error) {
       if (error instanceof AxiosError) {
         setMessage(error.response?.data?.message);
       }
     }
-  }, [paramsId, cookies.accessToken]);
+  }, [cookies.accessToken]);
 
   const handleCloseModal = () => {
     setIsOpen(!isOpen);
   };
 
-  console.log(reviewList);
-
+  // todo : 모달 오픈에서 글쓰기 페이지로 넘기기
+  const lectureReview = () => {
+    setIsOpen(!isOpen);
+  };
+  // console.log(reviewList);
+  console.log(review);
   console.log(message);
 
   useEffect(() => {
@@ -91,21 +96,40 @@ const KyRecommendDetail: React.FC = () => {
         <ReviewSection>
           <HandleReview>
             <StarDiv>
-              <StarRate review={detail?.reviewSummary || undefined} />
+              <StarRate
+                score={detail?.reviewSummary.avgStarScore || undefined}
+              />
               <AvgScore>{detail?.reviewSummary?.avgStarScore || 0}</AvgScore>
             </StarDiv>
             <p>강의평 {detail?.reviewSummary?.totalCount || 0}건</p>
-            {/* <p onClick={() => setIsOpen(!isOpen)}>리뷰 쓰기🖋️</p> */}
           </HandleReview>
-          {review ? (
-            <Review>{review.content}</Review>
+          {reviewList ? (
+            <Review>
+              <HaveReview>
+                <ReviewDiv>
+                  <ReviewStar>{review?.starScore}</ReviewStar>
+                  <ReviewTitle>{review?.title}</ReviewTitle>
+                  <ReviewContent>{review?.content}</ReviewContent>
+                </ReviewDiv>
+                <div>
+                  <Next />
+                </div>
+              </HaveReview>
+              <Button
+                text="강의 평가하기"
+                handleOnClick={() => lectureReview()}
+              />
+            </Review>
           ) : (
             <Review>
               <NoneReview>
                 <p>강의평이 존재하지 않습니다.</p>
                 <p>첫 번째로 강의를 평가해보세요.</p>
               </NoneReview>
-              <Button text="강의 평가하기" />
+              <Button
+                text="강의 평가하기"
+                handleOnClick={() => lectureReview()}
+              />
             </Review>
           )}
         </ReviewSection>
@@ -252,4 +276,44 @@ const NoneReview = styled.div`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+`;
+
+const HaveReview = styled.div`
+  display: flex;
+  width: 100%;
+  height: 70%;
+  border: 1px solid #cacaca;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ReviewDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+`;
+
+const ReviewStar = styled.p`
+  display: flex;
+  width: 50%;
+  height: 20%;
+  align-items: center;
+`;
+
+const ReviewTitle = styled.p`
+  display: flex;
+  width: 50%;
+  height: 30%;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+`;
+
+const ReviewContent = styled.p`
+  display: flex;
+  width: 50%;
+  height: 50%;
+  font-size: 1.2rem;
 `;
