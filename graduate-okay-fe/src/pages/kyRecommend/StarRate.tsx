@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { IReviewSummary } from "../../interfaces";
 
 interface StarRateProps {
-  review?: IReviewSummary;
+  score?: number;
 }
 
-const StarRate: React.FC<StarRateProps> = ({ review }) => {
-  const rate = review?.avgStarScore;
+const StarRate: React.FC<StarRateProps> = ({ score }) => {
+  const rate = score;
   const AVG_RATE = rate ? rate : 0;
   const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
