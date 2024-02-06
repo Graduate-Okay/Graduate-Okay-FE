@@ -16,7 +16,6 @@ const KyRecommendDetail: React.FC = () => {
   const [detail, setDetail] = useState<ISubject>();
   const [review, setReview] = useState<any>();
   const [reviewList, setReviewList] = useState<ISubjectReviewDataList[]>();
-  const [message, setMessage] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const params = useParams();
   const paramsId = params.id;
@@ -51,7 +50,7 @@ const KyRecommendDetail: React.FC = () => {
               return response.data.data;
             } catch (error) {
               if (error instanceof AxiosError) {
-                setMessage(error.response?.data?.message);
+                console.error(error.response?.data?.message);
               }
               return null;
             }
@@ -63,7 +62,7 @@ const KyRecommendDetail: React.FC = () => {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        setMessage(error.response?.data?.message);
+        console.error(error.response?.data?.message);
       }
     }
   }, [cookies.accessToken, reviewList]);
@@ -76,8 +75,7 @@ const KyRecommendDetail: React.FC = () => {
   const lectureReview = () => {
     setIsOpen(!isOpen);
   };
-  // console.log(review, +"1");
-  // console.log(reviewList);
+
   console.log(review);
 
   useEffect(() => {
@@ -111,32 +109,38 @@ const KyRecommendDetail: React.FC = () => {
           <Type>{detail?.kyModelType || "없음"}</Type>
         </DetailInfo>
         <ReviewSection>
-          {/* <HandleReview>
+          <HandleReview>
             <StarDiv>
-              <StarRate
-                score={detail?.reviewSummary.avgStarScore || undefined}
-              />
-              <AvgScore>{detail?.reviewSummary?.avgStarScore || 0}</AvgScore>
+              <StarRate score={detail?.avgStarScore || undefined} />
+              <AvgScore>{detail?.avgStarScore || "0.0"}</AvgScore>
             </StarDiv>
-            <p>강의평 {detail?.reviewSummary?.totalCount || 0}건</p>
-          </HandleReview> */}
-          {/* {review && review.length > 0 ? (
-            <Review>
-              <HaveReview>
-                <ReviewDiv>
-                  <ReviewStar>{review?.starScore}</ReviewStar>
-                  <ReviewTitle>{review?.title}</ReviewTitle>
-                  <ReviewContent>{review?.content}</ReviewContent>
-                </ReviewDiv>
-                <div>
-                  <Next />
-                </div>
-              </HaveReview>
-              <Button
-                text="강의 평가하기"
-                handleOnClick={() => lectureReview()}
-              />
-            </Review>
+            <p>강의평 {detail?.kyCount || 0}건</p>
+          </HandleReview>
+          {review && review.length > 0 ? (
+            <>
+              {review.map((item: any) => {
+                return (
+                  <Review>
+                    <HaveReview>
+                      <ReviewDiv>
+                        <ReviewStar>{item?.starScore}</ReviewStar>
+                        <ReviewTitle>{item?.title}</ReviewTitle>
+                        <ReviewContent>{item?.content}</ReviewContent>
+                      </ReviewDiv>
+                      <div>
+                        <Next />
+                      </div>
+                    </HaveReview>
+                  </Review>
+                );
+              })}
+              <WrapButton>
+                <Button
+                  text="강의 평가하기"
+                  handleOnClick={() => lectureReview()}
+                />
+              </WrapButton>
+            </>
           ) : (
             <Review>
               <NoneReview>
@@ -148,7 +152,7 @@ const KyRecommendDetail: React.FC = () => {
                 handleOnClick={() => lectureReview()}
               />
             </Review>
-          )} */}
+          )}
         </ReviewSection>
       </DetailSection>
       {isOpen ? (
@@ -277,7 +281,7 @@ const StarDiv = styled.div`
 const Review = styled.div`
   display: flex;
   width: 90%;
-  height: 15vh;
+  height: 12vh;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -287,7 +291,7 @@ const Review = styled.div`
 const NoneReview = styled.div`
   display: flex;
   width: 100%;
-  height: 70%;
+  height: 60%;
   flex-direction: column;
   background-color: #f4f3f8;
   border-radius: 10px;
@@ -298,7 +302,7 @@ const NoneReview = styled.div`
 const HaveReview = styled.div`
   display: flex;
   width: 100%;
-  height: 70%;
+  height: 80%;
   border: 1px solid #cacaca;
   border-radius: 10px;
   justify-content: center;
@@ -333,4 +337,9 @@ const ReviewContent = styled.p`
   width: 50%;
   height: 50%;
   font-size: 1.2rem;
+`;
+
+const WrapButton = styled.div`
+  display: flex;
+  justify-content: center;
 `;
