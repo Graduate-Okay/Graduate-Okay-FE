@@ -1,7 +1,16 @@
-export interface ISubjectData {
+export interface ISubjectList {
   totalCount: number;
   maxPageCount: number;
-  subjectList: ISubject[];
+  subjectList: SubjectList[];
+}
+
+export interface SubjectList {
+  subjectId: number;
+  name: string;
+  subName: string;
+  isRequired: boolean;
+  credit: number;
+  kyCount: number;
 }
 
 export interface ISubject {
@@ -13,14 +22,14 @@ export interface ISubject {
   kyModelType: string;
   kyCoreType: string;
   kyCount: number;
-}
-
-export interface ISubjectDetail extends ISubject {
-  reviewSummary: IReviewSummary;
-}
-
-export interface IReviewSummary {
-  totalCount: number;
+  reviewCount: number;
   avgStarScore: number;
-  reviewIdList: number[];
+  reviewDataList: ISubjectReviewDataList[];
+}
+
+export interface ISubjectReviewDataList {
+  reviewId: number;
+  title: string;
+  username: string;
+  starScore: number;
 }

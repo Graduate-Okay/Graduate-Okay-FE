@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Pagination from "../../components/Pagination";
-import { ISubjectData, ISubject } from "../../interfaces";
+import { ISubjectList, SubjectList } from "../../interfaces";
 import theme from "../../constants/theme";
 import api from "../../apis/api";
 import useInput from "../../hooks/useInput";
@@ -11,13 +11,15 @@ import useDebounce from "../../hooks/useDebounce";
 import HandleSection from "../../components/HandleSection";
 
 const KyRecommend: React.FC = () => {
-  const [electives, setElectives] = useState<ISubjectData | null>(null);
+  const [electives, setElectives] = useState<ISubjectList | null>(null);
   const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
   const search = useInput("");
 
   const debouncedSearch = useDebounce(search.value, 400);
+
+  console.log(electives);
 
   const params = {
     page: currentPage,
@@ -85,13 +87,13 @@ const KyRecommend: React.FC = () => {
               <Count>수강횟수</Count>
             </Title>
             {electives?.subjectList &&
-              electives?.subjectList.map((item: ISubject, key: number) => {
+              electives?.subjectList.map((item: SubjectList) => {
                 return (
                   <Content
                     key={item.subjectId}
                     onClick={() => routeDetail(item.subjectId)}
                   >
-                    <Rank>{key + 1}</Rank>
+                    <Rank>{item.subjectId}</Rank>
                     <Subject>{item.name || ""}</Subject>
                     <Credit>{item.credit || ""}</Credit>
                     <Count>{item.kyCount || ""}</Count>

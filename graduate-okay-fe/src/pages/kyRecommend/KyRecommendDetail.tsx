@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import { useParams } from "react-router-dom";
-import { IReview, ISubjectDetail } from "../../interfaces";
+import { ISubject, ISubjectReviewDataList } from "../../interfaces";
 import axios, { AxiosError } from "axios";
 import api from "../../apis/api";
 import { useCookies } from "react-cookie";
@@ -13,9 +13,9 @@ import Button from "../../components/Button";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 
 const KyRecommendDetail: React.FC = () => {
-  const [detail, setDetail] = useState<ISubjectDetail>();
-  const [review, setReview] = useState<IReview>();
-  const [reviewList, setReviewList] = useState<number[]>();
+  const [detail, setDetail] = useState<ISubject>();
+  const [review, setReview] = useState<any>();
+  const [reviewList, setReviewList] = useState<ISubjectReviewDataList[]>();
   const [message, setMessage] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const params = useParams();
@@ -30,29 +30,43 @@ const KyRecommendDetail: React.FC = () => {
         },
       });
       setDetail(response?.data.data);
-      setReviewList(response?.data.data.reviewSummary.reviewIdList);
+      setReviewList(response?.data.data.reviewDataList);
     } catch (error) {
       throw new Error(`${error}`);
     }
   }, [paramsId, cookies.accessToken]);
 
-  /**
-   * @todo paramsId -> reviewList에있는 배열 값이 들어가야함
-   */
-  const getReview = useCallback(async () => {
+  const getReviewList = useCallback(async () => {
     try {
-      const response = await axios.get(`${api.review}/8`, {
-        headers: {
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      });
-      setReview(response.data.data);
+      if (reviewList) {
+        const reviewPromises = reviewList.map(
+          async (review: ISubjectReviewDataList) => {
+            const reviewId = review.reviewId;
+            try {
+              const response = await axios.get(`${api.review}/${reviewId}`, {
+                headers: {
+                  Authorization: `Bearer ${cookies.accessToken}`,
+                },
+              });
+              return response.data.data;
+            } catch (error) {
+              if (error instanceof AxiosError) {
+                setMessage(error.response?.data?.message);
+              }
+              return null;
+            }
+          }
+        );
+
+        const reviews = await Promise.all(reviewPromises);
+        setReview(reviews);
+      }
     } catch (error) {
       if (error instanceof AxiosError) {
         setMessage(error.response?.data?.message);
       }
     }
-  }, [cookies.accessToken]);
+  }, [cookies.accessToken, reviewList]);
 
   const handleCloseModal = () => {
     setIsOpen(!isOpen);
@@ -62,14 +76,17 @@ const KyRecommendDetail: React.FC = () => {
   const lectureReview = () => {
     setIsOpen(!isOpen);
   };
+  // console.log(review, +"1");
   // console.log(reviewList);
   console.log(review);
-  console.log(message);
 
   useEffect(() => {
     getDetail();
-    getReview();
-  }, [getDetail, getReview]);
+  }, [params, getDetail]);
+
+  useEffect(() => {
+    getReviewList();
+  }, [getReviewList]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,7 +111,7 @@ const KyRecommendDetail: React.FC = () => {
           <Type>{detail?.kyModelType || "없음"}</Type>
         </DetailInfo>
         <ReviewSection>
-          <HandleReview>
+          {/* <HandleReview>
             <StarDiv>
               <StarRate
                 score={detail?.reviewSummary.avgStarScore || undefined}
@@ -102,8 +119,8 @@ const KyRecommendDetail: React.FC = () => {
               <AvgScore>{detail?.reviewSummary?.avgStarScore || 0}</AvgScore>
             </StarDiv>
             <p>강의평 {detail?.reviewSummary?.totalCount || 0}건</p>
-          </HandleReview>
-          {reviewList ? (
+          </HandleReview> */}
+          {/* {review && review.length > 0 ? (
             <Review>
               <HaveReview>
                 <ReviewDiv>
@@ -131,7 +148,7 @@ const KyRecommendDetail: React.FC = () => {
                 handleOnClick={() => lectureReview()}
               />
             </Review>
-          )}
+          )} */}
         </ReviewSection>
       </DetailSection>
       {isOpen ? (
