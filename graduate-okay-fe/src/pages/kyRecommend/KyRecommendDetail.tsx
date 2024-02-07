@@ -6,7 +6,7 @@ import { ISubject, ISubjectReviewDataList } from "../../interfaces";
 import axios, { AxiosError } from "axios";
 import api from "../../apis/api";
 import { useCookies } from "react-cookie";
-import ReviewModal from "./ReviewModal";
+import ReviewModal from "./Review";
 import StarRate from "./StarRate";
 import HandleSection from "../../components/HandleSection";
 import Button from "../../components/Button";
@@ -71,12 +71,9 @@ const KyRecommendDetail: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  // todo : 모달 오픈에서 글쓰기 페이지로 넘기기
   const lectureReview = () => {
     setIsOpen(!isOpen);
   };
-
-  console.log(review);
 
   useEffect(() => {
     getDetail();
@@ -116,7 +113,9 @@ const KyRecommendDetail: React.FC = () => {
             </StarDiv>
             <p>강의평 {detail?.kyCount || 0}건</p>
           </HandleReview>
-          {review && review.length > 0 ? (
+          {isOpen ? (
+            <ReviewModal onClose={handleCloseModal} id={detail?.subjectId} />
+          ) : review && review.length > 0 ? (
             <>
               {review.map((item: any) => {
                 return (
@@ -155,13 +154,6 @@ const KyRecommendDetail: React.FC = () => {
           )}
         </ReviewSection>
       </DetailSection>
-      {isOpen ? (
-        <ReviewModal
-          onClose={handleCloseModal}
-          title={detail?.name}
-          id={detail?.subjectId}
-        />
-      ) : null}
     </ThemeProvider>
   );
 };
