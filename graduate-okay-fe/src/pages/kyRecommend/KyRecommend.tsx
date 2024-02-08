@@ -19,8 +19,6 @@ const KyRecommend: React.FC = () => {
 
   const debouncedSearch = useDebounce(search.value, 400);
 
-  console.log(electives);
-
   const params = {
     page: currentPage,
     searchWord: debouncedSearch,
