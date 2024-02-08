@@ -5,6 +5,7 @@ const api = {
   subject: `${address}/subject`,
   admin: `${address}/admin`,
   review: `${address}/review`,
+  graduate: `${address}/graduate-ok`,
 };
 
 export default api;

@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import HandleSection from "../components/HandleSection";
 import GraduateImage from "../assets/imgs/background/graduate.svg";
 import { ReactComponent as File } from "../assets/imgs/file.svg";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
+import axios from "axios";
+import api from "../apis/api";
+import { useCookies } from "react-cookie";
 
 interface ImageProps {
   backgroundImage: string;
 }
 
 const Graduate: React.FC = () => {
+  const [cookies, _] = useCookies(["accessToken"]);
+  const [isActive, setActive] = useState<boolean>(false);
+  const handleDragStart = () => setActive(true);
+  const handleDragEnd = () => setActive(false);
+  const handleDragOver = (event: any) => {
+    event.preventDefault();
+  };
+  const handleDrop = (event: any) => {
+    event.preventDefault();
+    setActive(false);
+  };
+
+  const uploadFile = () => {
+    const fd = new FormData();
+    const getFile = document.getElementById("file") as HTMLInputElement | null;
+    getFile?.files?.[0] && fd.append("file", getFile.files[0]);
+    axios.post(`${api.graduate}`, fd, {
+      headers: {
+        "Content-Type": `multipart/form-data`,
+        Authorization: `Bearer ${cookies.accessToken}`,
+      },
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <GraduateSection>
@@ -21,12 +48,26 @@ const Graduate: React.FC = () => {
           color="#a489f0"
         />
         <Explain>학업성적확인서를 올려 졸업 요건을 조회해보세요.</Explain>
-        <Image backgroundImage={GraduateImage}>
-          <FileButton>
-            <File width={30} height={30} />
-            <p>학업성적확인서 PDF 업로드</p>
-          </FileButton>
-        </Image>
+        <Label
+          onDragEnter={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragEnd}
+          onDrop={handleDrop}
+        >
+          <Image backgroundImage={GraduateImage}>
+            <Input
+              type="file"
+              accept=".pdf"
+              id="file"
+              name="file"
+              onChange={uploadFile}
+            />
+            <FileButton>
+              <File width={30} height={30} />
+              <p>학업성적확인서 PDF 업로드</p>
+            </FileButton>
+          </Image>
+        </Label>
         <Result>
           <Caution width={30} height={30} />
           <ResultExplain>
@@ -81,7 +122,7 @@ const Explain = styled.div`
 const Image = styled.div<ImageProps>`
   display: flex;
   width: 100%;
-  height: 30%;
+  height: 100%;
   background-image: url(${(props) => props.backgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
@@ -164,4 +205,14 @@ const IsGraduate = styled.div`
   color: #a489f0;
   margin-left: 10px;
   margin-right: 10px;
+`;
+
+const Label = styled.label`
+  display: flex;
+  width: 100%;
+  height: 30%;
+`;
+
+const Input = styled.input`
+  display: none;
 `;
