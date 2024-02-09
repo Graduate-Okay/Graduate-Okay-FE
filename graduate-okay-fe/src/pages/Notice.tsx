@@ -46,7 +46,7 @@ const Notice: React.FC = () => {
                   onClick={() => routeDetail(notice.id)}
                 >
                   <DataGroup>
-                    <Alarm />
+                    <Alarm width={27} height={27} />
                     <NoticeText>
                       <NoticeName>{notice.title}</NoticeName>
                       <NoticeDate>{notice.createdAt}</NoticeDate>
@@ -75,12 +75,6 @@ const NoticeDiv = styled.div`
   height: 80vh;
   justify-content: center;
   align-items: center;
-
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 70%;
-    height: 80vh;
-    margin: 0 auto;
-  }
 `;
 
 const NoticeContent = styled.div`
@@ -90,6 +84,10 @@ const NoticeContent = styled.div`
   height: 75%;
   margin: 2vh auto;
   justify-content: space-between;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+  }
 `;
 
 const NoticeData = styled.div`
@@ -103,6 +101,10 @@ const NoticeData = styled.div`
   &:hover {
     background-color: #ecf0f1;
   }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    height: 12%;
+  }
 `;
 
 const DataGroup = styled.div`
@@ -112,6 +114,16 @@ const DataGroup = styled.div`
 
   > svg {
     width: 15%;
+
+    @media ${({ theme }) => theme.device.tablet} {
+      height: 30px;
+    }
+    @media ${({ theme }) => theme.device.laptop} {
+      height: 35px;
+    }
+    @media ${({ theme }) => theme.device.largeLaptop} {
+      height: 40px;
+    }
   }
 `;
 
