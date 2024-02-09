@@ -1,34 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as SchoolTitle } from "../../assets/imgs/logo/schoolTitle.svg";
+import { ReactComponent as FullLogo } from "../../assets/imgs/logo/FullLogo.svg";
 
 const OtherViewFooter: React.FC = () => {
+  const handleOnClick = (args: string) => {
+    if (args === "univ") {
+      window.open("https://hs.ac.kr/intro.html");
+    } else if (args === "graduate") {
+      window.open("https://github.com/Graduate-Okay");
+    }
+  };
   return (
     <FooterSection>
       <FooterTitle>바로가기</FooterTitle>
       <FooterContent>
-        <SchoolTitle />
+        <SchoolTitle onClick={() => handleOnClick("univ")} />
+        <FullLogo onClick={() => handleOnClick("graduate")} />
       </FooterContent>
-      {/* <Content>
-        <a
-          href="https://www.hs.ac.kr/intro.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          한신대학교 홈페이지
-        </a>
-        <a
-          href="https://hsctis.hs.ac.kr/app-nexa/index.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          한신대학교 종합정보시스템
-        </a>
-      </Content>
-      <Content>
-        <p>졸업가능?</p>
-        <p>https://github.com/Graduate-Okay</p>
-      </Content> */}
     </FooterSection>
   );
 };
@@ -41,21 +30,8 @@ const FooterSection = styled.footer`
   width: 100%;
   height: 20vh;
   font-size: 1.1rem;
+  align-items: center;
 `;
-
-// const Content = styled.div`
-//   display: flex;
-//   width: 100%;
-//   justify-content: center;
-//   flex-direction: column;
-//   text-align: center;
-//   @media ${({ theme }) => theme.device.laptop} {
-//     font-size: 1.2rem;
-//   }
-//   @media ${({ theme }) => theme.device.largeLaptop} {
-//     font-size: 1.4rem;
-//   }
-// `;
 
 const FooterTitle = styled.div`
   display: flex;
@@ -68,4 +44,13 @@ const FooterTitle = styled.div`
 
 const FooterContent = styled.div`
   display: flex;
+  width: 80%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    width: 40%;
+    cursor: pointer;
+  }
 `;
