@@ -68,6 +68,16 @@ const HandleSectionDiv = styled.div`
   > div {
     flex-grow: 1;
   }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.8rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 2rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2.2rem;
+  }
 `;
 
 const Title = styled.p<TextProps>`
@@ -81,4 +91,10 @@ const SVGWrapper = styled.div<SVGProps>`
   display: flex;
   justify-content: ${(props) => props.justifyContent};
   visibility: ${(props) => (props.visibility ? "visible" : "hidden")};
+
+  > svg {
+    @media ${({ theme }) => theme.device.tablet} {
+      visibility: hidden;
+    }
+  }
 `;
