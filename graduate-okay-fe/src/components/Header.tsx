@@ -71,13 +71,12 @@ const HeaderDiv = styled.header`
   height: 6vh;
   margin: 1rem auto;
 
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 80%;
-    margin: 1.2rem auto;
-  }
-
   > img {
     cursor: pointer;
+  }
+
+  @media ${({ theme }) => theme.device.desktop} {
+    width: 90%;
   }
 `;
 
@@ -95,12 +94,16 @@ const Text = styled.p<TextProps>`
   border-right: ${(props) => props.borderRight && "1px solid black"};
   color: ${(props) => props.color};
 
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.4rem;
-  }
-
   &:hover {
     opacity: 0.5;
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+    width: 80px;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.6rem;
   }
 `;
 
@@ -109,12 +112,19 @@ const NavBar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-size: 2rem;
+  font-size: 1.6rem;
   width: 50%;
 
   a {
     &:hover {
       opacity: 0.5;
     }
+  }
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 2rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2.2rem;
   }
 `;
