@@ -113,6 +113,16 @@ const IntroduceText = styled.p<IntroduceTextProps>`
   word-break: keep-all;
   text-align: center;
   white-space: normal;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 2.5rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 3rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 4rem;
+  }
 `;
 
 const ButtonDiv = styled.div<TextProps>`
@@ -127,4 +137,23 @@ const SVGDiv = styled.div<SVGProps>`
   width: 100%;
   height: 70%;
   justify-content: ${(props) => props.justifyContent};
+
+  @media ${({ theme }) => theme.device.tablet} {
+    > svg {
+      width: 400px;
+      height: 450px;
+    }
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    > svg {
+      width: 500px;
+      height: 550px;
+    }
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    > svg {
+      width: 600px;
+      height: 550px;
+    }
+  }
 `;

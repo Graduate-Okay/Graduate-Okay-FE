@@ -27,10 +27,31 @@ const ButtonArea = styled.div`
   background-color: ${({ theme }) => theme.colors.mainColor};
   justify-content: center;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 14rem;
+    height: 5rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 18rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 21rem;
+  }
 `;
 
 const Text = styled.p`
   display: flex;
   color: white;
   font-size: 1.2rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.7rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2.2rem;
+  }
 `;
