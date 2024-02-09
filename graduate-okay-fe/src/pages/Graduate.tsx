@@ -14,7 +14,7 @@ interface ImageProps {
 }
 
 const Graduate: React.FC = () => {
-  const [cookies, _] = useCookies(["accessToken"]);
+  const [cookies] = useCookies(["accessToken"]);
   const [isActive, setActive] = useState<boolean>(false);
   const handleDragStart = () => setActive(true);
   const handleDragEnd = () => setActive(false);
@@ -25,6 +25,7 @@ const Graduate: React.FC = () => {
     event.preventDefault();
     setActive(false);
   };
+  console.log(isActive);
 
   const uploadFile = () => {
     const fd = new FormData();
