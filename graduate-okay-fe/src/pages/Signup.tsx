@@ -156,6 +156,9 @@ const SignupSection = styled.section`
   width: 90%;
   height: 60vh;
   margin: 5% auto;
+  @media ${({ theme }) => theme.device.laptop} {
+    justify-content: center;
+  }
 `;
 
 const SignupSub = styled.div`
@@ -164,6 +167,12 @@ const SignupSub = styled.div`
   height: 4vh;
   justify-content: center;
   font-size: 1rem;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+  }
 `;
 
 const SignupInput = styled.input`
@@ -230,6 +239,11 @@ const LoginTitle = styled.div`
   width: 90%;
   height: 3vh;
   align-items: center;
-
   margin-left: auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 65%;
+  }
 `;

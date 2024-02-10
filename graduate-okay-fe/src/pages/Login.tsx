@@ -102,6 +102,9 @@ const LoginSection = styled.section`
   width: 90%;
   height: 60vh;
   margin: 5% auto;
+  @media ${({ theme }) => theme.device.laptop} {
+    justify-content: center;
+  }
 `;
 
 const LoginDiv = styled.div`
@@ -171,10 +174,11 @@ const Account = styled.div`
   > p {
     cursor: pointer;
     font-size: 1.2rem;
+    &:hover {
+      opacity: 0.5;
+    }
   }
-  &:hover {
-    opacity: 0.5;
-  }
+
   @media ${({ theme }) => theme.device.tablet} {
     width: 50%;
     margin: 0 auto;
@@ -192,6 +196,12 @@ const Announcement = styled.div`
   height: 5vh;
   align-items: center;
   margin-left: auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 65%;
+  }
 `;
 
 const LoginTitle = styled.div`
@@ -201,4 +211,10 @@ const LoginTitle = styled.div`
   height: 3vh;
   align-items: center;
   margin-left: auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 75%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 65%;
+  }
 `;
