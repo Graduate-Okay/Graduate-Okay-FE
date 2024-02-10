@@ -131,6 +131,13 @@ const MypageDiv = styled.div`
   flex-direction: column;
   width: 90%;
   height: 67%;
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 60%;
+    height: 60%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 40%;
+  }
 `;
 
 const UserInfo = styled.div`
@@ -138,6 +145,10 @@ const UserInfo = styled.div`
   flex-direction: column;
   width: 50%;
   height: 50%;
+  @media ${({ theme }) => theme.device.laptop} {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const OptionList = styled.div`
@@ -166,6 +177,13 @@ const MypageRow = styled.div`
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.3rem;
   }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.5rem;
+    height: 4rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.7rem;
+  }
 `;
 
 const MypageHeader = styled.div`
@@ -179,6 +197,13 @@ const MypageHeader = styled.div`
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.6rem;
   }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.8rem;
+    height: 4rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2rem;
+  }
 `;
 
 const MyDiv = styled.div`
@@ -187,12 +212,26 @@ const MyDiv = styled.div`
   height: 25%;
   justify-content: space-around;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    flex-direction: column;
+    height: 35%;
+    justify-content: center;
+    > svg {
+      order: -1;
+    }
+  }
 `;
 
 const UserText = styled.p`
   display: flex;
   font-size: 1.6rem;
   font-weight: 600;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-weight: normal;
+    font-size: 1.8rem;
+  }
 `;
 
 const Divide = styled.div`
