@@ -38,7 +38,7 @@ const NoticeDetail: React.FC = () => {
           color="#a489f0"
         />
         <DataGroup>
-          <Alarm />
+          <Alarm width={30} height={30} />
           <NoticeText>
             <NoticeName>{detail?.title}</NoticeName>
             <NoticeDate>{detail?.createdAt}</NoticeDate>
@@ -62,6 +62,9 @@ const DetailSection = styled.section`
   @media ${({ theme }) => theme.device.laptop} {
     width: 60%;
   }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 55%;
+  }
 `;
 
 const DetailContent = styled.div`
@@ -84,6 +87,13 @@ const DataGroup = styled.div`
 
   > svg {
     width: 15%;
+
+    @media ${({ theme }) => theme.device.laptop} {
+      height: 40%;
+    }
+    @media ${({ theme }) => theme.device.largeLaptop} {
+      height: 50%;
+    }
   }
 `;
 
@@ -98,11 +108,13 @@ const NoticeName = styled.div`
   font-size: 1.6rem;
 
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.9rem;
+    font-size: 2rem;
   }
-
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 2.1rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2.3rem;
   }
 `;
 
@@ -116,5 +128,8 @@ const NoticeDate = styled.div`
   }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.4rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.5rem;
   }
 `;
