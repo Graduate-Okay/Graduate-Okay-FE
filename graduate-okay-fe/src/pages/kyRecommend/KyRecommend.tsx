@@ -117,6 +117,14 @@ const KyRecommendSection = styled.section`
   height: 70vh;
   flex-direction: column;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 80%;
+    margin: 0 auto;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 70%;
+  }
 `;
 
 const SubjectLength = styled.div`
@@ -145,6 +153,13 @@ const Title = styled.div`
   height: 10%;
   background-color: #ece5ff;
   font-size: 1.2rem;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.6rem;
+  }
 `;
 
 const Content = styled.div`
@@ -154,6 +169,12 @@ const Content = styled.div`
   height: 8%;
   font-size: 1.2rem;
   border-bottom: 1px solid #d9d9d9;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.25rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.3rem;
+  }
 `;
 
 const Rank = styled.div`
@@ -192,14 +213,31 @@ const ExplainDiv = styled.div`
   height: 7%;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.3rem;
+  }
 `;
 
 const InputSearch = styled.input`
   display: flex;
   width: 30rem;
-  height: 3rem;
+  height: 2rem;
   border: 2px solid #a489f0;
   border-radius: 15px;
+  padding: 0.6rem;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 40rem;
+    height: 2.2rem;
+    padding: 1rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 50rem;
+    height: 2.5rem;
+  }
 `;
 
 const ContentSection = styled.section`
