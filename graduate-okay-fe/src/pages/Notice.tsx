@@ -86,7 +86,10 @@ const NoticeContent = styled.div`
   justify-content: space-between;
 
   @media ${({ theme }) => theme.device.laptop} {
-    width: 70%;
+    width: 60%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 50%;
   }
 `;
 

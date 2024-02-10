@@ -78,9 +78,7 @@ const Page = styled.div`
   > img {
     width: 5%;
     cursor: pointer;
-    @media ${({ theme }) => theme.device.tablet} {
-      width: 30px;
-    }
+
     &:hover {
       background-color: #d9d9d9;
     }
@@ -92,10 +90,18 @@ const Number = styled.span`
   width: 30px;
   justify-content: center;
   cursor: pointer;
+
+  &:hover {
+    background-color: #d9d9d9;
+  }
+
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.2rem;
   }
-  &:hover {
-    background-color: #d9d9d9;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.5rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.8rem;
   }
 `;
