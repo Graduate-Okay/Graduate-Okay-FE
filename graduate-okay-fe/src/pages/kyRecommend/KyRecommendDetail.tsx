@@ -109,9 +109,9 @@ const KyRecommendDetail: React.FC = () => {
           <HandleReview>
             <StarDiv>
               <StarRate score={detail?.avgStarScore || undefined} />
-              <AvgScore>{detail?.avgStarScore || "0.0"}</AvgScore>
+              <AvgScore>{detail?.avgStarScore.toFixed(1) || "0.0"}</AvgScore>
             </StarDiv>
-            <p>강의평 {detail?.kyCount || 0}건</p>
+            <LectureLeview>강의평 {detail?.kyCount || 0}건</LectureLeview>
           </HandleReview>
           {isOpen ? (
             <ReviewModal onClose={handleCloseModal} id={detail?.subjectId} />
@@ -122,6 +122,7 @@ const KyRecommendDetail: React.FC = () => {
                   <Review>
                     <HaveReview>
                       <ReviewDiv>
+                        <StarRate score={item?.starScore || undefined} />
                         <ReviewStar>{item?.starScore}</ReviewStar>
                         <ReviewTitle>{item?.title}</ReviewTitle>
                         <ReviewContent>{item?.content}</ReviewContent>
@@ -166,6 +167,15 @@ const DetailSection = styled.section`
   width: 90%;
   height: 70vh;
   margin: 2vh auto;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 50%;
+  }
 `;
 
 const Credit = styled.div`
@@ -178,6 +188,16 @@ const Credit = styled.div`
   font-size: 1.2rem;
   justify-content: center;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 8rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 6rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 6rem;
+  }
 `;
 
 const Type = styled.div`
@@ -334,4 +354,20 @@ const ReviewContent = styled.p`
 const WrapButton = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const LectureLeview = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.3rem;
+    height: 4rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.4rem;
+  }
 `;
