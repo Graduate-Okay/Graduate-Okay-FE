@@ -85,13 +85,14 @@ const KyRecommend: React.FC = () => {
               <Count>수강횟수</Count>
             </Title>
             {electives?.subjectList &&
-              electives?.subjectList.map((item: SubjectList) => {
+              electives?.subjectList.map((item: SubjectList, index: number) => {
+                const rank = currentPage * 10 + index + 1;
                 return (
                   <Content
                     key={item.subjectId}
                     onClick={() => routeDetail(item.subjectId)}
                   >
-                    <Rank>{item.subjectId}</Rank>
+                    <Rank>{rank}</Rank>
                     <Subject>{item.name || ""}</Subject>
                     <Credit>{item.credit || ""}</Credit>
                     <Count>{item.kyCount || ""}</Count>
