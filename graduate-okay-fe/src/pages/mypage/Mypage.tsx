@@ -6,13 +6,16 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import api from "../../apis/api";
 import HandleSection from "../../components/HandleSection";
+import Modal from "../../components/Modal";
 import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg";
 import { ReactComponent as GraduationCap } from "../../assets/imgs/graduationCap.svg";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
+import { ReactComponent as Withdrawal } from "../../assets/imgs/withdrawal.svg";
 
 const Mypage: React.FC = () => {
   const [nickname, setNickname] = useState<string>("");
   const [cookies, , removeCookie] = useCookies(["accessToken"]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const getInfo = useCallback(async () => {
@@ -31,10 +34,6 @@ const Mypage: React.FC = () => {
   }, [cookies.accessToken]);
 
   const handleWithdrawal = async () => {
-    const withdrawal = window.confirm("정말 탈퇴하시겠습니까?");
-    if (!withdrawal) {
-      return;
-    }
     try {
       const response = await axios.delete(`${api.user}/withdrawal`, {
         headers: {
@@ -52,6 +51,10 @@ const Mypage: React.FC = () => {
         alert(error?.response?.data?.message);
       }
     }
+  };
+
+  const handleOnModal = () => {
+    setIsOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -106,11 +109,20 @@ const Mypage: React.FC = () => {
               <Next />
             </MypageRow>
             <MypageRow>
-              <p onClick={() => handleWithdrawal()}>회원탈퇴</p>
+              <p onClick={() => handleOnModal()}>회원탈퇴</p>
               <Next />
             </MypageRow>
           </OptionList>
         </MypageDiv>
+        {isOpen ? (
+          <Modal
+            svg={Withdrawal}
+            title="정말 탈퇴하시겠어요?"
+            message="탈퇴 시, 계정과 활동 정보가 삭제되며 복구되지 않습니다."
+            onModal={handleOnModal}
+            handleFunction={handleWithdrawal}
+          />
+        ) : null}
       </MypageSection>
     </ThemeProvider>
   );

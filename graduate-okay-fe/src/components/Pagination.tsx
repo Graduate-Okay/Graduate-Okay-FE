@@ -75,9 +75,11 @@ const Page = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+
   > img {
-    width: 5%;
+    width: 3%;
     cursor: pointer;
+    border-radius: 10px;
 
     &:hover {
       background-color: #d9d9d9;
@@ -99,9 +101,9 @@ const Number = styled.span`
     font-size: 1.2rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
   }
 `;
