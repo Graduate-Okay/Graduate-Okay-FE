@@ -169,6 +169,7 @@ const Content = styled.div`
   height: 8%;
   font-size: 1.2rem;
   border-bottom: 1px solid #d9d9d9;
+  cursor: pointer;
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.25rem;
   }
