@@ -68,17 +68,35 @@ const ModalContent = styled.div`
   height: 30%;
   align-items: center;
   justify-content: space-around;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 45%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 35%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 25%;
+  }
 `;
 
 const SvgWrap = styled.div`
   display: flex;
   background-color: #ff7272;
-  width: 30%;
-  height: 25%;
+  width: 8rem;
+  height: 8rem;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   padding: 3px;
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 10rem;
+    height: 10rem;
+    > svg {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
 `;
 
 const ButtonArea = styled.div`
@@ -100,12 +118,23 @@ const Button = styled.button<ButtonProps>`
   align-items: center;
   border-radius: 20px;
   cursor: pointer;
+  font-weight: bold;
 `;
 
 const Title = styled.p`
   display: flex;
   font-weight: bold;
   font-size: 1.6rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.7rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.8rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2rem;
+  }
 `;
 
 const Message = styled.p`
@@ -114,4 +143,16 @@ const Message = styled.p`
   width: 75%;
   word-break: keep-all;
   text-align: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+    width: 65%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.5rem;
+    width: 55%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.6rem;
+  }
 `;
