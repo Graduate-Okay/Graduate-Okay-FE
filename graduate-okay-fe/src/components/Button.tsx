@@ -30,13 +30,13 @@ const ButtonArea = styled.div`
 
   @media ${({ theme }) => theme.device.tablet} {
     width: 14rem;
-    height: 5rem;
+    height: 4rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 18rem;
+    width: 15.5rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 21rem;
+    width: 17rem;
   }
 `;
 
@@ -49,9 +49,9 @@ const Text = styled.p`
     font-size: 1.4rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
 `;

@@ -118,12 +118,17 @@ const KyRecommendDetail: React.FC = () => {
           ) : review && review.length > 0 ? (
             <>
               {review.map((item: any) => {
+                /**
+                 * @todo StarRate에 들어가는 score props에 따라 다르게 나와야한다.
+                 * 현재는 최상단에 사용된 StarRate값이 중복해서 보여짐
+                 * score에 들어가는 props값은 각각 다르게 들어가짐
+                 */
                 return (
                   <Review>
                     <HaveReview>
                       <ReviewDiv>
                         <StarRate score={item?.starScore || undefined} />
-                        <ReviewStar>{item?.starScore}</ReviewStar>
+                        {/* <ReviewStar>{item?.starScore}</ReviewStar> */}
                         <ReviewTitle>{item?.title}</ReviewTitle>
                         <ReviewContent>{item?.content}</ReviewContent>
                       </ReviewDiv>
@@ -147,10 +152,12 @@ const KyRecommendDetail: React.FC = () => {
                 <p>강의평이 존재하지 않습니다.</p>
                 <p>첫 번째로 강의를 평가해보세요.</p>
               </NoneReview>
-              <Button
-                text="강의 평가하기"
-                handleOnClick={() => lectureReview()}
-              />
+              <WrapButton>
+                <Button
+                  text="강의 평가하기"
+                  handleOnClick={() => lectureReview()}
+                />
+              </WrapButton>
             </Review>
           )}
         </ReviewSection>
@@ -298,6 +305,13 @@ const Review = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    height: 15vh;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    height: 18vh;
+  }
 `;
 
 const NoneReview = styled.div`
@@ -309,6 +323,10 @@ const NoneReview = styled.div`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
 `;
 
 const HaveReview = styled.div`
