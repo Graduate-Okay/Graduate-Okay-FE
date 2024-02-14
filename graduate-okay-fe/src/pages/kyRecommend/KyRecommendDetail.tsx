@@ -128,7 +128,6 @@ const KyRecommendDetail: React.FC = () => {
                     <HaveReview>
                       <ReviewDiv>
                         <StarRate score={item?.starScore || undefined} />
-                        {/* <ReviewStar>{item?.starScore}</ReviewStar> */}
                         <ReviewTitle>{item?.title}</ReviewTitle>
                         <ReviewContent>{item?.content}</ReviewContent>
                       </ReviewDiv>
@@ -344,19 +343,13 @@ const ReviewDiv = styled.div`
   flex-direction: column;
   width: 90%;
   height: 100%;
-`;
-
-const ReviewStar = styled.p`
-  display: flex;
-  width: 50%;
-  height: 20%;
-  align-items: center;
+  justify-content: center;
 `;
 
 const ReviewTitle = styled.p`
   display: flex;
   width: 50%;
-  height: 30%;
+  height: 20%;
   align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
@@ -365,7 +358,7 @@ const ReviewTitle = styled.p`
 const ReviewContent = styled.p`
   display: flex;
   width: 50%;
-  height: 50%;
+  height: 40%;
   font-size: 1.2rem;
 `;
 
