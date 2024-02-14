@@ -8,6 +8,7 @@ import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import axios from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
+import { IGraduate } from "../interfaces";
 
 interface ImageProps {
   backgroundImage: string;
@@ -16,6 +17,7 @@ interface ImageProps {
 const Graduate: React.FC = () => {
   const [cookies] = useCookies(["accessToken"]);
   const [isActive, setActive] = useState<boolean>(false);
+  const [graduateData, setGraduateData] = useState<IGraduate>();
   const handleDragStart = () => setActive(true);
   const handleDragEnd = () => setActive(false);
   const handleDragOver = (event: any) => {
@@ -31,13 +33,18 @@ const Graduate: React.FC = () => {
     const fd = new FormData();
     const getFile = document.getElementById("file") as HTMLInputElement | null;
     getFile?.files?.[0] && fd.append("file", getFile.files[0]);
-    axios.post(`${api.graduate}`, fd, {
-      headers: {
-        "Content-Type": `multipart/form-data`,
-        Authorization: `Bearer ${cookies.accessToken}`,
-      },
-    });
+    axios
+      .post(`${api.graduate}`, fd, {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+      })
+      .then((response) => {
+        setGraduateData(response.data.data);
+      });
   };
+  console.log(graduateData);
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,18 +91,26 @@ const Graduate: React.FC = () => {
               <GraduateTd>마일리지</GraduateTd>
             </GraduateTableHeaderRow>
             <tr>
-              <GraduateTd>totalCredit</GraduateTd>
-              <GraduateTd>majorCredit</GraduateTd>
-              <GraduateTd>kyCredit</GraduateTd>
-              <GraduateTd>nonSubject</GraduateTd>
-              <GraduateTd>mileage</GraduateTd>
+              <GraduateTd>{graduateData?.totalCredit || "0"}</GraduateTd>
+              <GraduateTd>{graduateData?.majorCredit || "0"}</GraduateTd>
+              <GraduateTd>{graduateData?.kyCredit || "0"}</GraduateTd>
+              <GraduateTd>{graduateData?.nonSubject || "0"}</GraduateTd>
+              <GraduateTd>{graduateData?.mileage || "0"}</GraduateTd>
             </tr>
           </GraduateTable>
-          <Show>
-            <p>당신은 졸업이</p>
-            <IsGraduate>가능</IsGraduate>
-            <p>합니다!</p>
-          </Show>
+          {/* {graduateData?.isGraduateOk ? (
+            <Show>
+              <p>당신은 졸업이</p>
+              <IsGraduate>가능</IsGraduate>
+              <p>합니다!</p>
+            </Show>
+          ) : (
+            <Show>
+              <p>당신은 졸업이</p>
+              <IsGraduate>불가능</IsGraduate>
+              <p>합니다!</p>
+            </Show>
+          )} */}
         </Result>
       </GraduateSection>
     </ThemeProvider>
