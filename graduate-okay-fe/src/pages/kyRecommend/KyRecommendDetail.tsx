@@ -118,11 +118,6 @@ const KyRecommendDetail: React.FC = () => {
           ) : review && review.length > 0 ? (
             <>
               {review.map((item: any) => {
-                /**
-                 * @todo StarRate에 들어가는 score props에 따라 다르게 나와야한다.
-                 * 현재는 최상단에 사용된 StarRate값이 중복해서 보여짐
-                 * score에 들어가는 props값은 각각 다르게 들어가짐
-                 */
                 return (
                   <Review>
                     <HaveReview>
@@ -353,6 +348,8 @@ const ReviewTitle = styled.p`
   align-items: center;
   font-weight: bold;
   font-size: 1.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const ReviewContent = styled.p`
@@ -360,6 +357,8 @@ const ReviewContent = styled.p`
   width: 50%;
   height: 40%;
   font-size: 1.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const WrapButton = styled.div`
