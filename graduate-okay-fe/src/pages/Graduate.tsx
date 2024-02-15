@@ -3,12 +3,13 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import HandleSection from "../components/HandleSection";
 import GraduateImage from "../assets/imgs/background/graduate.svg";
-import { ReactComponent as File } from "../assets/imgs/file.svg";
-import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import axios from "axios";
 import api from "../apis/api";
 import { useCookies } from "react-cookie";
 import { IGraduate } from "../interfaces";
+import { ReactComponent as File } from "../assets/imgs/file.svg";
+import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
+import { ReactComponent as Folder } from "../assets/imgs/folder.svg";
 
 interface ImageProps {
   backgroundImage: string;
@@ -27,9 +28,9 @@ const Graduate: React.FC = () => {
     event.preventDefault();
     setActive(false);
   };
-  console.log(isActive);
 
   const uploadFile = () => {
+    setActive(true);
     const fd = new FormData();
     const getFile = document.getElementById("file") as HTMLInputElement | null;
     getFile?.files?.[0] && fd.append("file", getFile.files[0]);
@@ -42,9 +43,12 @@ const Graduate: React.FC = () => {
       })
       .then((response) => {
         setGraduateData(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setActive(false);
       });
   };
-  console.log(graduateData);
 
   return (
     <ThemeProvider theme={theme}>
@@ -98,7 +102,16 @@ const Graduate: React.FC = () => {
               <GraduateTd>{graduateData?.mileage || "0"}</GraduateTd>
             </tr>
           </GraduateTable>
-          {/* {graduateData?.isGraduateOk ? (
+          {!isActive ? (
+            <Default>
+              <Folder width={35} height={35} />
+              <PDFText>학업성적확인서 PDF 다운로드 경로</PDFText>
+              <PDFInfo>
+                portal.hs.ac.kr {`>`} 한신종합정보 {`>`} 인트라넷 {`>`}{" "}
+                학부생서비스 {`>`} 성적 {`>`} 학업성적확인서
+              </PDFInfo>
+            </Default>
+          ) : graduateData?.isGraduateOk ? (
             <Show>
               <p>당신은 졸업이</p>
               <IsGraduate>가능</IsGraduate>
@@ -110,7 +123,7 @@ const Graduate: React.FC = () => {
               <IsGraduate>불가능</IsGraduate>
               <p>합니다!</p>
             </Show>
-          )} */}
+          )}
         </Result>
       </GraduateSection>
     </ThemeProvider>
@@ -231,4 +244,58 @@ const Label = styled.label`
 
 const Input = styled.input`
   display: none;
+`;
+
+const Default = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 35%;
+  background-color: #fafafa;
+  justify-content: space-around;
+  align-items: center;
+
+  > svg {
+    @media ${({ theme }) => theme.device.tablet} {
+      width: 40px;
+      height: 40px;
+    }
+  }
+`;
+
+const PDFText = styled.p`
+  display: flex;
+  font-size: 1.5rem;
+  color: #885eff;
+  align-items: center;
+  justify-content: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.6rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.8rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 2rem;
+  }
+`;
+
+const PDFInfo = styled.p`
+  display: flex;
+  width: 70%;
+  height: 30%;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  align-items: center;
+  justify-content: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.5rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.6rem;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.7rem;
+  }
 `;
