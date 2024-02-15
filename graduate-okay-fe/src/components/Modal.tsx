@@ -4,10 +4,11 @@ import theme from "../constants/theme";
 
 interface ModalProps {
   svg: React.FC<React.SVGProps<SVGSVGElement>>;
-  title: string;
+  title?: string;
   message: string;
   onModal: () => void;
   handleFunction?: () => void;
+  closeMessage?: string;
 }
 
 interface ButtonProps {
@@ -20,23 +21,24 @@ const Modal: React.FC<ModalProps> = ({
   message,
   onModal,
   handleFunction,
+  closeMessage,
 }) => {
   return (
     <ThemeProvider theme={theme}>
       <ModalBackground>
         <ModalContent>
-          <SvgWrap>
-            <SvgComponent width={35} height={35} />
-          </SvgWrap>
+          <SvgComponent width={100} height={100} />
           <Title>{title}</Title>
           <Message>{message}</Message>
           <ButtonArea>
             <Button bgColor="#cacaca" onClick={onModal}>
-              취소하기
+              {closeMessage}
             </Button>
-            <Button bgColor="#ff7272" onClick={handleFunction}>
-              탈퇴하기
-            </Button>
+            {handleFunction ? (
+              <Button bgColor="#ff7272" onClick={handleFunction}>
+                탈퇴하기
+              </Button>
+            ) : null}
           </ButtonArea>
         </ModalContent>
       </ModalBackground>
@@ -77,25 +79,6 @@ const ModalContent = styled.div`
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 25%;
-  }
-`;
-
-const SvgWrap = styled.div`
-  display: flex;
-  background-color: #ff7272;
-  width: 8rem;
-  height: 8rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  padding: 3px;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 10rem;
-    height: 10rem;
-    > svg {
-      width: 4rem;
-      height: 4rem;
-    }
   }
 `;
 
@@ -142,7 +125,8 @@ const Message = styled.p`
   font-size: 1.3rem;
   width: 75%;
   word-break: keep-all;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.4rem;

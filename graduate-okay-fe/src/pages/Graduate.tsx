@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import HandleSection from "../components/HandleSection";
+import Modal from "../components/Modal";
 import GraduateImage from "../assets/imgs/background/graduate.svg";
 import axios from "axios";
 import api from "../apis/api";
@@ -10,6 +11,7 @@ import { IGraduate } from "../interfaces";
 import { ReactComponent as File } from "../assets/imgs/file.svg";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { ReactComponent as Folder } from "../assets/imgs/folder.svg";
+import { ReactComponent as Fail } from "../assets/imgs/x.svg";
 
 interface ImageProps {
   backgroundImage: string;
@@ -19,6 +21,8 @@ const Graduate: React.FC = () => {
   const [cookies] = useCookies(["accessToken"]);
   const [isActive, setActive] = useState<boolean>(false);
   const [graduateData, setGraduateData] = useState<IGraduate>();
+  const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleDragStart = () => setActive(true);
   const handleDragEnd = () => setActive(false);
   const handleDragOver = (event: any) => {
@@ -27,6 +31,9 @@ const Graduate: React.FC = () => {
   const handleDrop = (event: any) => {
     event.preventDefault();
     setActive(false);
+  };
+  const handleOnModal = () => {
+    setIsOpen(!isOpen);
   };
 
   const uploadFile = () => {
@@ -45,7 +52,9 @@ const Graduate: React.FC = () => {
         setGraduateData(response.data.data);
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.response.data.message);
+        setMessage(error.response.data.message);
+        setIsOpen(true);
         setActive(false);
       });
   };
@@ -125,6 +134,14 @@ const Graduate: React.FC = () => {
             </Show>
           )}
         </Result>
+        {isOpen ? (
+          <Modal
+            svg={Fail}
+            message={message}
+            onModal={handleOnModal}
+            closeMessage={"닫기"}
+          />
+        ) : null}
       </GraduateSection>
     </ThemeProvider>
   );

@@ -121,6 +121,7 @@ const Mypage: React.FC = () => {
             message="탈퇴 시, 계정과 활동 정보가 삭제되며 복구되지 않습니다."
             onModal={handleOnModal}
             handleFunction={handleWithdrawal}
+            closeMessage="취소하기"
           />
         ) : null}
       </MypageSection>
