@@ -115,20 +115,18 @@ const theme = {
 
 </details>
 
-## UI
+## Demo
 
 <details>
 <summary>메인 페이지</summary>
 
 ## 메인 페이지 
 
-왼쪽 : 모바일, 오른쪽 : 테블릿 이상 사이즈
-
 <table border>
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/6ebd7319-efc0-4359-96bd-3b8d65158aa0' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/2074c4c4-5d20-493e-93a1-f7ab68cdcddc' alt='gif' />   
       </td>
       <td align="center" width="50%">
         <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0a39d6c1-aac2-446b-ad71-ed3c9959fa21'  alt='gif' />   
@@ -147,7 +145,7 @@ const theme = {
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/d6e0f781-9002-4c12-b82a-3d86360ae2b1' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08f79a4e-445c-40e6-89ff-293509c951a9' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -162,7 +160,10 @@ const theme = {
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = '' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/23ec82d2-cd41-4cd4-aaf2-fbeff92ee3a1' alt='gif' />
+      </td>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/b16e7ee3-1aa3-4f59-ad22-4fe8de008fbf' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -176,8 +177,14 @@ const theme = {
 <table border>
   <tbody>
     <tr>
-      <td align="center" width="50%">
-        <img src = '' alt='gif' />
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0e4ba62d-e337-4b00-9470-a65df7a7fc39' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/7c68c8e8-80b9-4c30-8df5-f8690c3f775d' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08255613-3c56-4871-a92a-5f570c977d64' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -185,14 +192,17 @@ const theme = {
 </details>
 
 <details>
-<summary>마이 페이지</summary>
+<summary>로그인 & 마이 페이지</summary>
   
 ## 로그인 & 마이 페이지
 <table border>
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = '' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/ba482dbd-c358-4557-b649-c339fff89f48' alt='gif' />
+      </td>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/aa34226b-26aa-4fc7-8ef6-6ba088e7020f' alt='gif' />
       </td>
      </tr>
   </tbody>
