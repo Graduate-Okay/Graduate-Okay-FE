@@ -67,11 +67,7 @@ const KyRecommendDetail: React.FC = () => {
     }
   }, [cookies.accessToken, reviewList]);
 
-  const handleCloseModal = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const lectureReview = () => {
+  const IsModalOpen = () => {
     setIsOpen(!isOpen);
   };
 
@@ -111,10 +107,10 @@ const KyRecommendDetail: React.FC = () => {
               <StarRate score={detail?.avgStarScore || undefined} />
               <AvgScore>{detail?.avgStarScore.toFixed(1) || "0.0"}</AvgScore>
             </StarDiv>
-            <LectureLeview>강의평 {detail?.kyCount || 0}건</LectureLeview>
+            <LectureLeview>강의평 {detail?.reviewCount || 0}건</LectureLeview>
           </HandleReview>
           {isOpen ? (
-            <ReviewModal onClose={handleCloseModal} id={detail?.subjectId} />
+            <ReviewModal onClose={IsModalOpen} id={detail?.subjectId} />
           ) : review && review.length > 0 ? (
             <>
               {review.map((item: any) => {
@@ -136,7 +132,7 @@ const KyRecommendDetail: React.FC = () => {
               <WrapButton>
                 <Button
                   text="강의 평가하기"
-                  handleOnClick={() => lectureReview()}
+                  handleOnClick={() => IsModalOpen()}
                 />
               </WrapButton>
             </>
@@ -149,7 +145,7 @@ const KyRecommendDetail: React.FC = () => {
               <WrapButton>
                 <Button
                   text="강의 평가하기"
-                  handleOnClick={() => lectureReview()}
+                  handleOnClick={() => IsModalOpen()}
                 />
               </WrapButton>
             </Review>
