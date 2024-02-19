@@ -44,7 +44,7 @@
 이를 해결하기 위해 따로 버튼을 누르지 않아도 검색이 되도록 구현 방향을 잡았습니다. <br/>
 `Debounce`를 적용하여 입력을 측정하여 일정 시간이 넘기전에 입력을 받으면 API호출을 하지 않도록 작성했습니다.<br/>
 
-![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/3dd7d168-3882-4fcf-becd-0490d78b010d) 
+![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/23ec82d2-cd41-4cd4-aaf2-fbeff92ee3a1) 
 ```ts
 const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -71,7 +71,7 @@ const useDebounce = (value: string, delay: number) => {
 ## 반응형 웹 적용
 다양한 기기에서 동일한 사용자 경험을 제공하고자 미디어 쿼리와 윈도우 크기를 받아와 반응형 디자인을 적용했습니다.
   
-![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/065fa207-1d04-4c9f-bf24-3cbb5bbf48c3)
+![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/e0a8bbc6-7c67-430c-9c50-eda32d8c2b66)
 ```ts
 import { useState, useEffect } from "react";
 
@@ -115,20 +115,18 @@ const theme = {
 
 </details>
 
-## UI
+## Demo
 
 <details>
 <summary>메인 페이지</summary>
 
 ## 메인 페이지 
 
-왼쪽 : 모바일, 오른쪽 : 테블릿 이상 사이즈
-
 <table border>
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/6ebd7319-efc0-4359-96bd-3b8d65158aa0' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/2074c4c4-5d20-493e-93a1-f7ab68cdcddc' alt='gif' />   
       </td>
       <td align="center" width="50%">
         <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0a39d6c1-aac2-446b-ad71-ed3c9959fa21'  alt='gif' />   
@@ -147,7 +145,7 @@ const theme = {
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/d6e0f781-9002-4c12-b82a-3d86360ae2b1' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08f79a4e-445c-40e6-89ff-293509c951a9' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -162,7 +160,10 @@ const theme = {
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = '' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/23ec82d2-cd41-4cd4-aaf2-fbeff92ee3a1' alt='gif' />
+      </td>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/b16e7ee3-1aa3-4f59-ad22-4fe8de008fbf' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -176,8 +177,14 @@ const theme = {
 <table border>
   <tbody>
     <tr>
-      <td align="center" width="50%">
-        <img src = '' alt='gif' />
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0e4ba62d-e337-4b00-9470-a65df7a7fc39' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/7c68c8e8-80b9-4c30-8df5-f8690c3f775d' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08255613-3c56-4871-a92a-5f570c977d64' alt='gif' />
       </td>
      </tr>
   </tbody>
@@ -185,14 +192,17 @@ const theme = {
 </details>
 
 <details>
-<summary>마이 페이지</summary>
+<summary>로그인 & 마이 페이지</summary>
   
 ## 로그인 & 마이 페이지
 <table border>
   <tbody>
     <tr>
       <td align="center" width="50%">
-        <img src = '' alt='gif' />
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/ba482dbd-c358-4557-b649-c339fff89f48' alt='gif' />
+      </td>
+      <td align="center" width="50%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/aa34226b-26aa-4fc7-8ef6-6ba088e7020f' alt='gif' />
       </td>
      </tr>
   </tbody>
