@@ -19,7 +19,7 @@ interface ImageProps {
 
 const Graduate: React.FC = () => {
   const [cookies] = useCookies(["accessToken"]);
-  const [isActive, setActive] = useState<boolean>(false);
+  const [, setActive] = useState<boolean>(false);
   const [graduateData, setGraduateData] = useState<IGraduate>();
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -99,7 +99,7 @@ const Graduate: React.FC = () => {
               onChange={handleFileInputChange}
             />
             <FileButton>
-              <File width={30} height={30} />
+              <File width={30} height={30} fill="white" />
               <p>학업성적확인서 PDF 업로드</p>
             </FileButton>
           </Image>
@@ -126,7 +126,7 @@ const Graduate: React.FC = () => {
               <GraduateTd>{graduateData?.mileage || "0"}</GraduateTd>
             </tr>
           </GraduateTable>
-          {!isActive ? (
+          {!graduateData ? (
             <Default>
               <Folder width={35} height={35} />
               <PDFText>학업성적확인서 PDF 다운로드 경로</PDFText>
@@ -203,6 +203,25 @@ const FileButton = styled.div`
   align-items: center;
   font-size: 1.5rem;
   color: white;
+
+  &:hover {
+    background-color: white;
+    color: #a489f0;
+
+    > svg {
+      fill: #a489f0;
+    }
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 60%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 50%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 40%;
+  }
 `;
 
 const Result = styled.div`

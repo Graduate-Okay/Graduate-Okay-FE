@@ -1,9 +1,9 @@
-<svg width="current" height="current" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="current" height="current" viewBox="0 0 26 26" fill="current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <mask id="mask0_63_852" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
 <rect width="26" height="26" fill="url(#fileSVG)"/>
 </mask>
 <g mask="url(#mask0_63_852)">
-<rect x="-14.3447" y="-2.68945" width="49.3103" height="30.4828" fill="white"/>
+<rect x="-14.3447" y="-2.68945" width="49.3103" height="30.4828" fill="current"/>
 </g>
 <defs>
 <pattern id="fileSVG" patternContentUnits="objectBoundingBox" width="1" height="1">
