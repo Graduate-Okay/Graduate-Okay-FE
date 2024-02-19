@@ -52,7 +52,6 @@ const Graduate: React.FC = () => {
         setGraduateData(response.data.data);
       })
       .catch((error) => {
-        console.error(error.response.data.message);
         setMessage(error.response.data.message);
         setIsOpen(true);
         setActive(false);
@@ -211,6 +210,19 @@ const ResultExplain = styled.div`
   height: 10%;
   align-items: center;
   justify-content: center;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+    height: 13%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.6rem;
+    height: 15%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.8rem;
+    height: 15%;
+  }
 `;
 
 const GraduateTable = styled.table`
