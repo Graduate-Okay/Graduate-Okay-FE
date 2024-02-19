@@ -23,24 +23,40 @@ const Graduate: React.FC = () => {
   const [graduateData, setGraduateData] = useState<IGraduate>();
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const handleDragStart = () => setActive(true);
-  const handleDragEnd = () => setActive(false);
-  const handleDragOver = (event: any) => {
+  const handleDragLeave = () => setActive(false);
+
+  const handleDragOver = (event: React.DragEvent) => {
     event.preventDefault();
+    setActive(true);
   };
-  const handleDrop = (event: any) => {
+
+  const handleDrop = (event: React.DragEvent) => {
     event.preventDefault();
     setActive(false);
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      uploadFile(file);
+    }
   };
+
   const handleOnModal = () => {
     setIsOpen(!isOpen);
   };
 
-  const uploadFile = () => {
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadFile(file);
+    }
+  };
+
+  const uploadFile = (file: File) => {
     setActive(true);
     const fd = new FormData();
-    const getFile = document.getElementById("file") as HTMLInputElement | null;
-    getFile?.files?.[0] && fd.append("file", getFile.files[0]);
+    fd.append("file", file);
+
     axios
       .post(`${api.graduate}`, fd, {
         headers: {
@@ -71,7 +87,7 @@ const Graduate: React.FC = () => {
         <Label
           onDragEnter={handleDragStart}
           onDragOver={handleDragOver}
-          onDragLeave={handleDragEnd}
+          onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
           <Image backgroundImage={GraduateImage}>
@@ -80,7 +96,7 @@ const Graduate: React.FC = () => {
               accept=".pdf"
               id="file"
               name="file"
-              onChange={uploadFile}
+              onChange={handleFileInputChange}
             />
             <FileButton>
               <File width={30} height={30} />
