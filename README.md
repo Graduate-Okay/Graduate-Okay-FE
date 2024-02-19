@@ -44,7 +44,7 @@
 이를 해결하기 위해 따로 버튼을 누르지 않아도 검색이 되도록 구현 방향을 잡았습니다. <br/>
 `Debounce`를 적용하여 입력을 측정하여 일정 시간이 넘기전에 입력을 받으면 API호출을 하지 않도록 작성했습니다.<br/>
 
-![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/3dd7d168-3882-4fcf-becd-0490d78b010d) 
+![디바운싱 적용후](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/23ec82d2-cd41-4cd4-aaf2-fbeff92ee3a1) 
 ```ts
 const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -71,7 +71,7 @@ const useDebounce = (value: string, delay: number) => {
 ## 반응형 웹 적용
 다양한 기기에서 동일한 사용자 경험을 제공하고자 미디어 쿼리와 윈도우 크기를 받아와 반응형 디자인을 적용했습니다.
   
-![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/065fa207-1d04-4c9f-bf24-3cbb5bbf48c3)
+![반응형 웹 적용](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/e0a8bbc6-7c67-430c-9c50-eda32d8c2b66)
 ```ts
 import { useState, useEffect } from "react";
 
