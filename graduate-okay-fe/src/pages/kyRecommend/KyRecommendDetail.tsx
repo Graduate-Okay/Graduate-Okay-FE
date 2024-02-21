@@ -1,83 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { ISubject, ISubjectReviewDataList } from "../../interfaces";
-import axios, { AxiosError } from "axios";
-import api from "../../apis/api";
-import { useCookies } from "react-cookie";
 import ReviewModal from "./Review";
 import StarRate from "./StarRate";
 import HandleSection from "../../components/HandleSection";
 import Button from "../../components/Button";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
+import {
+  kyRecommendDetailQuery,
+  kyRecommendReviewList,
+} from "../../queries/kyRecommendQuery";
 
 const KyRecommendDetail: React.FC = () => {
-  const [detail, setDetail] = useState<ISubject>();
-  const [review, setReview] = useState<any>();
-  const [reviewList, setReviewList] = useState<ISubjectReviewDataList[]>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const params = useParams();
   const paramsId = params.id;
-  const [cookies] = useCookies(["accessToken"]);
 
-  const getDetail = useCallback(async () => {
-    try {
-      const response = await axios.get(`${api.subject}/${paramsId}`, {
-        headers: {
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      });
-      setDetail(response?.data.data);
-      setReviewList(response?.data.data.reviewDataList);
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  }, [paramsId, cookies.accessToken]);
+  const { data: detailData } = useQuery({
+    queryKey: ["kyRecommendDetail"],
+    queryFn: () => kyRecommendDetailQuery(paramsId),
+  });
 
-  const getReviewList = useCallback(async () => {
-    try {
-      if (reviewList) {
-        const reviewPromises = reviewList.map(
-          async (review: ISubjectReviewDataList) => {
-            const reviewId = review.reviewId;
-            try {
-              const response = await axios.get(`${api.review}/${reviewId}`, {
-                headers: {
-                  Authorization: `Bearer ${cookies.accessToken}`,
-                },
-              });
-              return response.data.data;
-            } catch (error) {
-              if (error instanceof AxiosError) {
-                console.error(error.response?.data?.message);
-              }
-              return null;
-            }
-          }
-        );
-
-        const reviews = await Promise.all(reviewPromises);
-        setReview(reviews);
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.error(error.response?.data?.message);
-      }
-    }
-  }, [cookies.accessToken, reviewList]);
+  const { data: reviewData } = useQuery({
+    queryKey: ["kyRecommendReviewList", detailData],
+    queryFn: () => kyRecommendReviewList(detailData?.reviewDataList),
+  });
 
   const IsModalOpen = () => {
     setIsOpen(!isOpen);
   };
-
-  useEffect(() => {
-    getDetail();
-  }, [params, getDetail]);
-
-  useEffect(() => {
-    getReviewList();
-  }, [getReviewList]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,32 +41,36 @@ const KyRecommendDetail: React.FC = () => {
           closeBtn={false}
           color="#a489f0"
         />
-        <Credit>{detail?.credit || 0}학점</Credit>
+        <Credit>{detailData?.credit || 0}학점</Credit>
         <DetailIsRequired>
-          {detail?.isRequired ? <p>교양필수</p> : null}
+          {detailData?.isRequired ? <p>교양필수</p> : null}
         </DetailIsRequired>
         <DetailTitle>
-          {detail?.name} ({detail?.subName})
+          {detailData?.name} ({detailData?.subName})
         </DetailTitle>
         <DetailInfo>
           <TypeText>핵심역량</TypeText>
-          <Type>{detail?.kyCoreType || "없음"}</Type>
+          <Type>{detailData?.kyCoreType || "없음"}</Type>
           <TypeText>인재상</TypeText>
-          <Type>{detail?.kyModelType || "없음"}</Type>
+          <Type>{detailData?.kyModelType || "없음"}</Type>
         </DetailInfo>
         <ReviewSection>
           <HandleReview>
             <StarDiv>
-              <StarRate score={detail?.avgStarScore || undefined} />
-              <AvgScore>{detail?.avgStarScore.toFixed(1) || "0.0"}</AvgScore>
+              <StarRate score={detailData?.avgStarScore || undefined} />
+              <AvgScore>
+                {detailData?.avgStarScore.toFixed(1) || "0.0"}
+              </AvgScore>
             </StarDiv>
-            <LectureLeview>강의평 {detail?.reviewCount || 0}건</LectureLeview>
+            <LectureLeview>
+              강의평 {detailData?.reviewCount || 0}건
+            </LectureLeview>
           </HandleReview>
           {isOpen ? (
-            <ReviewModal onClose={IsModalOpen} id={detail?.subjectId} />
-          ) : review && review.length > 0 ? (
+            <ReviewModal onClose={IsModalOpen} id={detailData?.subjectId} />
+          ) : reviewData && reviewData.length > 0 ? (
             <>
-              {review.map((item: any) => {
+              {reviewData?.map((item: any) => {
                 return (
                   <Review>
                     <HaveReview>
