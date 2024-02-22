@@ -69,7 +69,7 @@ const KyRecommendDetail: React.FC = () => {
           {isOpen ? (
             <ReviewModal onClose={IsModalOpen} id={detailData?.subjectId} />
           ) : reviewData && reviewData.length > 0 ? (
-            <>
+            <WrapReview>
               {reviewData?.map((item: any) => {
                 return (
                   <Review>
@@ -92,7 +92,7 @@ const KyRecommendDetail: React.FC = () => {
                   handleOnClick={() => IsModalOpen()}
                 />
               </WrapButton>
-            </>
+            </WrapReview>
           ) : (
             <Review>
               <NoneReview>
@@ -119,7 +119,7 @@ const DetailSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 70vh;
+  height: 80vh;
   margin: 2vh auto;
   @media ${({ theme }) => theme.device.tablet} {
     width: 80%;
@@ -218,7 +218,8 @@ const DetailInfo = styled.div`
 const ReviewSection = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  overflow-y: auto;
+  height: 70%;
 `;
 
 const HandleReview = styled.div`
@@ -244,10 +245,18 @@ const StarDiv = styled.div`
   }
 `;
 
+const WrapReview = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+  overflow-y: auto;
+`;
+
 const Review = styled.div`
   display: flex;
   width: 90%;
-  height: 12vh;
+  min-height: 12vh;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -317,6 +326,9 @@ const ReviewContent = styled.p`
 const WrapButton = styled.div`
   display: flex;
   justify-content: center;
+  z-index: 999;
+  position: sticky;
+  bottom: 15px;
 `;
 
 const LectureLeview = styled.div`
