@@ -6,11 +6,15 @@ import axios, { AxiosError } from "axios";
 import { useCookies } from "react-cookie";
 import api from "../../apis/api";
 import option from "../../constants/option";
+import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 
 interface ModalProps {
   onClose: () => void;
   title?: string;
   id?: number;
+  refetch?: (
+    options?: RefetchOptions | undefined
+  ) => Promise<QueryObserverResult<any, Error>>;
 }
 
 interface OptionProps {
@@ -18,7 +22,7 @@ interface OptionProps {
   name: string;
 }
 
-const Review: React.FC<ModalProps> = ({ onClose, id }) => {
+const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
   const reviewTitle = useInput("");
   const reviewContent = useInput("");
   const [selectedValue, setSelectedValue] = useState<number | string>("");
@@ -45,6 +49,9 @@ const Review: React.FC<ModalProps> = ({ onClose, id }) => {
           alert("리뷰 등록이 완료되었습니다.");
           onClose();
         });
+      if (refetch) {
+        await refetch();
+      }
     } catch (error) {
       if (error instanceof AxiosError) {
         alert(error.response?.data.message);

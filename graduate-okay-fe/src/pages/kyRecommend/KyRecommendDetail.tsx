@@ -18,7 +18,7 @@ const KyRecommendDetail: React.FC = () => {
   const params = useParams();
   const paramsId = params.id;
 
-  const { data: detailData } = useQuery({
+  const { data: detailData, refetch } = useQuery({
     queryKey: ["kyRecommendDetail"],
     queryFn: () => kyRecommendDetailQuery(paramsId),
   });
@@ -67,7 +67,11 @@ const KyRecommendDetail: React.FC = () => {
             </LectureLeview>
           </HandleReview>
           {isOpen ? (
-            <ReviewModal onClose={IsModalOpen} id={detailData?.subjectId} />
+            <ReviewModal
+              onClose={IsModalOpen}
+              id={detailData?.subjectId}
+              refetch={refetch}
+            />
           ) : reviewData && reviewData.length > 0 ? (
             <WrapReview>
               {reviewData?.map((item: any) => {
