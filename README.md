@@ -115,6 +115,73 @@ const theme = {
 
 </details>
 
+<details>
+<summary>드래그 앤 드랍</summary>
+
+## 드래그 앤 드랍 기능 
+클릭으로 파일을 핸들링하는 것 외에도 드래그 앤 드랍 기능으로 유저가 쉽게 파일을 핸들링할 수 있도록 만들었습니다. 
+
+![드래그앤드랍](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/e4e44f75-0759-491c-b5fb-c3b087915ff1)
+
+```tsx
+const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadFile(file);
+    }
+};
+
+const uploadFile = (file: File) => {
+    setActive(true);
+    const fd = new FormData();
+    fd.append("file", file);
+
+    axios
+      .post(`${api.graduate}`, fd, {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+          Authorization: `Bearer ${cookies.accessToken}`,
+        },
+      })
+      .then((response) => {
+        setGraduateData(response.data.data);
+      })
+      .catch((error) => {
+        setMessage(error.response.data.message);
+        setIsOpen(true);
+        setActive(false);
+      });
+  };
+
+return (
+    <Label
+          onDragEnter={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          <Image backgroundImage={GraduateImage}>
+            <Input
+              type="file"
+              accept=".pdf"
+              id="file"
+              name="file"
+              onChange={handleFileInputChange}
+            />
+            <FileButton>
+              <File width={30} height={30} fill="white" />
+              <p>학업성적확인서 PDF 업로드</p>
+            </FileButton>
+          </Image>
+    </Label>
+)
+
+
+```
+
+</details>
+
+
 ## Demo
 
 <details>
