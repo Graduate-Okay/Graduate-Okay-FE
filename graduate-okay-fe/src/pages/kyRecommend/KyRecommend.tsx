@@ -1,40 +1,24 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Pagination from "../../components/Pagination";
-import { ISubjectList, SubjectList } from "../../interfaces";
+import { SubjectList } from "../../interfaces";
 import theme from "../../constants/theme";
-import api from "../../apis/api";
 import useInput from "../../hooks/useInput";
 import useDebounce from "../../hooks/useDebounce";
 import HandleSection from "../../components/HandleSection";
+import { useQuery } from "@tanstack/react-query";
+import { kyRecommend } from "../../queries/kyRecommendQuery";
 
 const KyRecommend: React.FC = () => {
-  const [electives, setElectives] = useState<ISubjectList | null>(null);
-  const [maxPageNumber, setMaxPageNumber] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const navigate = useNavigate();
   const search = useInput("");
-
   const debouncedSearch = useDebounce(search.value, 400);
-
   const params = {
     page: currentPage,
     searchWord: debouncedSearch,
   };
-
-  const getElectives = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${api.subject}?page=${params.page}&searchWord=${params.searchWord}&size=10`
-      );
-      setElectives(response?.data.data);
-      setMaxPageNumber(response?.data.data.maxPageCount);
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  }, [params.page, params.searchWord]);
 
   const getCurrentPage = (page: number) => {
     setCurrentPage(page);
@@ -45,9 +29,10 @@ const KyRecommend: React.FC = () => {
     navigate(`${subjectId}`);
   };
 
-  useEffect(() => {
-    getElectives();
-  }, [getElectives]);
+  const { data } = useQuery({
+    queryKey: ["kyRecommend", params.page, params.searchWord],
+    queryFn: () => kyRecommend(params.page, params.searchWord),
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,7 +58,7 @@ const KyRecommend: React.FC = () => {
             <SubjectLength>과목수</SubjectLength>
             <Length>
               <p>총</p>
-              <LengthNumber>{electives?.totalCount}</LengthNumber>
+              <LengthNumber>{data?.totalCount}</LengthNumber>
               <p>건</p>
             </Length>
           </SearchOptions>
@@ -84,8 +69,8 @@ const KyRecommend: React.FC = () => {
               <Credit>학점</Credit>
               <Count>수강횟수</Count>
             </Title>
-            {electives?.subjectList &&
-              electives?.subjectList.map((item: SubjectList, index: number) => {
+            {data?.subjectList &&
+              data?.subjectList.map((item: SubjectList, index: number) => {
                 const rank = currentPage * 10 + index + 1;
                 return (
                   <Content
@@ -100,7 +85,7 @@ const KyRecommend: React.FC = () => {
                 );
               })}
             <Pagination
-              maxPageNumber={maxPageNumber}
+              maxPageNumber={data?.maxPageCount}
               getCurrentPage={getCurrentPage}
             />
           </RecommendDiv>

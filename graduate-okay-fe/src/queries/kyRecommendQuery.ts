@@ -48,3 +48,10 @@ export const kyRecommendReviewList = async (list: any) => {
     }
   }
 };
+
+export const kyRecommend = async (page: number, searchWord: string) => {
+  const response = await axios.get(
+    `${api.subject}?page=${page}&searchWord=${searchWord}&size=10`
+  );
+  return response.data.data;
+};
