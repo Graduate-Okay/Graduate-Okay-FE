@@ -20,20 +20,12 @@ export const getMypageDataQuery = async () => {
   }
 };
 
-// export const withdrawalMyDataQuery = async () => {
-//     try {
-//         const response = await axios.delete(`${api.user}/withdrawal`, {
-//           headers: {
-//             Authorization: `Bearer ${accessToken}`,
-//           },
-//         });
-//         if (response?.data.status === "OK") {
-//           alert("정상적으로 회원탈퇴되었습니다.");
-//           localStorage.clear();
-//         }
-//       } catch (error) {
-//         if (error instanceof AxiosError) {
-//           alert(error?.response?.data?.message);
-//         }
-//       }
-// }
+export const withdrawal = async () => {
+  const accessToken = cookies.get("accessToken");
+
+  return axios.delete(`${api.user}/withdrawal`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};

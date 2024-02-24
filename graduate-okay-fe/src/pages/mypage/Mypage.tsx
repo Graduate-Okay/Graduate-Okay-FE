@@ -3,19 +3,18 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
-import api from "../../apis/api";
+import { AxiosError } from "axios";
 import HandleSection from "../../components/HandleSection";
 import Modal from "../../components/Modal";
 import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg";
 import { ReactComponent as GraduationCap } from "../../assets/imgs/graduationCap.svg";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 import { ReactComponent as Withdrawal } from "../../assets/imgs/withdrawal.svg";
-import { getMypageDataQuery } from "../../queries/mypageQuery";
-import { useQuery } from "@tanstack/react-query";
+import { getMypageDataQuery, withdrawal } from "../../queries/mypageQuery";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const Mypage: React.FC = () => {
-  const [cookies, , removeCookie] = useCookies(["accessToken"]);
+  const [, , removeCookie] = useCookies(["accessToken"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -24,25 +23,20 @@ const Mypage: React.FC = () => {
     queryFn: () => getMypageDataQuery(),
   });
 
-  const handleWithdrawal = async () => {
-    try {
-      const response = await axios.delete(`${api.user}/withdrawal`, {
-        headers: {
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      });
-      if (response?.data.status === "OK") {
-        alert("정상적으로 회원탈퇴되었습니다.");
-        removeCookie("accessToken");
-        localStorage.clear();
-        navigate("/");
-      }
-    } catch (error) {
+  const { mutate: withdrawalMutation } = useMutation({
+    mutationFn: () => withdrawal(),
+    onSuccess: () => {
+      alert("정상적으로 회원탈퇴되었습니다.");
+      removeCookie("accessToken");
+      localStorage.clear();
+      navigate("/");
+    },
+    onError: (error: AxiosError) => {
       if (error instanceof AxiosError) {
-        alert(error?.response?.data?.message);
+        console.log(error);
       }
-    }
-  };
+    },
+  });
 
   const handleOnModal = () => {
     setIsOpen(!isOpen);
@@ -107,7 +101,7 @@ const Mypage: React.FC = () => {
             title="정말 탈퇴하시겠어요?"
             message="탈퇴 시, 계정과 활동 정보가 삭제되며 복구되지 않습니다."
             onModal={handleOnModal}
-            handleFunction={handleWithdrawal}
+            handleFunction={withdrawalMutation}
             closeMessage="취소하기"
           />
         ) : null}
