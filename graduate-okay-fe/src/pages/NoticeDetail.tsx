@@ -1,32 +1,20 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
-import axios, { AxiosError } from "axios";
-import api from "../apis/api";
-import { INoticeDetail } from "../interfaces";
 import HandleSection from "../components/HandleSection";
 import { ReactComponent as Alarm } from "../assets/imgs/alarm.svg";
+import { noticeDetailQuery } from "../queries/noticeQuery";
+import { useQuery } from "@tanstack/react-query";
 
 const NoticeDetail: React.FC = () => {
   const params = useParams();
-  const [detail, setDetail] = useState<INoticeDetail>();
   const paramsId = params.id;
 
-  const getDetail = useCallback(async () => {
-    try {
-      const response = await axios.get(`${api.notice}/${paramsId}`);
-      setDetail(response.data.data);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
-      }
-    }
-  }, [paramsId]);
-
-  useEffect(() => {
-    getDetail();
-  }, [getDetail]);
+  const { data } = useQuery({
+    queryKey: ["getNoticeDetailQuery"],
+    queryFn: () => noticeDetailQuery(paramsId),
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -40,11 +28,11 @@ const NoticeDetail: React.FC = () => {
         <DataGroup>
           <Alarm width={30} height={30} />
           <NoticeText>
-            <NoticeName>{detail?.title}</NoticeName>
-            <NoticeDate>{detail?.createdAt}</NoticeDate>
+            <NoticeName>{data?.title}</NoticeName>
+            <NoticeDate>{data?.createdAt}</NoticeDate>
           </NoticeText>
         </DataGroup>
-        <DetailContent>{detail?.content}</DetailContent>
+        <DetailContent>{data?.content}</DetailContent>
       </DetailSection>
     </ThemeProvider>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import { useCookies } from "react-cookie";
@@ -11,27 +11,18 @@ import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg
 import { ReactComponent as GraduationCap } from "../../assets/imgs/graduationCap.svg";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 import { ReactComponent as Withdrawal } from "../../assets/imgs/withdrawal.svg";
+import { getMypageDataQuery } from "../../queries/mypageQuery";
+import { useQuery } from "@tanstack/react-query";
 
 const Mypage: React.FC = () => {
-  const [nickname, setNickname] = useState<string>("");
   const [cookies, , removeCookie] = useCookies(["accessToken"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const getInfo = useCallback(async () => {
-    try {
-      const response = await axios.get(`${api.user}/info`, {
-        headers: {
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      });
-      setNickname(response?.data.data.nickname);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error?.response?.data?.message);
-      }
-    }
-  }, [cookies.accessToken]);
+  const { data: myData } = useQuery({
+    queryKey: ["getMypageData"],
+    queryFn: () => getMypageDataQuery(),
+  });
 
   const handleWithdrawal = async () => {
     try {
@@ -57,10 +48,6 @@ const Mypage: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    getInfo();
-  }, [getInfo]);
-
   return (
     <ThemeProvider theme={theme}>
       <MypageSection>
@@ -74,7 +61,7 @@ const Mypage: React.FC = () => {
           <UserInfo>
             <GraduationCap width={50} height={50} />
             <UserText>안녕하세요!</UserText>
-            <UserText>'{nickname}'님</UserText>
+            <UserText>'{myData?.nickname}'님</UserText>
           </UserInfo>
           <Profile />
         </MyDiv>
