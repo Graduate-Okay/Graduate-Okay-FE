@@ -4,25 +4,34 @@ import theme from "../constants/theme";
 import HandleSection from "../components/HandleSection";
 import Modal from "../components/Modal";
 import GraduateImage from "../assets/imgs/background/graduate.svg";
-import axios from "axios";
-import api from "../apis/api";
-import { useCookies } from "react-cookie";
-import { IGraduate } from "../interfaces";
 import { ReactComponent as File } from "../assets/imgs/file.svg";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { ReactComponent as Folder } from "../assets/imgs/folder.svg";
 import { ReactComponent as Fail } from "../assets/imgs/x.svg";
+import { useMutation } from "@tanstack/react-query";
+import { postGraduateFile } from "../queries/graduateQuery";
+import { AxiosError } from "axios";
 
 interface ImageProps {
   backgroundImage: string;
 }
 
 const Graduate: React.FC = () => {
-  const [cookies] = useCookies(["accessToken"]);
   const [, setActive] = useState<boolean>(false);
-  const [graduateData, setGraduateData] = useState<IGraduate>();
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const postFile = useMutation({
+    mutationFn: (fd: FormData) => postGraduateFile(fd),
+    onError: (error: AxiosError) => {
+      setIsOpen(true);
+      setActive(false);
+      setMessage(
+        (error?.response?.data as { message?: string }).message ??
+          "No message available"
+      );
+    },
+  });
 
   const handleDragStart = () => setActive(true);
   const handleDragLeave = () => setActive(false);
@@ -42,7 +51,7 @@ const Graduate: React.FC = () => {
   };
 
   const handleOnModal = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,22 +65,7 @@ const Graduate: React.FC = () => {
     setActive(true);
     const fd = new FormData();
     fd.append("file", file);
-
-    axios
-      .post(`${api.graduate}`, fd, {
-        headers: {
-          "Content-Type": `multipart/form-data`,
-          Authorization: `Bearer ${cookies.accessToken}`,
-        },
-      })
-      .then((response) => {
-        setGraduateData(response.data.data);
-      })
-      .catch((error) => {
-        setMessage(error.response.data.message);
-        setIsOpen(true);
-        setActive(false);
-      });
+    postFile.mutate(fd);
   };
 
   return (
@@ -119,14 +113,14 @@ const Graduate: React.FC = () => {
               <GraduateTd>마일리지</GraduateTd>
             </GraduateTableHeaderRow>
             <tr>
-              <GraduateTd>{graduateData?.totalCredit || "0"}</GraduateTd>
-              <GraduateTd>{graduateData?.majorCredit || "0"}</GraduateTd>
-              <GraduateTd>{graduateData?.kyCredit || "0"}</GraduateTd>
-              <GraduateTd>{graduateData?.nonSubject || "0"}</GraduateTd>
-              <GraduateTd>{graduateData?.mileage || "0"}</GraduateTd>
+              <GraduateTd>{postFile?.data?.totalCredit || "0"}</GraduateTd>
+              <GraduateTd>{postFile?.data?.majorCredit || "0"}</GraduateTd>
+              <GraduateTd>{postFile?.data?.kyCredit || "0"}</GraduateTd>
+              <GraduateTd>{postFile?.data?.nonSubject || "0"}</GraduateTd>
+              <GraduateTd>{postFile?.data?.mileage || "0"}</GraduateTd>
             </tr>
           </GraduateTable>
-          {!graduateData ? (
+          {!postFile?.isSuccess ? (
             <Default>
               <Folder width={35} height={35} />
               <PDFText>학업성적확인서 PDF 다운로드 경로</PDFText>
@@ -135,7 +129,7 @@ const Graduate: React.FC = () => {
                 학부생서비스 {`>`} 성적 {`>`} 학업성적확인서
               </PDFInfo>
             </Default>
-          ) : graduateData?.isGraduateOk ? (
+          ) : postFile?.data?.isGraduateOk ? (
             <Show>
               <p>당신은 졸업이</p>
               <IsGraduate>가능</IsGraduate>
