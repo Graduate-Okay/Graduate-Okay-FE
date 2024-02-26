@@ -22,7 +22,6 @@ const Login: React.FC = () => {
     }
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
-
     try {
       await axios
         .post(`${api.user}/login`, {
@@ -81,7 +80,6 @@ const Login: React.FC = () => {
           value={passwordInput.value}
           onChange={passwordInput.onChange}
           onKeyDown={handleKeyDown}
-          autoFocus
         />
 
         <SubmitLogin onClick={() => submitLogin()}>로그인</SubmitLogin>
