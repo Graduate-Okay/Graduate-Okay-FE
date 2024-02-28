@@ -3,11 +3,16 @@ import { useNavigate } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useInput from "../hooks/useInput";
-import axios, { AxiosError } from "axios";
-import api from "../apis/api";
+import { AxiosError } from "axios";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 import HandleSection from "../components/HandleSection";
+import { useMutation } from "@tanstack/react-query";
+import {
+  postAuthNumberToEmail,
+  submitAuthNumberQuery,
+  submitPasswordQuery,
+} from "../queries/signupQuery";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +22,27 @@ const Signup: React.FC = () => {
   const authNumber = useInput("");
   const passwordInput = useInput("");
 
+  const postAuthNumberToEmailMutation = useMutation({
+    mutationFn: (emailInput: string) => {
+      setIsClick(true);
+      return postAuthNumberToEmail(emailInput);
+    },
+  });
+
+  const submitPasswordMutation = useMutation({
+    mutationFn: (formData: { emailInput: string; passwordInput: string }) => {
+      const { emailInput, passwordInput } = formData;
+      return submitPasswordQuery(emailInput, passwordInput);
+    },
+    onSuccess: () => {
+      alert("회원가입이 완료되었습니다.");
+      navigate("/");
+    },
+    onError: (error: AxiosError) => {
+      console.error(error);
+    },
+  });
+
   const sendAuthNumber = async () => {
     if (isEmpty()) {
       alert("이메일을 입력해주세요");
@@ -25,17 +51,7 @@ const Signup: React.FC = () => {
     alert("인증번호를 전송했습니다. 메일을 확인해주세요");
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
-
-    try {
-      setIsClick(true);
-      await axios.post(`${api.user}/email`, {
-        email: emailInput.value,
-      });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
-      }
-    }
+    postAuthNumberToEmailMutation.mutate(emailInput.value);
   };
 
   const submitAuthNumber = async () => {
@@ -44,11 +60,7 @@ const Signup: React.FC = () => {
       return;
     }
     try {
-      const response = await axios.get(`${api.user}/email`, {
-        params: {
-          number: authNumber.value,
-        },
-      });
+      const response = await submitAuthNumberQuery(authNumber.value);
       if (response?.data.status === "OK") {
         setIsAuth(true);
       }
@@ -66,21 +78,10 @@ const Signup: React.FC = () => {
     }
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
-
-    try {
-      const response = await axios.post(`${api.user}/join`, {
-        email: emailInput.value,
-        password: passwordInput.value,
-      });
-      if (response?.data.status === "CREATED") {
-        alert("회원가입이 완료되었습니다.");
-      }
-      navigate("/");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
-      }
-    }
+    submitPasswordMutation.mutate({
+      emailInput: emailInput.value,
+      passwordInput: passwordInput.value,
+    });
   };
 
   const isEmpty = () => {
