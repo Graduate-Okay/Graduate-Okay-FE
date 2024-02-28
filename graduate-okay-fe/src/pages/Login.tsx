@@ -3,17 +3,23 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
-import axios, { AxiosError } from "axios";
-import api from "../apis/api";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
-import { useCookies } from "react-cookie";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
+import { useMutation } from "@tanstack/react-query";
+import { submitLoginQuery } from "../queries/loginQuery";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const emailInput = useInput("");
   const passwordInput = useInput("");
-  const [, setCookie] = useCookies(["accessToken"]);
+
+  const submitLoginMutation = useMutation({
+    mutationFn: (formData: { emailInput: string; passwordInput: string }) => {
+      const { emailInput, passwordInput } = formData;
+      return submitLoginQuery(emailInput, passwordInput);
+    },
+    onSuccess: () => navigate("/"),
+  });
 
   const submitLogin = async () => {
     if (isEmpty()) {
@@ -22,31 +28,10 @@ const Login: React.FC = () => {
     }
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
-    try {
-      await axios
-        .post(`${api.user}/login`, {
-          email: emailInput.value,
-          password: passwordInput.value,
-        })
-        .then((response) => {
-          localStorage.clear();
-          localStorage.setItem("id", response?.data.data.id);
-          localStorage.setItem("nickname", response?.data.data.nickname);
-          localStorage.setItem(
-            "refreshToken",
-            response?.data.data.tokenInfo.refreshToken
-          );
-          setCookie("accessToken", response?.data.data.tokenInfo.accessToken, {
-            path: "/",
-          });
-        });
-
-      navigate("/");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
-      }
-    }
+    submitLoginMutation.mutate({
+      emailInput: emailInput.value,
+      passwordInput: passwordInput.value,
+    });
   };
 
   const isEmpty = () => {
