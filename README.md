@@ -277,8 +277,8 @@ return (
 </details>
 
 ## 유즈케이스
-![제목 없는 다이어그램 drawio](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/8fd77727-4bb4-45e9-80e2-1d406292f136)
 
+![drawio drawio](https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/4c5a643f-ee7d-4e82-82a4-434a34cedf99)
 
 
 ## 로컬 환경 테스트
