@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
-import axios, { AxiosError } from "axios";
-import { useCookies } from "react-cookie";
-import api from "../../apis/api";
 import option from "../../constants/option";
-import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useMutation,
+} from "@tanstack/react-query";
+import { postReview } from "../../queries/reviewQuery";
 
 interface ModalProps {
   onClose: () => void;
   title?: string;
-  id?: number;
+  id: number;
   refetch?: (
     options?: RefetchOptions | undefined
   ) => Promise<QueryObserverResult<any, Error>>;
@@ -26,37 +28,33 @@ const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
   const reviewTitle = useInput("");
   const reviewContent = useInput("");
   const [selectedValue, setSelectedValue] = useState<number | string>("");
-  const [cookies] = useCookies(["accessToken"]);
+
+  const postReviewMutation = useMutation({
+    mutationFn: (formData: {
+      id: number;
+      reviewTitle: string;
+      reviewContent: string;
+      selectedValue: number;
+    }) => {
+      const { id, reviewTitle, reviewContent, selectedValue } = formData;
+      return postReview(id, reviewTitle, reviewContent, selectedValue);
+    },
+    onSuccess: () => {
+      alert("리뷰 등록이 완료되었습니다.");
+      onClose();
+      if (refetch) {
+        refetch();
+      }
+    },
+  });
 
   const submitReview = async () => {
-    try {
-      await axios
-        .post(
-          `${api.review}`,
-          {
-            subjectId: id,
-            title: reviewTitle.value,
-            content: reviewContent.value,
-            starScore: Number(selectedValue),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.accessToken}`,
-            },
-          }
-        )
-        .then(() => {
-          alert("리뷰 등록이 완료되었습니다.");
-          onClose();
-        });
-      if (refetch) {
-        await refetch();
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data.message);
-      }
-    }
+    postReviewMutation.mutate({
+      id: id,
+      reviewTitle: reviewTitle.value,
+      reviewContent: reviewContent.value,
+      selectedValue: Number(selectedValue),
+    });
   };
 
   return (
