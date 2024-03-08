@@ -30,13 +30,13 @@ const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
   const [selectedValue, setSelectedValue] = useState<number | string>("");
 
   const postReviewMutation = useMutation({
-    mutationFn: (formData: {
+    mutationFn: (data: {
       id: number;
       reviewTitle: string;
       reviewContent: string;
       selectedValue: number;
     }) => {
-      const { id, reviewTitle, reviewContent, selectedValue } = formData;
+      const { id, reviewTitle, reviewContent, selectedValue } = data;
       return postReview(id, reviewTitle, reviewContent, selectedValue);
     },
     onSuccess: () => {

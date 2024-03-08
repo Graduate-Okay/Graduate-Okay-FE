@@ -3,48 +3,38 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import HandleSection from "../../components/HandleSection";
-import axios, { AxiosError } from "axios";
-import api from "../../apis/api";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as ProfileWithSetting } from "../../assets/imgs/profile/profileWithSetting.svg";
+import { useMutation } from "@tanstack/react-query";
+import { modifyInfoQuery } from "../../queries/mypageQuery";
 
 const ModifyInfo: React.FC = () => {
   const loginInput = useInput("");
   const passwordInput = useInput("");
-  const [cookies] = useCookies(["accessToken"]);
   const navigate = useNavigate();
 
-  const changeInfomation = async () => {
-    try {
-      const payload: { [key: string]: string } = {};
-      if (loginInput.value) {
-        payload.nickname = loginInput.value;
-      }
-      if (passwordInput.value) {
-        payload.password = passwordInput.value;
-      }
-      if (!loginInput.value && !passwordInput.value) {
-        alert("입력 값을 확인해주세요.");
-        return;
-      }
-      console.log(payload);
+  const changeMutation = useMutation({
+    mutationFn: (payload: { [key: string]: string }) =>
+      modifyInfoQuery(payload),
+    onSuccess: () => {
+      alert("변경이 완료되었습니다.");
+      navigate("/mypage");
+    },
+  });
 
-      await axios
-        .patch(`${api.user}/info`, payload, {
-          headers: {
-            Authorization: `Bearer ${cookies.accessToken}`,
-          },
-        })
-        .then(() => {
-          alert("변경이 완료되었습니다.");
-          navigate("/mypage");
-        });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
-      }
+  const changeInfomation = async () => {
+    const payload: { [key: string]: string } = {};
+    if (loginInput.value) {
+      payload.nickname = loginInput.value;
     }
+    if (passwordInput.value) {
+      payload.password = passwordInput.value;
+    }
+    if (!loginInput.value && !passwordInput.value) {
+      alert("입력 값을 확인해주세요.");
+      return;
+    }
+    changeMutation.mutate(payload);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
