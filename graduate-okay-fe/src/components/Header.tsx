@@ -122,9 +122,9 @@ const NavBar = styled.nav`
   }
 
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 `;
