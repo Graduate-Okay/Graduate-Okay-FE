@@ -28,7 +28,7 @@ const FooterSection = styled.footer`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 20vh;
+  height: 15vh;
   font-size: 1.1rem;
   align-items: center;
 `;
@@ -39,18 +39,18 @@ const FooterTitle = styled.div`
   height: 40%;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.6rem;
 `;
 
 const FooterContent = styled.div`
   display: flex;
   width: 80%;
   height: 60%;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 
   > svg {
-    width: 40%;
+    height: 70%;
     cursor: pointer;
   }
 `;
