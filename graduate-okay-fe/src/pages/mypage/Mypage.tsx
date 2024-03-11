@@ -65,20 +65,18 @@ const Mypage: React.FC = () => {
             <MypageHeader>
               <p>졸업요건 조회</p>
             </MypageHeader>
-            <MypageRow>
-              <p onClick={() => navigate("/graduate")}>졸업결과 확인하기</p>
+            <MypageRow onClick={() => navigate("/graduate")}>
+              <p>졸업결과 확인하기</p>
               <Next />
             </MypageRow>
             <MypageHeader>
               <p>나의 정보</p>
             </MypageHeader>
-            <MypageRow>
-              <p onClick={() => navigate("/mypage/modifyInfo")}>
-                정보 수정하기
-              </p>
+            <MypageRow onClick={() => navigate("/mypage/modifyInfo")}>
+              <p>정보 수정하기</p>
               <Next />
             </MypageRow>
-            <MypageRow>
+            <MypageRow onClick={() => navigate("/mypage/myreview")}>
               <p>리뷰 관리</p>
               <Next />
             </MypageRow>
@@ -140,8 +138,12 @@ const UserInfo = styled.div`
   width: 50%;
   height: 50%;
   @media ${({ theme }) => theme.device.laptop} {
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    height: 43%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    height: 40%;
   }
 `;
 
@@ -175,9 +177,6 @@ const MypageRow = styled.div`
     font-size: 1.5rem;
     height: 4rem;
   }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.7rem;
-  }
 `;
 
 const MypageHeader = styled.div`
@@ -210,7 +209,6 @@ const MyDiv = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     flex-direction: column;
     height: 35%;
-    justify-content: center;
     > svg {
       order: -1;
     }
@@ -224,7 +222,7 @@ const UserText = styled.p`
 
   @media ${({ theme }) => theme.device.laptop} {
     font-weight: normal;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 `;
 

@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
     <ThemeProvider theme={theme}>
       <ModalBackground>
         <ModalContent>
-          <SvgComponent width={100} height={100} />
+          <SvgComponent width={80} height={80} />
           <Title>{title}</Title>
           <Message>{message}</Message>
           <ButtonArea>
@@ -71,11 +71,18 @@ const ModalContent = styled.div`
   align-items: center;
   justify-content: space-around;
 
+  > svg {
+    @media ${({ theme }) => theme.device.laptop} {
+      width: 30%;
+      height: 30%;
+    }
+  }
+
   @media ${({ theme }) => theme.device.tablet} {
-    width: 45%;
+    width: 40%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 35%;
+    width: 30%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 25%;
@@ -102,21 +109,21 @@ const Button = styled.button<ButtonProps>`
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
+
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 30%;
+  }
 `;
 
 const Title = styled.p`
   display: flex;
   font-weight: bold;
   font-size: 1.6rem;
+  height: 15%;
+  align-items: center;
 
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.7rem;
-  }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.8rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2rem;
   }
 `;
 
@@ -127,16 +134,17 @@ const Message = styled.p`
   word-break: keep-all;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.4rem;
     width: 65%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.5rem;
-    width: 55%;
+    width: 60%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    width: 65%;
   }
 `;

@@ -172,6 +172,9 @@ const Explain = styled.div`
   justify-content: center;
   text-align: center;
   height: 5%;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.3rem;
+  }
 `;
 
 const Image = styled.div<ImageProps>`
@@ -208,13 +211,13 @@ const FileButton = styled.div`
   }
 
   @media ${({ theme }) => theme.device.tablet} {
-    width: 60%;
+    width: 55%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 50%;
+    width: 40%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 40%;
+    width: 30%;
   }
 `;
 
@@ -226,9 +229,9 @@ const Result = styled.div`
   align-items: center;
 
   > svg {
-    height: 15%;
-    align-items: center;
-    justify-content: center;
+    height: 10%;
+    @media ${({ theme }) => theme.device.laptop} {
+    }
   }
 `;
 
@@ -241,16 +244,11 @@ const ResultExplain = styled.div`
   justify-content: center;
 
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.4rem;
-    height: 13%;
+    font-size: 1.3rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.6rem;
-    height: 15%;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.8rem;
-    height: 15%;
+    font-size: 1.4rem;
+    height: 8%;
   }
 `;
 
@@ -260,6 +258,19 @@ const GraduateTable = styled.table`
   margin-bottom: 3vh;
   text-align: center;
   line-height: 30px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 70%;
+    height: 15%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 50%;
+    font-size: 1.4rem;
+  }
 `;
 
 const GraduateTableHeaderRow = styled.tr`
@@ -268,6 +279,7 @@ const GraduateTableHeaderRow = styled.tr`
 
 const GraduateTd = styled.td`
   border: 1px solid #a79d9d;
+  vertical-align: middle;
 `;
 
 const Show = styled.div`
@@ -292,6 +304,16 @@ const IsGraduate = styled.div`
   color: #a489f0;
   margin-left: 10px;
   margin-right: 10px;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 15%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 10%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 8%;
+  }
 `;
 
 const Label = styled.label`
