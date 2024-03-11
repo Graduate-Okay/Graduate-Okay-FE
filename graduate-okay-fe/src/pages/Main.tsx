@@ -102,6 +102,8 @@ const TextDiv = styled.div<TextProps>`
   display: flex;
   flex-direction: row;
   width: ${(props) => (props ? props.width : "100%")};
+  height: 5vh;
+  align-items: center;
   justify-content: ${(props) => props.justifyContent};
 `;
 
@@ -115,13 +117,13 @@ const IntroduceText = styled.p<IntroduceTextProps>`
   white-space: normal;
 
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 2.5rem;
+    font-size: 2.1rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 4rem;
+    font-size: 2.7rem;
   }
 `;
 

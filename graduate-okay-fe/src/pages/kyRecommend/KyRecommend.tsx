@@ -196,16 +196,9 @@ const ExplainDiv = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;
-  width: 90%;
-  height: 7%;
-  justify-content: center;
+  width: 80%;
+  height: 5%;
   align-items: center;
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.2rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.3rem;
-  }
 `;
 
 const InputSearch = styled.input`
@@ -213,17 +206,21 @@ const InputSearch = styled.input`
   width: 30rem;
   height: 2rem;
   border: 2px solid #a489f0;
-  border-radius: 15px;
+  border-radius: 30rem;
   padding: 0.6rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 35rem;
+  }
 
   @media ${({ theme }) => theme.device.laptop} {
     width: 40rem;
-    height: 2.2rem;
-    padding: 1rem;
+    height: 2rem;
+    padding: 0.7rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 50rem;
-    height: 2.5rem;
+    width: 45rem;
+    height: 2rem;
   }
 `;
 

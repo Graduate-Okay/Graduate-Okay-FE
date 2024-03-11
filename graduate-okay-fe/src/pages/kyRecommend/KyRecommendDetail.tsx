@@ -41,13 +41,15 @@ const KyRecommendDetail: React.FC = () => {
           closeBtn={false}
           color="#a489f0"
         />
-        <Credit>{detailData?.credit || 0}학점</Credit>
-        <DetailIsRequired>
-          {detailData?.isRequired ? <p>교양필수</p> : null}
-        </DetailIsRequired>
-        <DetailTitle>
-          {detailData?.name} ({detailData?.subName})
-        </DetailTitle>
+        <DetailHeader>
+          <Credit>{detailData?.credit || 0}학점</Credit>
+          <DetailIsRequired>
+            {detailData?.isRequired ? <p>교양필수</p> : null}
+          </DetailIsRequired>
+          <DetailTitle>
+            {detailData?.name} ({detailData?.subName})
+          </DetailTitle>
+        </DetailHeader>
         <DetailInfo>
           <TypeText>핵심역량</TypeText>
           <Type>{detailData?.kyCoreType || "없음"}</Type>
@@ -90,12 +92,6 @@ const KyRecommendDetail: React.FC = () => {
                   </Review>
                 );
               })}
-              <WrapButton>
-                <Button
-                  text="강의 평가하기"
-                  handleOnClick={() => IsModalOpen()}
-                />
-              </WrapButton>
             </WrapReview>
           ) : (
             <Review>
@@ -103,15 +99,14 @@ const KyRecommendDetail: React.FC = () => {
                 <p>강의평이 존재하지 않습니다.</p>
                 <p>첫 번째로 강의를 평가해보세요.</p>
               </NoneReview>
-              <WrapButton>
-                <Button
-                  text="강의 평가하기"
-                  handleOnClick={() => IsModalOpen()}
-                />
-              </WrapButton>
             </Review>
           )}
         </ReviewSection>
+        {!isOpen ? (
+          <WrapButton>
+            <Button text="강의 평가하기" handleOnClick={() => IsModalOpen()} />
+          </WrapButton>
+        ) : null}
       </DetailSection>
     </ThemeProvider>
   );
@@ -148,7 +143,7 @@ const Credit = styled.div`
   align-items: center;
 
   @media ${({ theme }) => theme.device.tablet} {
-    width: 8rem;
+    width: 7rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
     width: 6rem;
@@ -207,7 +202,7 @@ const DetailIsRequired = styled.div`
 
 const DetailTitle = styled.div`
   display: flex;
-  height: 8vh;
+  height: 4.5vh;
   align-items: center;
   font-size: 1.7rem;
 `;
@@ -217,12 +212,21 @@ const DetailInfo = styled.div`
   height: 4vh;
   align-items: center;
   border-bottom: 1px solid #a4b0be;
+  width: 90%;
+  margin: 0 auto;
+`;
+
+const DetailHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 const ReviewSection = styled.section`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  width: 100%;
   height: 70%;
 `;
 
@@ -232,6 +236,8 @@ const HandleReview = styled.div`
   align-items: center;
   height: 5rem;
   font-size: 1.1rem;
+  width: 90%;
+  margin: 0 auto;
   > p {
     &:hover {
       opacity: 0.5;
@@ -242,7 +248,6 @@ const HandleReview = styled.div`
 const StarDiv = styled.div`
   display: flex;
   align-items: center;
-  width: 60%;
   > p {
     width: 100%;
     margin: 0px 5px;
@@ -330,9 +335,9 @@ const ReviewContent = styled.p`
 const WrapButton = styled.div`
   display: flex;
   justify-content: center;
-  z-index: 999;
   position: sticky;
   bottom: 15px;
+  cursor: pointer;
 `;
 
 const LectureLeview = styled.div`
@@ -341,12 +346,5 @@ const LectureLeview = styled.div`
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.2rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.3rem;
-    height: 4rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.4rem;
   }
 `;

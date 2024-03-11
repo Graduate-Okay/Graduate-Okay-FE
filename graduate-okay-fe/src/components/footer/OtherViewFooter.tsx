@@ -50,7 +50,7 @@ const FooterContent = styled.div`
   align-items: center;
 
   > svg {
-    height: 70%;
+    height: 75%;
     cursor: pointer;
   }
 `;

@@ -84,9 +84,13 @@ const NoticeContent = styled.div`
   height: 75%;
   margin: 2vh auto;
   justify-content: space-between;
+  align-items: center;
 
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 70%;
+  }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 60%;
+    width: 65%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 50%;
@@ -113,19 +117,14 @@ const NoticeData = styled.div`
 const DataGroup = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   align-items: center;
+  justify-content: space-around;
 
   > svg {
     width: 15%;
-
     @media ${({ theme }) => theme.device.tablet} {
-      height: 30px;
-    }
-    @media ${({ theme }) => theme.device.laptop} {
-      height: 35px;
-    }
-    @media ${({ theme }) => theme.device.largeLaptop} {
-      height: 40px;
+      width: 10%;
     }
   }
 `;
@@ -133,17 +132,20 @@ const DataGroup = styled.div`
 const NoticeText = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 90%;
+  height: 70%;
+  justify-content: space-around;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+  }
 `;
 
 const NoticeName = styled.div`
   display: flex;
   font-size: 1.6rem;
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.9rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 2.1rem;
+    font-size: 1.8rem;
   }
 `;
 
@@ -152,7 +154,7 @@ const NoticeDate = styled.div`
   font-size: 1.2rem;
   color: #a4b0be;
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.4rem;

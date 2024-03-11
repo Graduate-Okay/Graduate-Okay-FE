@@ -47,11 +47,14 @@ const DetailSection = styled.section`
   height: 65vh;
   margin: 2vh auto;
 
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+  }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 60%;
+    width: 70%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 55%;
+    width: 60%;
   }
 `;
 
@@ -61,8 +64,14 @@ const DetailContent = styled.div`
   font-size: 1.4rem;
   margin-top: 2rem;
 
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.5rem;
+    margin: 2rem auto;
+    width: 80%;
+  }
+
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 
@@ -76,11 +85,8 @@ const DataGroup = styled.div`
   > svg {
     width: 15%;
 
-    @media ${({ theme }) => theme.device.laptop} {
-      height: 40%;
-    }
-    @media ${({ theme }) => theme.device.largeLaptop} {
-      height: 50%;
+    @media ${({ theme }) => theme.device.tablet} {
+      width: 10%;
     }
   }
 `;
@@ -96,13 +102,13 @@ const NoticeName = styled.div`
   font-size: 1.6rem;
 
   @media ${({ theme }) => theme.device.tablet} {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 2.1rem;
+    font-size: 2rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
   }
 `;
 

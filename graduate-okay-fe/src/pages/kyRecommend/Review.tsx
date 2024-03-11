@@ -144,6 +144,12 @@ const TitleInput = styled.input`
   border: 1px solid #a489f0;
   border-radius: 10px;
   padding: 0.5rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 1rem;
+    width: 88%;
+    height: 8%;
+  }
 `;
 const ContentInput = styled.textarea`
   display: flex;
@@ -153,6 +159,12 @@ const ContentInput = styled.textarea`
   border: 1px solid #a489f0;
   border-radius: 10px;
   padding: 0.5rem;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 1rem;
+    width: 88%;
+    height: 65%;
+  }
 `;
 
 const InputDiv = styled.div`
