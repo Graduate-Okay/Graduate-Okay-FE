@@ -105,22 +105,22 @@ const ModifyInfoDiv = styled.div`
   align-items: center;
 
   @media ${({ theme }) => theme.device.tablet} {
-    width: 50%;
+    width: 60%;
     height: 70%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 35%;
+    width: 50%;
     height: 65%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 40%;
+    width: 50%;
     height: 60%;
   }
 `;
 
 const ChangeButton = styled.div`
   display: flex;
-  width: 80%;
+  width: 50%;
   height: 4rem;
   margin: auto;
   color: white;
@@ -139,7 +139,10 @@ const ChangeButton = styled.div`
     width: 50%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 30%;
+    width: 40%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 25%;
   }
 `;
 
@@ -153,10 +156,14 @@ const Title = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 85%;
+  width: 75%;
   height: 5vh;
   font-size: 1.3rem;
   margin: 0 auto;
+
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 45%;
+  }
 `;
 
 const Content = styled.div`
@@ -167,14 +174,21 @@ const Content = styled.div`
 
 const Input = styled.input`
   display: flex;
-  width: 85%;
-  height: 5vh;
+  width: 75%;
+  height: 3.5vh;
   margin: 0 auto;
   border-color: #a489f0;
   border-radius: 10px;
+  padding: 0.5rem;
 
   &:focus {
     outline: none;
     border-color: #d6d6f5;
+  }
+
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 45%;
+    height: 15%;
+    padding: 1rem;
   }
 `;
