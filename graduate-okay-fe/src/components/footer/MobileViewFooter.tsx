@@ -43,7 +43,7 @@ const FooterSection = styled.footer`
   display: flex;
   position: fixed;
   width: 100%;
-  height: 11vh;
+  height: 11.5vh;
   left: 0px;
   bottom: 0px;
   background-color: white;
@@ -54,14 +54,18 @@ const FooterDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90%;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: center;
   align-items: center;
-  margin-top: auto;
   cursor: pointer;
+  > svg {
+    flex-grow: 1;
+  }
 `;
 
 const Text = styled.p<{ color: string }>`
+  display: flex;
   font-size: 1.2rem;
   color: ${(props) => props.color};
+  flex-grow: 0.5;
 `;

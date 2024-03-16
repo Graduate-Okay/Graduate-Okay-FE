@@ -252,4 +252,5 @@ const Length = styled.div`
 const LengthNumber = styled.p`
   display: flex;
   color: #5315fc;
+  margin-left: 3px;
 `;

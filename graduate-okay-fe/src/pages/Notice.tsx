@@ -73,8 +73,6 @@ const NoticeDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 80vh;
-  justify-content: center;
-  align-items: center;
 `;
 
 const NoticeContent = styled.div`

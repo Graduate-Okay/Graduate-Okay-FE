@@ -121,8 +121,10 @@ const MypageSection = styled.section`
 const MypageDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
   height: 67%;
+  justify-content: center;
+
   @media ${({ theme }) => theme.device.laptop} {
     width: 60%;
     height: 60%;
@@ -137,6 +139,8 @@ const UserInfo = styled.div`
   flex-direction: column;
   width: 50%;
   height: 50%;
+  justify-content: space-around;
+
   @media ${({ theme }) => theme.device.laptop} {
     justify-content: space-around;
     align-items: center;
@@ -165,7 +169,6 @@ const MypageRow = styled.div`
   &:hover {
     color: gray;
   }
-
   > p {
     margin-left: 0.5rem;
   }
@@ -187,6 +190,7 @@ const MypageHeader = styled.div`
   justify-contents: center;
   height: 3rem;
   margin-top: 2rem;
+
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.6rem;
   }
@@ -218,7 +222,7 @@ const MyDiv = styled.div`
 const UserText = styled.p`
   display: flex;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 400;
 
   @media ${({ theme }) => theme.device.laptop} {
     font-weight: normal;

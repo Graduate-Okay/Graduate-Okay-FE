@@ -53,6 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({
             }
           }}
         />
+
         {paging()}
         <img
           src={ArrowNext}
@@ -74,15 +75,29 @@ const Page = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  height: 5vh;
 
   > img {
-    width: 3%;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
     border-radius: 10px;
 
     &:hover {
       background-color: #d9d9d9;
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+      width: 15px;
+      height: 15px;
+    }
+    @media ${({ theme }) => theme.device.laptop} {
+      width: 18px;
+      height: 18px;
+    }
+    @media ${({ theme }) => theme.device.largeLaptop} {
+      width: 20px;
+      height: 20px;
     }
   }
 `;
