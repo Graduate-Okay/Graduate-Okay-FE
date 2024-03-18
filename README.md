@@ -6,6 +6,7 @@
 - 정적 타입 시스템과 가독성을 향상하기 위해 `TypeScript`로 마이그레이션을 했습니다.
 - 데이터 관리를 좀 더 통일성있고 간편하게 구현하기 위해 `tanstack/query`를 적용했습니다.
 - 스타일 지역화와 동적 스타일링의 이점으로 `Styled-components`를 적용했습니다.
+  - 새롭게 CSS-IN-JS를 적용하면서 디자이너와 협업하여 UI를 개편했습니다.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6789c66e-df70-4553-9451-84c768d4853e/deploy-status)](https://app.netlify.com/sites/graduate-okay/deploys)
 
