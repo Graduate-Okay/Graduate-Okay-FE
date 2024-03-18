@@ -2,6 +2,8 @@
 한신대학교 재학생 누구나 본인의 졸업요건을 조회할 수 있는 웹사이트v2 <br/>
 [기존 프로젝트](https://github.com/Graduate-Ok/Graduation-Okay-)를 v2로 타입스크립트로 마이그레이션 및 기능 개선
 
+- 개선 이유 
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6789c66e-df70-4553-9451-84c768d4853e/deploy-status)](https://app.netlify.com/sites/graduate-okay/deploys)
 
 | [졸업가능 서비스 바로가기](https://hs-graduate-ok.site/) | 
@@ -33,6 +35,22 @@
      </tr>
   </tbody>
 </table>
+
+## FE STACK 🛠
+ <div align=left> 
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">    
+  <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">    
+  <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">    
+   
+  <br/>
+  
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"> 
+  <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <br>
+</div>
+
 
 ## 개선 기능 💡 
 
@@ -288,16 +306,4 @@ yarn install
 yarn start
 ```
 
-## FE STACK 🛠
- <div align=left> 
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">    
-  <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">    
-  <br/>
-  
-  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"> 
-  <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
-  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-  <br>
-</div>
 
