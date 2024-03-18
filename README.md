@@ -2,7 +2,10 @@
 한신대학교 재학생 누구나 본인의 졸업요건을 조회할 수 있는 웹사이트v2 <br/>
 [기존 프로젝트](https://github.com/Graduate-Ok/Graduation-Okay-)를 v2로 타입스크립트로 마이그레이션 및 기능 개선
 
-- 개선 이유 
+#### 개선 이유 
+- 정적 타입 시스템과 가독성을 향상하기 위해 `TypeScript`로 마이그레이션을 했습니다.
+- 데이터 관리를 좀 더 통일성있고 간편하게 구현하기 위해 `tanstack/query`를 적용했습니다.
+- 스타일 지역화와 동적 스타일링의 이점으로 `Styled-components`를 적용했습니다.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6789c66e-df70-4553-9451-84c768d4853e/deploy-status)](https://app.netlify.com/sites/graduate-okay/deploys)
 
