@@ -23,6 +23,7 @@ const Admin = lazy(() => import("./pages/administration/Admin"));
 const Administration = lazy(
   () => import("./pages/administration/Administration")
 );
+const MyReview = lazy(() => import("./pages/mypage/MyReview"));
 
 function App() {
   const [cookies, setCookie] = useCookies(["accessToken"]);
@@ -93,6 +94,16 @@ function App() {
             element={
               cookies.accessToken ? (
                 <ModifyInfo />
+              ) : (
+                <Navigate replace to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/mypage/myreview"
+            element={
+              cookies.accessToken ? (
+                <MyReview />
               ) : (
                 <Navigate replace to="/login" />
               )
