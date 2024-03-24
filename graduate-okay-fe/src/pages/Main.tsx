@@ -142,20 +142,20 @@ const SVGDiv = styled.div<SVGProps>`
 
   @media ${({ theme }) => theme.device.tablet} {
     > svg {
-      width: 400px;
-      height: 450px;
+      width: 450px;
+      height: 330px;
     }
   }
   @media ${({ theme }) => theme.device.laptop} {
     > svg {
-      width: 500px;
-      height: 550px;
+      width: 400px;
+      height: 350px;
     }
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     > svg {
-      width: 600px;
-      height: 550px;
+      width: 550px;
+      height: 380px;
     }
   }
 `;
