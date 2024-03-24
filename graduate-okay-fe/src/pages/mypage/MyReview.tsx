@@ -3,7 +3,6 @@ import theme from "../../constants/theme";
 import { useQuery } from "@tanstack/react-query";
 import { getMypageDataQuery } from "../../queries/mypageQuery";
 import HandleSection from "../../components/HandleSection";
-import StarRate from "../kyRecommend/StarRate";
 import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 
 const MyReview: React.FC = () => {
@@ -11,8 +10,6 @@ const MyReview: React.FC = () => {
     queryKey: ["getMypageData"],
     queryFn: () => getMypageDataQuery(),
   });
-
-  console.log(myData?.reviewList);
 
   return (
     <ThemeProvider theme={theme}>
@@ -23,24 +20,24 @@ const MyReview: React.FC = () => {
           closeBtn={false}
           color="#a489f0"
         />
-        <ReviewDiv>
-          {myData?.reviewList.map((item: any) => {
+        {myData ? (
+          myData?.reviewList.map((item: any) => {
             return (
               <Review>
                 <HaveReview>
                   <ReviewDiv>
-                    <StarRate score={item?.starScore || undefined} />
+                    <Subject>{item?.subject}</Subject>
                     <ReviewTitle>{item?.title}</ReviewTitle>
                     <ReviewContent>{item?.content}</ReviewContent>
                   </ReviewDiv>
-                  <div>
-                    <Next />
-                  </div>
+                  <Next />
                 </HaveReview>
               </Review>
             );
-          })}
-        </ReviewDiv>
+          })
+        ) : (
+          <p>작성한 리뷰가 없습니다</p>
+        )}
       </MyReviewSection>
     </ThemeProvider>
   );
@@ -51,25 +48,26 @@ export default MyReview;
 const MyReviewSection = styled.section`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 95%;
   height: 100vh;
-  margin: 2vh auto;
+  align-items: center;
+  margin: 0 auto;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 60%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 40%;
+  }
 `;
 
 const ReviewDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 93%;
   height: 100%;
-  width: 100%;
   overflow-y: auto;
-  height: 70%;
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 60%;
-    height: 60%;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 40%;
-  }
+  align-items: space-around;
 `;
 
 const HaveReview = styled.div`
@@ -78,28 +76,28 @@ const HaveReview = styled.div`
   height: 80%;
   border: 1px solid #cacaca;
   border-radius: 10px;
-  justify-content: center;
   align-items: center;
 `;
 
 const ReviewTitle = styled.p`
   display: flex;
-  width: 50%;
+  width: 95%;
   height: 20%;
   align-items: center;
-  font-weight: bold;
   font-size: 1.2rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: 0 auto;
 `;
 
 const ReviewContent = styled.p`
   display: flex;
-  width: 50%;
-  height: 40%;
+  width: 95%;
+  height: 50%;
   font-size: 1.2rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: 0 auto;
 `;
 
 const Review = styled.div`
@@ -116,5 +114,18 @@ const Review = styled.div`
   }
   @media ${({ theme }) => theme.device.laptop} {
     height: 18vh;
+  }
+`;
+
+const Subject = styled.p`
+  display: flex;
+  width: 95%;
+  height: 30%;
+  align-items: center;
+  font-size: 1.4rem;
+  margin: 0 auto;
+  font-weight: bold;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.5rem;
   }
 `;
