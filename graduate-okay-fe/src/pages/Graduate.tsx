@@ -20,6 +20,7 @@ const Graduate: React.FC = () => {
   const [, setActive] = useState<boolean>(false);
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isFail, setIsFail] = useState<boolean>(false);
 
   const postFile = useMutation({
     mutationFn: (fd: FormData) => postGraduateFile(fd),
@@ -30,6 +31,11 @@ const Graduate: React.FC = () => {
         (error?.response?.data as { message?: string }).message ??
           "No message available"
       );
+    },
+    onSuccess: (data) => {
+      if (data?.failure) {
+        setIsFail(true);
+      }
     },
   });
 
@@ -52,6 +58,7 @@ const Graduate: React.FC = () => {
 
   const handleOnModal = () => {
     setIsOpen(false);
+    setIsFail(false);
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +132,7 @@ const Graduate: React.FC = () => {
               <Folder width={35} height={35} />
               <PDFText>학업성적확인서 PDF 다운로드 경로</PDFText>
               <PDFInfo>
-                portal.hs.ac.kr {`>`} 한신종합정보 {`>`} 인트라넷 {`>`}{" "}
+                portal.hs.ac.kr {`>`} 한신종합정보 {`>`} 인트라넷 {`>`}
                 학부생서비스 {`>`} 성적 {`>`} 학업성적확인서
               </PDFInfo>
             </Default>
@@ -141,6 +148,14 @@ const Graduate: React.FC = () => {
               <IsGraduate>불가능</IsGraduate>
               <p>합니다!</p>
             </Show>
+          )}
+          {isFail && (
+            <Modal
+              svg={Fail}
+              message={postFile?.data?.failure}
+              onModal={handleOnModal}
+              closeMessage="닫기"
+            />
           )}
         </Result>
         {isOpen ? (

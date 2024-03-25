@@ -130,7 +130,7 @@ const Title = styled.p`
 const Message = styled.p`
   display: flex;
   font-size: 1.3rem;
-  width: 75%;
+  width: 85%;
   word-break: keep-all;
   justify-content: center;
   align-items: center;
@@ -138,13 +138,12 @@ const Message = styled.p`
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.4rem;
-    width: 65%;
+    width: 75%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 60%;
+    width: 70%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.5rem;
-    width: 65%;
   }
 `;
