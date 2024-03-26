@@ -45,7 +45,7 @@ const KyRecommend: React.FC = () => {
       <KyRecommendSection>
         <ExplainDiv>
           <p>과목 클릭 시, 세부 페이지로 이동합니다.</p>
-          <p>과목명, 학점, 수강 횟수 클릭 시 오름/내림차순으로 정렬합니다.</p>
+          {/* <p>과목명, 학점, 수강 횟수 클릭 시 오름/내림차순으로 정렬합니다.</p> */}
         </ExplainDiv>
         <InputSearch
           type="text"

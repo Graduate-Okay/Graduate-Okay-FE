@@ -215,6 +215,7 @@ const FileButton = styled.div`
   align-items: center;
   font-size: 1.5rem;
   color: white;
+  cursor: pointer;
 
   &:hover {
     background-color: white;

@@ -84,7 +84,7 @@ const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
               value={reviewTitle.value}
             />
             <ContentInput
-              placeholder="강의에 대한 평가를 적어주세요."
+              placeholder="강의에 대한 평가를 적어주세요. 1000자 제한"
               onChange={reviewContent.onChange}
               value={reviewContent.value}
             />

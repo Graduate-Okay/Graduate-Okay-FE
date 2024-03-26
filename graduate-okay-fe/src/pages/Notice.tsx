@@ -151,6 +151,7 @@ const NoticeDate = styled.div`
   display: flex;
   font-size: 1.2rem;
   color: #a4b0be;
+
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.2rem;
   }

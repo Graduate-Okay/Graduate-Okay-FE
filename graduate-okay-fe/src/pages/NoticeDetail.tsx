@@ -63,6 +63,7 @@ const DetailContent = styled.div`
   width: 100%;
   font-size: 1.4rem;
   margin-top: 2rem;
+  white-space: pre-wrap;
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.5rem;

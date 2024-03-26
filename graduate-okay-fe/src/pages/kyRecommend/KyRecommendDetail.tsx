@@ -47,7 +47,7 @@ const KyRecommendDetail: React.FC = () => {
             {detailData?.isRequired ? <p>교양필수</p> : null}
           </DetailIsRequired>
           <DetailTitle>
-            {detailData?.name} ({detailData?.subName})
+            {detailData?.name} {detailData?.subName}
           </DetailTitle>
         </DetailHeader>
         <DetailInfo>
@@ -330,6 +330,7 @@ const ReviewContent = styled.p`
   font-size: 1.2rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: pre-wrap;
 `;
 
 const WrapButton = styled.div`
