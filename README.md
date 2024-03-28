@@ -1,16 +1,7 @@
 # <img width = "100%" src = "https://user-images.githubusercontent.com/75983289/164976416-004d3626-3a5c-4eb5-95d6-e94d1833a392.png"/>
 한신대학교 재학생 누구나 본인의 졸업요건을 조회할 수 있는 웹사이트v2 <br/>
 [기존 프로젝트](https://github.com/Graduate-Ok/Graduation-Okay-)를 v2로 타입스크립트로 마이그레이션 및 기능 개선
-
-#### 개선 
-- `JavaScript to TypeScript` 마이그레이션
-  - 정적 타입 시스템으로 코드 안정성을 향상시켜 런타임에서 버그를 줄여야할 필요를 느낌
-  - `TypeScript`를 도입하여 예기치 않는 버그를 줄이고, 타입을 명시하여 코드 가독성을 개선했습니다.
-- `tanstack/query`도입
-  - 상태 관리 코드를 간소화하고 간편하게 데이터를 관리하기 위해 도입했습니다.
-- `Styled-components`도입
-  - 기존 `CSS-IN-CSS`방식에서 스타일 재사용과 관리의 이점으로 도입했습니다.
-  - 고유한 클래스 이름을 갖기 때문에 네이밍이 충돌하는 경우를 제거했습니다.   
+  
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6789c66e-df70-4553-9451-84c768d4853e/deploy-status)](https://app.netlify.com/sites/graduate-okay/deploys)
 
@@ -37,7 +28,7 @@
         <img width="100%" src="https://avatars.githubusercontent.com/u/75983289?v=4"  alt=""/>
         프론트엔드<br/>
         <a href="https://github.com/pangkyu">
-          <img src="https://img.shields.io/badge/팡규-000000?style=flat-round&logo=GitHub&logoColor=white"/>
+          <img src="https://img.shields.io/badge/배성규-000000?style=flat-round&logo=GitHub&logoColor=white"/>
         </a>
       </td>
      </tr>
@@ -50,17 +41,121 @@
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">    
   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">    
   <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">    
-   
+  <img src="https://img.shields.io/badge/googleanalytics-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white"> 
   <br/>
   
   <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"> 
   <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  
   <br>
 </div>
 
+## UI & Demo
 
-## 개선 기능 💡 
+
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/32865bed-7039-428f-b2b0-3e977c7746ff' alt='gif' />   
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/0250b294-bbbb-4ad3-87d7-7fd6593192de' alt='gif' />   
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/d03fb536-75c7-4c2e-8fdc-873e240a3ab2' alt='gif' />   
+      </td>
+      </tr>
+      <tr>
+      <td align="center" width="33%">
+        <p>메인 페이지</p>
+      </td>
+      <td align="center" width="33%">
+        <p>공지사항 페이지</p>
+      </td>
+      <td align="center" width="33%">
+        <p>로그인 페이지</p>
+      </td>
+     </tr>
+  </tbody>
+</table>
+
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/1f3d778c-384e-47dc-9147-130edda296c8' alt='gif' />   
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/a9018b63-0a31-40f1-b997-ccb56e3fb9d3' alt='gif' />   
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/.github/assets/75983289/a772384a-e933-4178-8bdb-59f655ded369' alt='gif' />   
+      </td>
+      </tr>
+      <tr>
+      <td align="center" width="33%">
+        <p>졸업 요건 조회페이지</p>
+      </td>
+      <td align="center" width="33%">
+        <p>인기교양 페이지</p>
+      </td>
+      <td align="center" width="33%">
+        <p>리뷰 등록 </p>
+      </td>
+     </tr>
+  </tbody>
+</table>
+
+<details>
+<summary>졸업요건조회 경우의 수</summary>
+  
+## 졸업요건조회 페이지
+<table border>
+  <tbody>
+    <tr>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0e4ba62d-e337-4b00-9470-a65df7a7fc39' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/7c68c8e8-80b9-4c30-8df5-f8690c3f775d' alt='gif' />
+      </td>
+      <td align="center" width="33%">
+        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08255613-3c56-4871-a92a-5f570c977d64' alt='gif' />
+      </td>
+     </tr>
+       <tr>
+      <td align="center" width="33%">
+        <p>성공</p>
+      </td>
+      <td align="center" width="33%">
+        <p>실패</p>
+      </td>
+      <td align="center" width="33%">
+        <p>에러</p>
+      </td>
+     </tr>
+  </tbody>
+</table>
+</details>
+
+
+## 버전2의 개선 기능 💡 
+
+- `JavaScript` → `TypeScript` 로 마이그레이션
+    - 자바스크립트 사용 중 느슨한 타입에 의해 예상하지 못한 버그들이 자주 발생
+    - 타입스크립트를 도입하여 런타임 단계에서 오류를 방지할 수 있게 됨으로 타입 안정성 및 가독성을 개선
+- `tanstack/react-query` 도입
+    - API를 불러오는 데 있어 불필요한 보일러 플레이트를 제거하고 캐싱과 오류 처리의 일관된 방법을 원했음
+    - `tanstack/react-query`를 도입하여 효율성 높은 코드 작성과 디버깅의 편의성이 증가
+- `CSS` → `Styled-components` 로 변경
+    - 새롭게 CSS-IN-JS를 적용하면서 디자이너와 협업하여 UI 개편
+    - 프로젝트가 커질수록 CSS파일 모듈화 및 유지 보수 측면에서 어려움을 느낌
+    - `Styled-components` 를 도입하여 동적 스타일링을 사용할 수 있게 되고 재사용 및 모듈화 편의성이 향상됨
+- `Google Analytics` 도입
+    - 버전 1에서는 유저 피드백으로 개선 작업하여 사용자 행동 파악에 어려움을 느낌
+    - 접속 기기 환경을 확인하여 UI를 개선하고 트래픽 분석으로 프로젝트 개선 방향성을 잡을 수 있게 됨
 
 <details>
 <summary>검색 시 디바운싱 적용</summary>
@@ -207,100 +302,6 @@ return (
 
 </details>
 
-
-## Demo
-
-<details>
-<summary>메인 페이지</summary>
-
-## 메인 페이지 
-
-<table border>
-  <tbody>
-    <tr>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/2074c4c4-5d20-493e-93a1-f7ab68cdcddc' alt='gif' />   
-      </td>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0a39d6c1-aac2-446b-ad71-ed3c9959fa21'  alt='gif' />   
-      </td>
-     </tr>
-  </tbody>
-</table>
-
-</details>
-
-<details>
-<summary>공지사항 페이지</summary>
-  
-## 공지사항 페이지
-<table border>
-  <tbody>
-    <tr>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08f79a4e-445c-40e6-89ff-293509c951a9' alt='gif' />
-      </td>
-     </tr>
-  </tbody>
-</table>
-</details>
-
-<details>
-<summary>인기교양추천 페이지</summary>
-  
-## 인기교양추천 페이지
-<table border>
-  <tbody>
-    <tr>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/23ec82d2-cd41-4cd4-aaf2-fbeff92ee3a1' alt='gif' />
-      </td>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/b16e7ee3-1aa3-4f59-ad22-4fe8de008fbf' alt='gif' />
-      </td>
-     </tr>
-  </tbody>
-</table>
-</details>
-
-<details>
-<summary>졸업요건조회 페이지</summary>
-  
-## 졸업요건조회 페이지
-<table border>
-  <tbody>
-    <tr>
-      <td align="center" width="33%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/0e4ba62d-e337-4b00-9470-a65df7a7fc39' alt='gif' />
-      </td>
-      <td align="center" width="33%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/7c68c8e8-80b9-4c30-8df5-f8690c3f775d' alt='gif' />
-      </td>
-      <td align="center" width="33%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/08255613-3c56-4871-a92a-5f570c977d64' alt='gif' />
-      </td>
-     </tr>
-  </tbody>
-</table>
-</details>
-
-<details>
-<summary>로그인 & 마이 페이지</summary>
-  
-## 로그인 & 마이 페이지
-<table border>
-  <tbody>
-    <tr>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/ba482dbd-c358-4557-b649-c339fff89f48' alt='gif' />
-      </td>
-      <td align="center" width="50%">
-        <img src = 'https://github.com/Graduate-Okay/Graduate-Okay-FE/assets/75983289/aa34226b-26aa-4fc7-8ef6-6ba088e7020f' alt='gif' />
-      </td>
-     </tr>
-  </tbody>
-</table>
-</details>
 
 ## 유즈케이스
 
