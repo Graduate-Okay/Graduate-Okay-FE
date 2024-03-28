@@ -43,7 +43,7 @@ const FooterSection = styled.footer`
   display: flex;
   position: fixed;
   width: 100%;
-  height: 11.5vh;
+  height: 10.5vh;
   left: 0px;
   bottom: 0px;
   background-color: white;

@@ -61,6 +61,7 @@ const DetailSection = styled.section`
 const DetailContent = styled.div`
   display: flex;
   width: 100%;
+  height: 1vh;
   font-size: 1.4rem;
   margin-top: 2rem;
   white-space: pre-wrap;
