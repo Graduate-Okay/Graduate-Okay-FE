@@ -44,7 +44,7 @@ const DetailSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: 65vh;
+  height: 100vh;
   margin: 2vh auto;
 
   @media ${({ theme }) => theme.device.tablet} {
@@ -52,16 +52,17 @@ const DetailSection = styled.section`
   }
   @media ${({ theme }) => theme.device.laptop} {
     width: 70%;
+    height: 85vh;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 60%;
+    height: 75vh;
   }
 `;
 
 const DetailContent = styled.div`
   display: flex;
   width: 100%;
-  height: 1vh;
   font-size: 1.4rem;
   margin-top: 2rem;
   white-space: pre-wrap;
@@ -80,7 +81,7 @@ const DetailContent = styled.div`
 const DataGroup = styled.div`
   display: flex;
   width: 100%;
-  height: 15%;
+  height: 7vh;
   align-items: center;
   border-bottom: 1px solid #a4b0be;
 
