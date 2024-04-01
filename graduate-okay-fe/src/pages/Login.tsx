@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
+import Modal from "../components/Modal";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
+import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { useMutation } from "@tanstack/react-query";
 import { submitLoginQuery } from "../queries/loginQuery";
 
@@ -12,6 +14,8 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const emailInput = useInput("");
   const passwordInput = useInput("");
+  const [isError, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const submitLoginMutation = useMutation({
     mutationFn: (formData: { emailInput: string; passwordInput: string }) => {
@@ -19,11 +23,20 @@ const Login: React.FC = () => {
       return submitLoginQuery(emailInput, passwordInput);
     },
     onSuccess: () => navigate("/"),
+    onError: () => {
+      setErrorMessage("올바른 아이디/비밀번호를 입력해주세요.");
+      setError(true);
+    },
   });
+
+  const isEmpty = () => {
+    return emailInput.value === "" || passwordInput.value === "";
+  };
 
   const submitLogin = async () => {
     if (isEmpty()) {
-      alert("아이디와 비밀번호를 모두 입력해주세요");
+      setErrorMessage("아이디/비밀번호가 비어있습니다.");
+      setError(true);
       return;
     }
     const email = emailInput.value;
@@ -34,8 +47,8 @@ const Login: React.FC = () => {
     });
   };
 
-  const isEmpty = () => {
-    return emailInput.value === "" || passwordInput.value === "";
+  const handleOnModal = () => {
+    setError(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -66,13 +79,20 @@ const Login: React.FC = () => {
           onChange={passwordInput.onChange}
           onKeyDown={handleKeyDown}
         />
-
         <SubmitLogin onClick={() => submitLogin()}>로그인</SubmitLogin>
         <Account>
           <p onClick={() => navigate(`/signup`)}>회원가입</p>
           <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
         </Account>
       </LoginSection>
+      {isError ? (
+        <Modal
+          svg={Caution}
+          message={errorMessage}
+          onModal={handleOnModal}
+          closeMessage="닫기"
+        />
+      ) : null}
     </ThemeProvider>
   );
 };
