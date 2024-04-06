@@ -6,8 +6,14 @@
 const CheckSchoolEmail = (email: string) => {
   const emailSuffix = `@hs.ac.kr`;
   const hanshinEmail = `${email}${emailSuffix}`;
+  const allowedDomains = ["@hs.ac.kr", "@hanshin.ac.kr"];
 
-  return email.endsWith(emailSuffix) ? email : hanshinEmail;
+  if (allowedDomains.some((domain) => email.endsWith(domain))) {
+    return email.replace(/@hanshin.ac.kr$/, "@hs.ac.kr");
+  }
+
+  return hanshinEmail;
+  // return email.endsWith(emailSuffix) ? email : hanshinEmail;
 };
 
 export default CheckSchoolEmail;
