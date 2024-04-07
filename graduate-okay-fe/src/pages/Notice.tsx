@@ -110,6 +110,9 @@ const NoticeData = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     height: 12%;
   }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 75%;
+  }
 `;
 
 const DataGroup = styled.div`

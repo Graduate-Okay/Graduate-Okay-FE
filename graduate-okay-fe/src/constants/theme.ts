@@ -15,7 +15,7 @@ const deviceSizes = {
   mobile: 375,
   tablet: 768,
   laptop: 1024,
-  largeLaptop: 1440,
+  largeLaptop: 1800,
 };
 
 const device = {

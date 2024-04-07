@@ -55,7 +55,7 @@ const DetailSection = styled.section`
     height: 85vh;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 60%;
+    width: 50%;
     height: 75vh;
   }
 `;

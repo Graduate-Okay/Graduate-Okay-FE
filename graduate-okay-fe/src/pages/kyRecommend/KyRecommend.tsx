@@ -112,7 +112,7 @@ const KyRecommendSection = styled.section`
     margin: 0 auto;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 70%;
+    width: 65%;
   }
 `;
 
@@ -125,6 +125,12 @@ const SubjectLength = styled.div`
   font-size: 1.2rem;
   justify-content: center;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 8rem;
+    height: 3.5rem;
+    font-size: 1.3rem;
+  }
 `;
 
 const RecommendDiv = styled.div`
@@ -163,7 +169,7 @@ const Content = styled.div`
     font-size: 1.25rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 `;
 
@@ -202,6 +208,9 @@ const ExplainDiv = styled.div`
   width: 80%;
   height: 5%;
   align-items: center;
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.4rem;
+  }
 `;
 
 const InputDiv = styled.div`

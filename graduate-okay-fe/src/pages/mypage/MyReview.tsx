@@ -115,6 +115,9 @@ const Review = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     height: 18vh;
   }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 75%;
+  }
 `;
 
 const Subject = styled.p`

@@ -130,7 +130,7 @@ const MypageDiv = styled.div`
     height: 60%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 40%;
+    width: 30%;
   }
 `;
 

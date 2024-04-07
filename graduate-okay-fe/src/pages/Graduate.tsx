@@ -190,6 +190,9 @@ const Explain = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.3rem;
   }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    font-size: 1.4rem;
+  }
 `;
 
 const Image = styled.div<ImageProps>`
@@ -284,7 +287,7 @@ const GraduateTable = styled.table`
     height: 15%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    width: 50%;
+    width: 45%;
     font-size: 1.4rem;
   }
 `;
