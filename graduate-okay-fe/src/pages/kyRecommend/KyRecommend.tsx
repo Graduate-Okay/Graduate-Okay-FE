@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import Pagination from "../../components/Pagination";
 import { SubjectList } from "../../interfaces";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import useDebounce from "../../hooks/useDebounce";
 import HandleSection from "../../components/HandleSection";
-import { useQuery } from "@tanstack/react-query";
 import { kyRecommend } from "../../queries/kyRecommendQuery";
+import { ReactComponent as Search } from "../../assets/imgs/Search.svg";
 
 const KyRecommend: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -45,14 +46,16 @@ const KyRecommend: React.FC = () => {
       <KyRecommendSection>
         <ExplainDiv>
           <p>과목 클릭 시, 세부 페이지로 이동합니다.</p>
-          {/* <p>과목명, 학점, 수강 횟수 클릭 시 오름/내림차순으로 정렬합니다.</p> */}
         </ExplainDiv>
-        <InputSearch
-          type="text"
-          placeholder="🔍︎과목명을 입력하세요"
-          onChange={search.onChange}
-          value={search.value}
-        />
+        <InputDiv>
+          <Input
+            type="text"
+            placeholder="과목명을 입력하세요"
+            onChange={search.onChange}
+            value={search.value}
+          />
+          <Search width={24} height={24} />
+        </InputDiv>
         <ContentSection>
           <SearchOptions>
             <SubjectLength>과목수</SubjectLength>
@@ -201,26 +204,36 @@ const ExplainDiv = styled.div`
   align-items: center;
 `;
 
-const InputSearch = styled.input`
+const InputDiv = styled.div`
   display: flex;
   width: 30rem;
-  height: 2rem;
+  height: 2.5rem;
   border: 2px solid #a489f0;
   border-radius: 30rem;
-  padding: 0.6rem;
+  justify-content: center;
+  align-items: center;
 
   @media ${({ theme }) => theme.device.tablet} {
     width: 35rem;
+    height: 2.8rem;
   }
-
   @media ${({ theme }) => theme.device.laptop} {
     width: 40rem;
-    height: 2rem;
-    padding: 0.7rem;
+    height: 3rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 45rem;
-    height: 2rem;
+    height: 3.3rem;
+  }
+`;
+
+const Input = styled.input`
+  display: flex;
+  border: none;
+  width: 85%;
+
+  &:focus {
+    outline: none;
   }
 `;
 
