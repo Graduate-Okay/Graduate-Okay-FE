@@ -5,6 +5,7 @@ import "./index.css";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
 import authService from "./utils/authService";
+import NotFound from "./components/NotFound";
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Notice = lazy(() => import("./pages/Notice"));
@@ -109,6 +110,7 @@ function App() {
               )
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Suspense>
