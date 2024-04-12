@@ -13,7 +13,6 @@ interface handleSectionProps {
 }
 
 interface SVGProps {
-  justifyContent: string;
   visibility: boolean;
 }
 
@@ -36,15 +35,11 @@ const HandleSection: React.FC<handleSectionProps> = ({
   return (
     <ThemeProvider theme={theme}>
       <HandleSectionDiv>
-        <SVGWrapper
-          justifyContent="flex-start"
-          visibility={prevBtn}
-          onClick={handlePrev}
-        >
+        <SVGWrapper visibility={prevBtn} onClick={handlePrev}>
           <Prev width={15} height={15} />
         </SVGWrapper>
         <Title color={color}>{title}</Title>
-        <SVGWrapper justifyContent="flex-end" visibility={closeBtn}>
+        <SVGWrapper visibility={closeBtn}>
           <Close width={15} height={15} />
         </SVGWrapper>
       </HandleSectionDiv>
@@ -89,7 +84,7 @@ const Title = styled.p<TextProps>`
 
 const SVGWrapper = styled.div<SVGProps>`
   display: flex;
-  justify-content: ${(props) => props.justifyContent};
+  justify-content: center;
   visibility: ${(props) => (props.visibility ? "visible" : "hidden")};
 
   > svg {
