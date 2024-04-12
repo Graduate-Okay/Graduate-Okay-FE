@@ -69,6 +69,10 @@ const Mypage: React.FC = () => {
               <p>졸업결과 확인하기</p>
               <Next />
             </MypageRow>
+            <MypageRow onClick={() => navigate("/recruit")}>
+              <p>채용공고 확인하기</p>
+              <Next />
+            </MypageRow>
             <MypageHeader>
               <p>나의 정보</p>
             </MypageHeader>

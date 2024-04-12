@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./index.css";
@@ -25,6 +25,7 @@ const Administration = lazy(
   () => import("./pages/administration/Administration")
 );
 const MyReview = lazy(() => import("./pages/mypage/MyReview"));
+const Recruit = lazy(() => import("./pages/recruit/Recruit"));
 
 function App() {
   const [cookies, setCookie] = useCookies(["accessToken"]);
@@ -110,6 +111,7 @@ function App() {
               )
             }
           />
+          <Route path="/recruit" element={<Recruit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
