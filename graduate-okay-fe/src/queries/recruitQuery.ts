@@ -1,13 +1,12 @@
 import axios from "axios";
 
-export const recruitListQuery = async () => {
+const BASE_URL = process.env.REACT_APP_RECRUIT_BASE_URL;
+const SERVICE_KEY = process.env.REACT_APP_RECRUIT_API_KEY;
+
+export const fetchRecruitListQuery = async (page: number) => {
   const response = await axios.get(
-    `${process.env.REACT_APP_RECRUIT_BASE_URL}/list`,
-    {
-      params: {
-        serviceKey: `${process.env.REACT_APP_RECRUIT_API_KEY}`,
-      },
-    }
+    `${BASE_URL}/list?serviceKey=${SERVICE_KEY}&pageNo=${page}`
   );
+
   return response.data;
 };
