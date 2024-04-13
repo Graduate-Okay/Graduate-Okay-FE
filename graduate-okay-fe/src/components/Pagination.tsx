@@ -24,7 +24,11 @@ const Pagination: React.FC<PaginationProps> = ({
 
     for (let i = startPage; i <= endPage; i++) {
       numberArray.push(
-        <Number key={i} onClick={() => pageRouting(i)}>
+        <Number
+          key={i}
+          onClick={() => pageRouting(i)}
+          className={i === currentPage ? "currentPage" : ""}
+        >
           {i}
         </Number>
       );
@@ -110,6 +114,11 @@ const Number = styled.span`
 
   &:hover {
     background-color: #d9d9d9;
+  }
+
+  &.currentPage {
+    background-color: ${() => `#d9d9d9`};
+    font-weight: bold;
   }
 
   @media ${({ theme }) => theme.device.tablet} {
