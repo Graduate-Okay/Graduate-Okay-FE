@@ -22,6 +22,10 @@ const Recruit: React.FC = () => {
     return;
   };
 
+  const handleClick = (url: string) => {
+    window.open(url);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <HandleSection
@@ -34,18 +38,23 @@ const Recruit: React.FC = () => {
         <RecruitDiv>
           <Title>
             <Organization>공시기관</Organization>
+            <AnnouncementTitle>공고</AnnouncementTitle>
             <Classification>채용구분</Classification>
-            <Credit>학점</Credit>
-            <Count>수강횟수</Count>
+            <Employment>고용형태</Employment>
+            <WorkPlace>근무지</WorkPlace>
           </Title>
           {data &&
             data.result.map((item: any) => {
               return (
-                <Content>
+                <Content
+                  key={item?.recrutPblntSn}
+                  onClick={() => handleClick(item?.srcUrl)}
+                >
                   <Organization>{item?.instNm}</Organization>
+                  <Announcement>{item?.recrutPbancTtl}</Announcement>
                   <Classification>{item?.recrutSeNm}</Classification>
-                  <Credit>학점</Credit>
-                  <Count>수강횟수</Count>
+                  <Employment>{item?.hireTypeNmLst}</Employment>
+                  <WorkPlace>{item?.workRgnNmLst}</WorkPlace>
                 </Content>
               );
             })}
@@ -80,7 +89,7 @@ const RecruitSection = styled.section`
 const RecruitDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 85%;
+  height: 100%;
   flex-direction: column;
   align-items: center;
 `;
@@ -89,9 +98,12 @@ const Title = styled.div`
   display: flex;
   flex-direction: row;
   width: 95%;
-  height: 10%;
+  height: 8%;
   background-color: #ece5ff;
   font-size: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.4rem;
@@ -101,30 +113,43 @@ const Title = styled.div`
   }
 `;
 
-const Classification = styled.div`
-  display: flex;
-  width: 12%;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Organization = styled.div`
   display: flex;
   width: 30%;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `;
 
-const Credit = styled.div`
+const Announcement = styled.div`
+  display: flex;
+  width: 30%;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const AnnouncementTitle = styled(Announcement)`
+  justify-content: center;
+`;
+
+const Employment = styled.div`
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Classification = styled.div`
   display: flex;
   width: 15%;
   justify-content: center;
   align-items: center;
 `;
 
-const Count = styled.div`
+const WorkPlace = styled.div`
   display: flex;
-  width: 15%;
+  width: 10%;
   justify-content: center;
   align-items: center;
 `;
@@ -137,6 +162,7 @@ const Content = styled.div`
   font-size: 1.2rem;
   border-bottom: 1px solid #d9d9d9;
   cursor: pointer;
+
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.25rem;
   }
