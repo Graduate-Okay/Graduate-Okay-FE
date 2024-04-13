@@ -37,11 +37,10 @@ const Recruit: React.FC = () => {
       <RecruitSection>
         <RecruitDiv>
           <Title>
-            <Organization>공시기관</Organization>
+            <OrganizationTitle>공시기관</OrganizationTitle>
             <AnnouncementTitle>공고</AnnouncementTitle>
             <Classification>채용구분</Classification>
             <Employment>고용형태</Employment>
-            <WorkPlace>근무지</WorkPlace>
           </Title>
           {data &&
             data.result.map((item: any) => {
@@ -53,8 +52,10 @@ const Recruit: React.FC = () => {
                   <Organization>{item?.instNm}</Organization>
                   <Announcement>{item?.recrutPbancTtl}</Announcement>
                   <Classification>{item?.recrutSeNm}</Classification>
-                  <Employment>{item?.hireTypeNmLst}</Employment>
-                  <WorkPlace>{item?.workRgnNmLst}</WorkPlace>
+                  <EmploymentContent>
+                    <p>{item?.hireTypeNmLst}</p>
+                    <WorkPlace>{item?.workRgnNmLst}</WorkPlace>
+                  </EmploymentContent>
                 </Content>
               );
             })}
@@ -101,9 +102,6 @@ const Title = styled.div`
   height: 8%;
   background-color: #ece5ff;
   font-size: 1.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.4rem;
@@ -117,12 +115,18 @@ const Organization = styled.div`
   display: flex;
   width: 30%;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const OrganizationTitle = styled(Organization)`
   justify-content: center;
 `;
 
 const Announcement = styled.div`
   display: flex;
-  width: 30%;
+  width: 35%;
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -135,9 +139,19 @@ const AnnouncementTitle = styled(Announcement)`
 
 const Employment = styled.div`
   display: flex;
-  width: 15%;
+  width: 20%;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content: center;
+`;
+
+const EmploymentContent = styled(Employment)`
+  flex-direction: column;
+  font-size: 1rem;
+  align-items: start;
 `;
 
 const Classification = styled.div`
@@ -145,13 +159,18 @@ const Classification = styled.div`
   width: 15%;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const WorkPlace = styled.div`
   display: flex;
-  width: 10%;
-  justify-content: center;
+  width: 90%;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Content = styled.div`
