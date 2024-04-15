@@ -5,9 +5,11 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { fetchRecruitListQuery } from "../../queries/recruitQuery";
 import HandleSection from "../../components/HandleSection";
 import Pagination from "../../components/Pagination";
+import FilterModal from "./FilterModal";
 
 const Recruit: React.FC = () => {
   const [currnetPage, setCurrentPage] = useState<number>(1);
+  const [isOpen, setOpen] = useState<boolean>(false);
   const { data } = useQuery({
     queryKey: ["recruitList", currnetPage],
     queryFn: () => fetchRecruitListQuery(currnetPage),
@@ -15,7 +17,6 @@ const Recruit: React.FC = () => {
     placeholderData: keepPreviousData,
   });
 
-  console.log(data);
   const getCurrentPage = (page: number) => {
     const correction = page + 1;
     setCurrentPage(correction);
@@ -26,6 +27,12 @@ const Recruit: React.FC = () => {
     window.open(url);
   };
 
+  const handleFilter = () => {
+    setOpen(!isOpen);
+  };
+
+  console.log(data);
+
   return (
     <ThemeProvider theme={theme}>
       <HandleSection
@@ -34,6 +41,9 @@ const Recruit: React.FC = () => {
         closeBtn={false}
         color="#a489f0"
       />
+      <Filter>
+        <p onClick={handleFilter}>필터링</p>
+      </Filter>
       <RecruitSection>
         <RecruitDiv>
           <Title>
@@ -65,6 +75,7 @@ const Recruit: React.FC = () => {
           />
         </RecruitDiv>
       </RecruitSection>
+      {isOpen && <FilterModal onModal={handleFilter} />}
     </ThemeProvider>
   );
 };
@@ -187,5 +198,25 @@ const Content = styled.div`
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.4rem;
+  }
+`;
+
+const Filter = styled.div`
+  display: flex;
+  width: 90%;
+  height: 2vh;
+  justify-content: flex-end;
+  margin: 0 auto;
+
+  > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+    border: 1px solid #636e72;
+    border-radius: 10rem;
+    font-size: 1.1rem;
+    cursor: pointer;
   }
 `;
