@@ -31,6 +31,8 @@ const Recruit: React.FC = () => {
     setOpen(!isOpen);
   };
 
+  const handleSearch = () => {};
+
   console.log(data);
 
   return (
@@ -53,7 +55,7 @@ const Recruit: React.FC = () => {
             <Employment>고용형태</Employment>
           </Title>
           {data &&
-            data.result.map((item: any) => {
+            data.result?.map((item: any) => {
               return (
                 <Content
                   key={item?.recrutPblntSn}
@@ -75,7 +77,9 @@ const Recruit: React.FC = () => {
           />
         </RecruitDiv>
       </RecruitSection>
-      {isOpen && <FilterModal onModal={handleFilter} />}
+      {isOpen && (
+        <FilterModal onModal={handleFilter} handleSearch={handleSearch} />
+      )}
     </ThemeProvider>
   );
 };
@@ -208,6 +212,15 @@ const Filter = styled.div`
   justify-content: flex-end;
   margin: 0 auto;
 
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 75%;
+    margin: 1vh auto;
+  }
+
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 60%;
+  }
+
   > p {
     display: flex;
     justify-content: center;
@@ -218,5 +231,12 @@ const Filter = styled.div`
     border-radius: 10rem;
     font-size: 1.1rem;
     cursor: pointer;
+
+    @media ${({ theme }) => theme.device.laptop} {
+      width: 7%;
+    }
+    @media ${({ theme }) => theme.device.largeLaptop} {
+      width: 5%;
+    }
   }
 `;
