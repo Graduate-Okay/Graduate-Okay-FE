@@ -29,60 +29,53 @@ interface SVGProps {
 const Main: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <MainPageDiv>
-        <IntroduceSection>
-          <IntroduceDiv backgroundImage={BackgroundImage}>
-            <SVGDiv justifyContent="flex-end">
-              <CapAndCircle width={250} height={230} />
-            </SVGDiv>
-            <ButtonDiv width={"95%"} justifyContent={"flex-start"}>
-              <Button text={"졸업요건 검사"} />
-            </ButtonDiv>
-            <TextDiv width={"95%"} justifyContent={"flex-start"}>
-              <IntroduceText
-                fontSize={"1.8rem"}
-                color={"white"}
-                fontWeight={"bold"}
-              >
-                "졸업가능?"
-              </IntroduceText>
-              <IntroduceText fontSize={"1.8rem"} color={"white"}>
-                에서 쉽고 간편하게 확인하자!
-              </IntroduceText>
-            </TextDiv>
-          </IntroduceDiv>
-          <IntroduceDiv backgroundColor={"#ece5ff"}>
-            <SVGDiv justifyContent="flex-start">
-              <PencilAndCircle width={250} height={250} />
-            </SVGDiv>
-            <ButtonDiv width={"95%"} justifyContent={"flex-end"}>
-              <Button text={"인기교양추천"} />
-            </ButtonDiv>
-            <TextDiv width={"95%"} justifyContent={"flex-end"}>
-              <IntroduceText fontSize={"1.8rem"}>인기교양 추천도</IntroduceText>
-              <IntroduceText fontSize={"1.8rem"} fontWeight={"bold"}>
-                "졸업가능?"
-              </IntroduceText>
-              <IntroduceText fontSize={"1.8rem"}>에서!</IntroduceText>
-            </TextDiv>
-          </IntroduceDiv>
-        </IntroduceSection>
-      </MainPageDiv>
+      <IntroduceSection>
+        <IntroduceDiv backgroundImage={BackgroundImage}>
+          <SVGDiv justifyContent="flex-end">
+            <CapAndCircle width={250} height={230} />
+          </SVGDiv>
+          <ButtonDiv width={"95%"} justifyContent={"flex-start"}>
+            <Button text={"졸업요건 검사"} />
+          </ButtonDiv>
+          <TextDiv width={"95%"} justifyContent={"flex-start"}>
+            <IntroduceText
+              fontSize={"1.8rem"}
+              color={"white"}
+              fontWeight={"bold"}
+            >
+              "졸업가능?"
+            </IntroduceText>
+            <IntroduceText fontSize={"1.8rem"} color={"white"}>
+              에서 쉽고 간편하게 확인하자!
+            </IntroduceText>
+          </TextDiv>
+        </IntroduceDiv>
+        <IntroduceDiv backgroundColor={"#ece5ff"}>
+          <SVGDiv justifyContent="flex-start">
+            <PencilAndCircle width={250} height={250} />
+          </SVGDiv>
+          <ButtonDiv width={"95%"} justifyContent={"flex-end"}>
+            <Button text={"인기교양추천"} />
+          </ButtonDiv>
+          <TextDiv width={"95%"} justifyContent={"flex-end"}>
+            <IntroduceText fontSize={"1.8rem"}>인기교양 추천도</IntroduceText>
+            <IntroduceText fontSize={"1.8rem"} fontWeight={"bold"}>
+              "졸업가능?"
+            </IntroduceText>
+            <IntroduceText fontSize={"1.8rem"}>에서!</IntroduceText>
+          </TextDiv>
+        </IntroduceDiv>
+      </IntroduceSection>
     </ThemeProvider>
   );
 };
 export default Main;
 
-const MainPageDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
 const IntroduceSection = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: auto;
 `;
 
 const IntroduceDiv = styled.div<IntroduceDivProps>`
@@ -90,6 +83,7 @@ const IntroduceDiv = styled.div<IntroduceDivProps>`
   flex-direction: column;
   width: 100%;
   height: 40vh;
+  min-height: 30rem;
   background-image: url(${(props) => props.backgroundImage});
   background-color: ${(props) => props.backgroundColor};
   background-repeat: no-repeat;

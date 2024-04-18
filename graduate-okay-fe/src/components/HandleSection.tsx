@@ -53,6 +53,7 @@ const HandleSectionDiv = styled.div`
   display: flex;
   width: 100%;
   height: 6vh;
+  min-height: 6rem;
   font-size: 1.6rem;
   justify-content: center;
   align-items: center;

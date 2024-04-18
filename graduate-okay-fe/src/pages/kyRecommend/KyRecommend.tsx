@@ -104,6 +104,7 @@ const KyRecommendSection = styled.section`
   display: flex;
   width: 100%;
   height: 70vh;
+  min-height: 60rem;
   flex-direction: column;
   align-items: center;
 

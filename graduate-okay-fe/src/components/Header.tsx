@@ -69,10 +69,12 @@ const HeaderDiv = styled.header`
   justify-content: space-between;
   width: 90%;
   height: 6vh;
+  min-height: 2.5rem;
   margin: 1rem auto;
 
   > img {
     cursor: pointer;
+    min-height: 4rem;
   }
 
   @media ${({ theme }) => theme.device.desktop} {

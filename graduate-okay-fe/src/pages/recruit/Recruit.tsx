@@ -89,6 +89,7 @@ const RecruitSection = styled.section`
   display: flex;
   width: 100%;
   height: 70vh;
+  min-height: 50rem;
   flex-direction: column;
   align-items: center;
   margin-top: 3%;
@@ -209,6 +210,7 @@ const Filter = styled.div`
   display: flex;
   width: 90%;
   height: 2vh;
+  min-height: 1.5rem;
   justify-content: flex-end;
   margin: 0 auto;
 

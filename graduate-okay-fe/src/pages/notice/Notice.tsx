@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
-import { INoticeDetail } from "../interfaces";
-import Pagination from "../components/Pagination";
+import theme from "../../constants/theme";
+import { INoticeDetail } from "../../interfaces";
+import Pagination from "../../components/Pagination";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { noticeQuery } from "../queries/noticeQuery";
-import HandleSection from "../components/HandleSection";
-import { ReactComponent as Alarm } from "../assets/imgs/alarm.svg";
-import { ReactComponent as Next } from "../assets/imgs/arrow/next.svg";
+import { noticeQuery } from "../../queries/noticeQuery";
+import HandleSection from "../../components/HandleSection";
+import { ReactComponent as Alarm } from "../../assets/imgs/alarm.svg";
+import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 
 const Notice: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -102,6 +102,7 @@ const NoticeData = styled.div`
   border-radius: 30px;
   width: 100%;
   height: 11%;
+  min-height: 5rem;
   align-items: center;
   &:hover {
     background-color: #ecf0f1;

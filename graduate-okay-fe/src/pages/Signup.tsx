@@ -156,6 +156,7 @@ const SignupSection = styled.section`
   flex-direction: column;
   width: 90%;
   height: 60vh;
+  min-height: 60rem;
   margin: 5% auto;
   @media ${({ theme }) => theme.device.laptop} {
     justify-content: center;
@@ -180,6 +181,7 @@ const SignupInput = styled.input`
   display: flex;
   width: 80%;
   height: 3vh;
+  min-height: 2rem;
   margin: 0 auto;
   margin-top: 1.5vh;
   border: none;
@@ -227,6 +229,7 @@ const LoginDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 6vh;
+  min-height: 5rem;
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;

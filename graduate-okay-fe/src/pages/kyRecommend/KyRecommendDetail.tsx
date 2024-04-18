@@ -34,13 +34,13 @@ const KyRecommendDetail: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <HandleSection
+        prevBtn={true}
+        title="인기교양추천"
+        closeBtn={false}
+        color="#a489f0"
+      />
       <DetailSection>
-        <HandleSection
-          prevBtn={true}
-          title="인기교양추천"
-          closeBtn={false}
-          color="#a489f0"
-        />
         <DetailHeader>
           <Credit>{detailData?.credit || 0}학점</Credit>
           <DetailIsRequired>
@@ -210,6 +210,7 @@ const DetailTitle = styled.div`
 const DetailInfo = styled.div`
   display: flex;
   height: 4vh;
+  min-height: 3rem;
   align-items: center;
   border-bottom: 1px solid #a4b0be;
   width: 90%;
@@ -220,6 +221,8 @@ const DetailHeader = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
+  height: auto;
+  min-height: 5rem;
   margin: 0 auto;
 `;
 
@@ -265,7 +268,8 @@ const WrapReview = styled.div`
 const Review = styled.div`
   display: flex;
   width: 90%;
-  min-height: 12vh;
+  height: 12vh;
+  min-height: 7rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;

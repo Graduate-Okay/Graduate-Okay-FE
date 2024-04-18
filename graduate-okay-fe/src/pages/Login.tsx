@@ -104,6 +104,7 @@ const LoginSection = styled.section`
   flex-direction: column;
   width: 90%;
   height: 60vh;
+  min-height: 60rem;
   margin: 5% auto;
   @media ${({ theme }) => theme.device.laptop} {
     justify-content: center;
@@ -115,6 +116,7 @@ const LoginDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 14vh;
+  min-height: 8rem;
   justify-content: center;
   align-items: center;
   font-size: 1.6rem;
@@ -126,6 +128,7 @@ const LoginInput = styled.input`
   display: flex;
   width: 80%;
   height: 3vh;
+  min-height: 2rem;
   margin: 0 auto;
   margin-top: 1.5vh;
   border: none;
@@ -197,6 +200,7 @@ const Announcement = styled.div`
   font-size: 1.1rem;
   width: 90%;
   height: 5vh;
+  min-height: 3rem;
   align-items: center;
   margin-left: auto;
   @media ${({ theme }) => theme.device.tablet} {
@@ -212,6 +216,7 @@ const LoginTitle = styled.div`
   font-size: 1.4rem;
   width: 90%;
   height: 3vh;
+  min-height: 3rem;
   align-items: center;
   margin-left: auto;
   @media ${({ theme }) => theme.device.tablet} {

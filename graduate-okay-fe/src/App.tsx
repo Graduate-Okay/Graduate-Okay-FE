@@ -8,13 +8,13 @@ import authService from "./utils/authService";
 import NotFound from "./components/NotFound";
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/footer/Footer"));
-const Notice = lazy(() => import("./pages/Notice"));
+const Notice = lazy(() => import("./pages/notice/Notice"));
 const Main = lazy(() => import("./pages/Main"));
 const KyRecommend = lazy(() => import("./pages/kyRecommend/KyRecommend"));
 const Graduate = lazy(() => import("./pages/Graduate"));
 const Mypage = lazy(() => import("./pages/mypage/Mypage"));
 const Login = lazy(() => import("./pages/Login"));
-const NoticeDetail = lazy(() => import("./pages/NoticeDetail"));
+const NoticeDetail = lazy(() => import("./pages/notice/NoticeDetail"));
 const Signup = lazy(() => import("./pages/Signup"));
 const KyRecommendDetail = lazy(
   () => import("./pages/kyRecommend/KyRecommendDetail")

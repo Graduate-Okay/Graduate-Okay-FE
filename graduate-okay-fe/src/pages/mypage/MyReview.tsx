@@ -50,6 +50,7 @@ const MyReviewSection = styled.section`
   flex-direction: column;
   width: 95%;
   height: 100vh;
+  min-height: 60rem;
   align-items: center;
   margin: 0 auto;
 
@@ -103,7 +104,8 @@ const ReviewContent = styled.p`
 const Review = styled.div`
   display: flex;
   width: 90%;
-  min-height: 12vh;
+  height: 12vh;
+  min-height: 10rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;

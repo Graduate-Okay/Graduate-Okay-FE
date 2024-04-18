@@ -44,13 +44,13 @@ const Mypage: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <HandleSection
+        prevBtn={false}
+        title="마이페이지"
+        closeBtn={false}
+        color="#a489f0"
+      />
       <MypageSection>
-        <HandleSection
-          prevBtn={false}
-          title="마이페이지"
-          closeBtn={false}
-          color="#a489f0"
-        />
         <MyDiv>
           <UserInfo>
             <GraduationCap width={50} height={50} />
@@ -119,6 +119,7 @@ const MypageSection = styled.section`
   flex-direction: column;
   width: 100%;
   height: 75vh;
+  min-height: 50rem;
   align-items: center;
 `;
 

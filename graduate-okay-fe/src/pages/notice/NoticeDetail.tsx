@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "../constants/theme";
-import HandleSection from "../components/HandleSection";
-import { ReactComponent as Alarm } from "../assets/imgs/alarm.svg";
-import { noticeDetailQuery } from "../queries/noticeQuery";
+import theme from "../../constants/theme";
+import HandleSection from "../../components/HandleSection";
+import { ReactComponent as Alarm } from "../../assets/imgs/alarm.svg";
+import { noticeDetailQuery } from "../../queries/noticeQuery";
 import { useQuery } from "@tanstack/react-query";
 
 const NoticeDetail: React.FC = () => {
@@ -82,6 +82,7 @@ const DataGroup = styled.div`
   display: flex;
   width: 100%;
   height: 7vh;
+  min-height: 5rem;
   align-items: center;
   border-bottom: 1px solid #a4b0be;
 

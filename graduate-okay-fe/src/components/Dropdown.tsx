@@ -5,13 +5,14 @@ import dropdown from "../constants/dropdown";
 
 interface DropdownProps {
   getOption: (searchType: string | null) => void;
+  data: any;
 }
 
 interface OptionProps {
   selected?: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
+const Dropdown: React.FC<DropdownProps> = ({ getOption, data }) => {
   const [searchType, setSearchType] = useState<string | null>(null);
 
   const handleSearchType = (value: string) => {
@@ -30,16 +31,14 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
     <ThemeProvider theme={theme}>
       <DropdownDiv>
         <OptionDiv>
-          <OptionTitle>
-            <p>핵심역량</p>
-          </OptionTitle>
+          <OptionTitle></OptionTitle>
           <OptionContents>
-            {dropdown.KY_CORE_TYPE.map((item) => {
+            {data.map((item: any) => {
               return (
                 <Option
                   key={item.id}
-                  selected={searchType === item.type}
-                  onClick={() => handleSearchType(item.type)}
+                  selected={searchType === item.code}
+                  // onClick={() => handleSearchType(item.type)}
                 >
                   {item.value}
                 </Option>
@@ -47,32 +46,14 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption }) => {
             })}
           </OptionContents>
         </OptionDiv>
-        <OptionDiv>
-          <OptionTitle>
-            <p>인재상</p>
-          </OptionTitle>
-          <OptionContents>
-            {dropdown.KY_MODEL_TYPE.map((item) => {
-              return (
-                <Option
-                  key={item.id}
-                  selected={searchType === item.type}
-                  onClick={() => handleSearchType(item.type)}
-                >
-                  {item.value}
-                </Option>
-              );
-            })}
-          </OptionContents>
-        </OptionDiv>
-        <DropdownButton>
+        {/* <DropdownButton>
           <OptionSelectButton onClick={cleanFilter}>
             옵션 초기화
           </OptionSelectButton>
           <OptionSelectButton onClick={applyFilters}>
             적용하기
           </OptionSelectButton>
-        </DropdownButton>
+        </DropdownButton> */}
       </DropdownDiv>
     </ThemeProvider>
   );

@@ -178,6 +178,7 @@ const GraduateSection = styled.section`
   flex-direction: column;
   width: 100%;
   height: 75vh;
+  min-height: 70rem;
   margin: 0 auto;
 `;
 

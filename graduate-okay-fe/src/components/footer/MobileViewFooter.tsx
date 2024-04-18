@@ -44,6 +44,7 @@ const FooterSection = styled.footer`
   position: fixed;
   width: 100%;
   height: 10.5vh;
+  min-height: 8rem;
   left: 0px;
   bottom: 0px;
   background-color: white;
