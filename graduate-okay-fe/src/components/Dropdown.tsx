@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import styled, { ThemeProvider, css } from "styled-components";
 import theme from "../constants/theme";
-import dropdown from "../constants/dropdown";
+// import dropdown from "../constants/dropdown";
 
 interface DropdownProps {
   getOption: (searchType: string | null) => void;
@@ -13,19 +13,19 @@ interface OptionProps {
 }
 
 const Dropdown: React.FC<DropdownProps> = ({ getOption, data }) => {
-  const [searchType, setSearchType] = useState<string | null>(null);
+  // const [searchType, setSearchType] = useState<string | null>(null);
 
-  const handleSearchType = (value: string) => {
-    setSearchType(value);
-  };
+  // const handleSearchType = (value: string) => {
+  //   setSearchType(value);
+  // };
 
-  const applyFilters = () => {
-    getOption(searchType);
-  };
+  // const applyFilters = () => {
+  //   getOption(searchType);
+  // };
 
-  const cleanFilter = () => {
-    getOption("");
-  };
+  // const cleanFilter = () => {
+  //   getOption("");
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption, data }) => {
               return (
                 <Option
                   key={item.id}
-                  selected={searchType === item.code}
+                  // selected={searchType === item.code}
                   // onClick={() => handleSearchType(item.type)}
                 >
                   {item.value}
@@ -95,21 +95,21 @@ const OptionContents = styled.div`
   font-size: 1rem;
 `;
 
-const OptionSelectButton = styled.button`
-  display: flex;
-  width: 20%;
-  height: 3vh;
-  font-size: 1rem;
-  margin: 1vh auto;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 1rem;
-  font-family: "JejuGothic";
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.1rem;
-  }
-`;
+// const OptionSelectButton = styled.button`
+//   display: flex;
+//   width: 20%;
+//   height: 3vh;
+//   font-size: 1rem;
+//   margin: 1vh auto;
+//   justify-content: center;
+//   align-items: center;
+//   border: none;
+//   border-radius: 1rem;
+//   font-family: "JejuGothic";
+//   @media ${({ theme }) => theme.device.tablet} {
+//     font-size: 1.1rem;
+//   }
+// `;
 
 const Option = styled.p<OptionProps>`
   display: flex;
@@ -136,8 +136,8 @@ const Option = styled.p<OptionProps>`
     `}
 `;
 
-const DropdownButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
+// const DropdownButton = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+// `;
