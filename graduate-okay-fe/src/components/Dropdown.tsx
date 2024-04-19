@@ -66,12 +66,6 @@ const DropdownDiv = styled.div`
   width: 95%;
   height: auto;
   margin: 0 auto;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 80%;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 70%;
-  }
 `;
 
 const OptionDiv = styled.div`
@@ -80,11 +74,6 @@ const OptionDiv = styled.div`
   width: 100%;
   height: 100%;
   flex-flow: row wrap;
-`;
-
-const OptionContents = styled.div`
-  display: flex;
-  font-size: 1rem;
 `;
 
 // const OptionSelectButton = styled.button`
@@ -115,9 +104,6 @@ const Option = styled.p<OptionProps>`
 
   @media ${({ theme }) => theme.device.tablet} {
     font-size: 1.1rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    width: 10%;
   }
 
   ${({ theme, selected }) =>

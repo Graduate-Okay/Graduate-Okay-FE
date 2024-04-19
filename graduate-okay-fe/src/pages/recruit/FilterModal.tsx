@@ -152,7 +152,7 @@ const ModalContent = styled.div`
   border-radius: 15px;
   width: 75%;
   height: 65%;
-  min-height: 42rem;
+  min-height: 40rem;
   align-items: center;
 
   > svg {
@@ -163,22 +163,14 @@ const ModalContent = styled.div`
   }
 
   @media ${({ theme }) => theme.device.tablet} {
-    width: 40%;
+    width: 60%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 30%;
+    width: 45%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 25%;
   }
-`;
-
-const Submit = styled.div`
-  display: flex;
-  width: 100%;
-  height: 4%;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Title = styled.div`
@@ -195,6 +187,11 @@ const TitleOption = styled.p`
   flex-grow: 1;
   justify-content: center;
   cursor: pointer;
+  font-size: 1.2rem;
+
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+  }
 `;
 
 const TitleName = styled.p`
@@ -202,6 +199,12 @@ const TitleName = styled.p`
   font-size: 1.2rem;
   flex-grow: 8;
   justify-content: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.4rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.6rem;
+  }
 `;
 
 const Search = styled.div`
@@ -228,6 +231,12 @@ const InputDiv = styled.div`
   border-radius: 3px;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    height: 2.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    height: 2.4rem;
+  }
 
   > input {
     display: flex;
@@ -264,5 +273,28 @@ const SearchText = styled.p`
 
   > p {
     width: 50%;
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
+  }
+`;
+
+const Submit = styled.div`
+  display: flex;
+  width: 100%;
+  height: 4%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 1.2rem;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.4rem;
   }
 `;
