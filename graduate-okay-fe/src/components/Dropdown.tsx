@@ -1,18 +1,19 @@
 // import React, { useState } from "react";
 import styled, { ThemeProvider, css } from "styled-components";
 import theme from "../constants/theme";
-// import dropdown from "../constants/dropdown";
 
 interface DropdownProps {
   getOption: (searchType: string | null) => void;
   data: any;
+  width: number;
 }
 
 interface OptionProps {
   selected?: boolean;
+  width?: number;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ getOption, data }) => {
+const Dropdown: React.FC<DropdownProps> = ({ getOption, data, width }) => {
   // const [searchType, setSearchType] = useState<string | null>(null);
 
   // const handleSearchType = (value: string) => {
@@ -31,20 +32,18 @@ const Dropdown: React.FC<DropdownProps> = ({ getOption, data }) => {
     <ThemeProvider theme={theme}>
       <DropdownDiv>
         <OptionDiv>
-          <OptionTitle></OptionTitle>
-          <OptionContents>
-            {data.map((item: any) => {
-              return (
-                <Option
-                  key={item.id}
-                  // selected={searchType === item.code}
-                  // onClick={() => handleSearchType(item.type)}
-                >
-                  {item.value}
-                </Option>
-              );
-            })}
-          </OptionContents>
+          {data.map((item: any) => {
+            return (
+              <Option
+                key={item.id}
+                width={width}
+                // selected={searchType === item.code}
+                // onClick={() => handleSearchType(item.type)}
+              >
+                {item.value}
+              </Option>
+            );
+          })}
         </OptionDiv>
         {/* <DropdownButton>
           <OptionSelectButton onClick={cleanFilter}>
@@ -64,7 +63,8 @@ export default Dropdown;
 const DropdownDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 95%;
+  height: auto;
   margin: 0 auto;
   @media ${({ theme }) => theme.device.tablet} {
     width: 80%;
@@ -77,17 +77,9 @@ const DropdownDiv = styled.div`
 const OptionDiv = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const OptionTitle = styled.div`
-  display: flex;
-  font-size: 1rem;
-  font-weight: bold;
-  height: 2vh;
-  align-items: center;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.1rem;
-  }
+  width: 100%;
+  height: 100%;
+  flex-flow: row wrap;
 `;
 
 const OptionContents = styled.div`
@@ -115,7 +107,7 @@ const Option = styled.p<OptionProps>`
   display: flex;
   border: 1px solid black;
   border-radius: 2rem;
-  width: 25%;
+  width: ${(props) => props.width}%;
   height: 2.5vh;
   align-items: center;
   justify-content: center;

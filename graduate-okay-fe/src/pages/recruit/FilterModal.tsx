@@ -13,7 +13,12 @@ interface ModalProps {
 }
 
 const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [dropdowns, setDropdowns] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const title = useInput("");
 
@@ -21,10 +26,13 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
     console.log("ll");
   };
 
-  const handleOption = () => {
-    setOpen((prev) => !prev);
+  const handleOption = (index: number) => {
+    setDropdowns((prev) => {
+      const newDropdowns = [...prev];
+      newDropdowns[index] = !newDropdowns[index];
+      return newDropdowns;
+    });
   };
-  console.log(isOpen);
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,15 +71,56 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
               </InputDiv>
             </SearchForm>
             <SearchForm>
-              <SearchText onClick={handleOption}>
+              <SearchText onClick={() => handleOption(0)}>
                 <p>지역</p>
-                {isOpen ? <Down fill="#a6a6a6" /> : <Up fill="#a6a6a6" />}
+                {dropdowns[0] ? <Down fill="#a6a6a6" /> : <Up fill="#a6a6a6" />}
               </SearchText>
-              <Dropdown getOption={getOption} data={recruit.REGION} />
+              {dropdowns[0] ? (
+                <Dropdown
+                  getOption={getOption}
+                  data={recruit.REGION}
+                  width={10}
+                />
+              ) : null}
             </SearchForm>
             <SearchForm>
-              <SearchText>학력</SearchText>
-              <Dropdown getOption={getOption} data={recruit.EDU_LEVEL} />
+              <SearchText onClick={() => handleOption(1)}>
+                <p>학력</p>
+                {dropdowns[1] ? <Down fill="#a6a6a6" /> : <Up fill="#a6a6a6" />}
+              </SearchText>
+              {dropdowns[1] ? (
+                <Dropdown
+                  getOption={getOption}
+                  data={recruit.EDU_LEVEL}
+                  width={23}
+                />
+              ) : null}
+            </SearchForm>
+            <SearchForm>
+              <SearchText onClick={() => handleOption(2)}>
+                <p>고용형태</p>
+                {dropdowns[2] ? <Down fill="#a6a6a6" /> : <Up fill="#a6a6a6" />}
+              </SearchText>
+              {dropdowns[2] ? (
+                <Dropdown
+                  getOption={getOption}
+                  data={recruit.EMPLOYMENT_TYPE}
+                  width={24}
+                />
+              ) : null}
+            </SearchForm>
+            <SearchForm>
+              <SearchText onClick={() => handleOption(3)}>
+                <p>직무</p>
+                {dropdowns[3] ? <Down fill="#a6a6a6" /> : <Up fill="#a6a6a6" />}
+              </SearchText>
+              {dropdowns[3] ? (
+                <Dropdown
+                  getOption={getOption}
+                  data={recruit.NCS_CLASSIFICATION}
+                  width={24}
+                />
+              ) : null}
             </SearchForm>
           </Search>
           <Submit>적용하기</Submit>
@@ -101,8 +150,9 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 15px;
-  width: 70%;
-  height: 60%;
+  width: 75%;
+  height: 65%;
+  min-height: 42rem;
   align-items: center;
 
   > svg {
@@ -136,6 +186,7 @@ const Title = styled.div`
   align-items: center;
   width: 100%;
   height: 4%;
+  min-height: 1rem;
 `;
 
 const TitleOption = styled.p`
@@ -164,14 +215,15 @@ const SearchForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 10%;
+  height: auto;
+  min-height: 2rem;
   justify-content: space-around;
 `;
 
 const InputDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 40%;
+  height: 2rem;
   border: 1px solid #a6a6a6;
   border-radius: 3px;
   justify-content: center;
@@ -201,11 +253,16 @@ const SearchText = styled.p`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 4vh;
 
   > svg {
     color: #a6a6a6;
     width: 1.5rem;
     height: 1.5rem;
     cursor: pointer;
+  }
+
+  > p {
+    width: 50%;
   }
 `;
