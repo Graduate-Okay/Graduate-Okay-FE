@@ -69,6 +69,13 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
   };
 
   const handleClear = () => {
+    setRegion("");
+    setAcbgCondLst("");
+    setHireType("");
+    setNcsCdLst("");
+    setRecrutSe("");
+    title.value = "";
+
     handleSearch(
       region,
       acbgCondLst,
