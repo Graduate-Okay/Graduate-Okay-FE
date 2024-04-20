@@ -10,9 +10,34 @@ import FilterModal from "./FilterModal";
 const Recruit: React.FC = () => {
   const [currnetPage, setCurrentPage] = useState<number>(1);
   const [isOpen, setOpen] = useState<boolean>(false);
+  const [region, setRegion] = useState<string>(""); //REGION
+  const [acbgCondLst, setAcbgCondLst] = useState<string>(""); // EDU LEVEL
+  const [hireType, setHireType] = useState<string>(""); //EMPLOYMENT_TYPE
+  const [ncsCdLst, setNcsCdLst] = useState<string>(""); // NCS_CLASSIFICATION
+  const [recrutSe, setRecrutSe] = useState<string>(""); // 채용 구분
+  const [title, setTitle] = useState<string>(""); // 공고 제목
+
   const { data } = useQuery({
-    queryKey: ["recruitList", currnetPage],
-    queryFn: () => fetchRecruitListQuery(currnetPage),
+    queryKey: [
+      "recruitList",
+      currnetPage,
+      region,
+      hireType,
+      recrutSe,
+      acbgCondLst,
+      ncsCdLst,
+      title,
+    ],
+    queryFn: () =>
+      fetchRecruitListQuery(
+        currnetPage,
+        region,
+        hireType,
+        recrutSe,
+        acbgCondLst,
+        ncsCdLst,
+        title
+      ),
     staleTime: 600000,
     placeholderData: keepPreviousData,
   });
@@ -31,9 +56,21 @@ const Recruit: React.FC = () => {
     setOpen(!isOpen);
   };
 
-  const handleSearch = () => {};
-
-  console.log(data);
+  const handleSearch = (
+    handleRegion: string,
+    handleAcbgCondLst: string,
+    handleHireType: string,
+    handleNcsCdLst: string,
+    handleRecrutSe: string,
+    handleTitle: string
+  ) => {
+    setRegion(handleRegion);
+    setAcbgCondLst(handleAcbgCondLst);
+    setHireType(handleHireType);
+    setNcsCdLst(handleNcsCdLst);
+    setRecrutSe(handleRecrutSe);
+    setTitle(handleTitle);
+  };
 
   return (
     <ThemeProvider theme={theme}>

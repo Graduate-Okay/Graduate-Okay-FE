@@ -3,13 +3,20 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../../constants/theme";
 import useInput from "../../hooks/useInput";
 import recruit from "../../constants/recruit";
-import Dropdown from "../../components/Dropdown";
+import Dropdown from "./Dropdown";
 import { ReactComponent as Up } from "../../assets/imgs/arrow/up.svg";
 import { ReactComponent as Down } from "../../assets/imgs/arrow/down.svg";
 
 interface ModalProps {
   onModal: () => void;
-  handleSearch: () => void;
+  handleSearch: (
+    region: string,
+    acbgCondLst: string,
+    hireType: string,
+    ncsCdLst: string,
+    recrutSe: string,
+    title: string
+  ) => void;
 }
 
 const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
@@ -19,11 +26,26 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
     false,
     false,
   ]);
-
   const title = useInput("");
+  const [region, setRegion] = useState<string>("");
+  const [acbgCondLst, setAcbgCondLst] = useState<string>("");
+  const [hireType, setHireType] = useState<string>("");
+  const [ncsCdLst, setNcsCdLst] = useState<string>("");
+  const [recrutSe, setRecrutSe] = useState<string>("");
 
-  const getOption = () => {
-    console.log("ll");
+  const getOption = (divide: string, args: any) => {
+    if (divide === "region") {
+      setRegion(args.join(","));
+    }
+    if (divide === "eduLevel") {
+      setAcbgCondLst(args.join(","));
+    }
+    if (divide === "employmentType") {
+      setHireType(args.join(","));
+    }
+    if (divide === "ncsClassification") {
+      setNcsCdLst(args.join(","));
+    }
   };
 
   const handleOption = (index: number) => {
@@ -34,12 +56,36 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
     });
   };
 
+  const handleSubmit = () => {
+    handleSearch(
+      region,
+      acbgCondLst,
+      hireType,
+      ncsCdLst,
+      recrutSe,
+      title.value
+    );
+    onModal();
+  };
+
+  const handleClear = () => {
+    handleSearch(
+      region,
+      acbgCondLst,
+      hireType,
+      ncsCdLst,
+      recrutSe,
+      title.value
+    );
+    onModal();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <ModalBackground>
         <ModalContent>
           <Title>
-            <TitleOption>초기화</TitleOption>
+            <TitleOption onClick={handleClear}>초기화</TitleOption>
             <TitleName>검색 및 필터링</TitleName>
             <TitleOption onClick={onModal}>닫기</TitleOption>
           </Title>
@@ -58,8 +104,11 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
             <SearchForm>
               <SearchText>채용 구분</SearchText>
               <InputDiv>
-                <select name="recruitmentClassification">
-                  <option value="">선택</option>
+                <select
+                  name="recruitmentClassification"
+                  onChange={(e) => setRecrutSe(e.target.value)}
+                >
+                  <option value="">전체보기</option>
                   {recruit.RECRUITMENT_CLASSIFICATION.map((item) => {
                     return (
                       <option key={item.id} value={item.code}>
@@ -80,6 +129,7 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
                   getOption={getOption}
                   data={recruit.REGION}
                   width={10}
+                  divide="region"
                 />
               ) : null}
             </SearchForm>
@@ -93,6 +143,7 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
                   getOption={getOption}
                   data={recruit.EDU_LEVEL}
                   width={23}
+                  divide="eduLevel"
                 />
               ) : null}
             </SearchForm>
@@ -106,6 +157,7 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
                   getOption={getOption}
                   data={recruit.EMPLOYMENT_TYPE}
                   width={24}
+                  divide="employmentType"
                 />
               ) : null}
             </SearchForm>
@@ -119,11 +171,12 @@ const FilterModal: React.FC<ModalProps> = ({ onModal, handleSearch }) => {
                   getOption={getOption}
                   data={recruit.NCS_CLASSIFICATION}
                   width={24}
+                  divide="ncsClassification"
                 />
               ) : null}
             </SearchForm>
           </Search>
-          <Submit>적용하기</Submit>
+          <Submit onClick={handleSubmit}>적용하기</Submit>
         </ModalContent>
       </ModalBackground>
     </ThemeProvider>
@@ -151,7 +204,7 @@ const ModalContent = styled.div`
   padding: 20px;
   border-radius: 15px;
   width: 75%;
-  height: 65%;
+  height: 60%;
   min-height: 40rem;
   align-items: center;
 
@@ -218,9 +271,9 @@ const SearchForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
   min-height: 2rem;
   justify-content: space-around;
+  align-items: center;
 `;
 
 const InputDiv = styled.div`
