@@ -226,7 +226,7 @@ const ModalContent = styled.div`
     width: 60%;
   }
   @media ${({ theme }) => theme.device.laptop} {
-    width: 45%;
+    width: 40%;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 25%;

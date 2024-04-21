@@ -271,6 +271,9 @@ const Filter = styled.div`
     font-size: 1.1rem;
     cursor: pointer;
 
+    @media ${({ theme }) => theme.device.tablet} {
+      width: 9%;
+    }
     @media ${({ theme }) => theme.device.laptop} {
       width: 7%;
     }
