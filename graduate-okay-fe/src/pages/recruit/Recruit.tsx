@@ -205,6 +205,9 @@ const EmploymentContent = styled(Employment)`
   flex-direction: column;
   font-size: 1rem;
   align-items: start;
+  @media ${({ theme }) => theme.device.laptop} {
+    font-size: 1.2rem;
+  }
 `;
 
 const Classification = styled.div`
