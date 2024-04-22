@@ -26,6 +26,7 @@ const Administration = lazy(
 );
 const MyReview = lazy(() => import("./pages/mypage/MyReview"));
 const Recruit = lazy(() => import("./pages/recruit/Recruit"));
+const More = lazy(() => import("./pages/More"));
 
 function App() {
   const [cookies, setCookie] = useCookies(["accessToken"]);
@@ -111,6 +112,7 @@ function App() {
               )
             }
           />
+          <Route path="/more" element={<More />} />
           <Route path="/recruit" element={<Recruit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

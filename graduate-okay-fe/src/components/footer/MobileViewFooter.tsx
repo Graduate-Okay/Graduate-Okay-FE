@@ -5,6 +5,8 @@ import { ReactComponent as Home } from "../../assets/imgs/home.svg";
 import { ReactComponent as Mypage } from "../../assets/imgs/mypage.svg";
 import { ReactComponent as Graduate } from "../../assets/imgs/graduate.svg";
 import { ReactComponent as Recommend } from "../../assets/imgs/recommend.svg";
+// import { ReactComponent as Hamburger } from "../../assets/imgs/arrow/hamburger.svg";
+
 import theme from "../../constants/theme";
 
 const MobileViewFooter: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useCheckMobile from "../hooks/useCheckMobile";
@@ -8,6 +8,7 @@ import { useCookies } from "react-cookie";
 interface TextProps {
   borderRight?: boolean;
   color?: string;
+  width: string;
 }
 
 const Header: React.FC = () => {
@@ -29,28 +30,63 @@ const Header: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <HeaderDiv>
-        <img src="imgs/logo.png" alt="헤더로고" onClick={() => navigate("/")} />
-        {useCheckMobile() < theme.deviceSizes.tablet ? null : (
-          <NavBar>
-            <Link to="/kyRecommend">인기교양추천</Link>
-            <Link to="/graduate">졸업요건조회</Link>
-            <Link to="/mypage">마이페이지</Link>
-          </NavBar>
-        )}
+        <TitleDiv>
+          <img
+            src="imgs/logo.png"
+            alt="헤더로고"
+            onClick={() => navigate("/")}
+          />
+          {useCheckMobile() < theme.deviceSizes.tablet ? null : (
+            <Navigation>
+              <Text
+                onClick={() => navigate("/kyRecommend")}
+                color={getFillValue("/kyRecommend")}
+                width={"120px"}
+              >
+                인기교양추천
+              </Text>
+              <Text
+                onClick={() => navigate("/graduate")}
+                color={getFillValue("/graduate")}
+                width={"120px"}
+              >
+                졸업요건조회
+              </Text>
+              <Text
+                onClick={() => navigate("/recruit")}
+                color={getFillValue("/recruit")}
+                width={"120px"}
+              >
+                채용공고
+              </Text>
+              <Text
+                onClick={() => navigate("/mypage")}
+                color={getFillValue("/mypage")}
+                width={"120px"}
+              >
+                마이페이지
+              </Text>
+            </Navigation>
+          )}
+        </TitleDiv>
         <SubDiv>
           <Text
             onClick={() => navigate("/notice")}
             borderRight={true}
+            width={"60px"}
             color={getFillValue("/notice")}
           >
             공지사항
           </Text>
           {cookies.accessToken ? (
-            <Text onClick={() => handlelogOut()}>로그아웃</Text>
+            <Text onClick={() => handlelogOut()} width={"60px"}>
+              로그아웃
+            </Text>
           ) : (
             <Text
               onClick={() => navigate("/login")}
               color={getFillValue("/login")}
+              width={"60px"}
             >
               로그인
             </Text>
@@ -76,9 +112,22 @@ const HeaderDiv = styled.header`
     cursor: pointer;
     min-height: 4rem;
   }
+`;
 
-  @media ${({ theme }) => theme.device.desktop} {
-    width: 90%;
+const TitleDiv = styled.div`
+  display: flex;
+  width: 50%;
+  height: 100%;
+  justify-content: space-between;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 80%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 75%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 60%;
   }
 `;
 
@@ -89,7 +138,7 @@ const SubDiv = styled.div`
 const Text = styled.p<TextProps>`
   display: flex;
   font-size: 1.2rem;
-  width: 60px;
+  width: ${(props) => props.width};
   justify-content: center;
   margin: auto 0;
   cursor: pointer;
@@ -101,32 +150,15 @@ const Text = styled.p<TextProps>`
   }
 
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.4rem;
-    width: 80px;
+    font-size: 1.3rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 `;
 
-const NavBar = styled.nav`
-  font-family: ${theme.fonts.JejuGothic};
+const Navigation = styled.nav`
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 1.6rem;
-  width: 50%;
-
-  a {
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.8rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2rem;
-  }
+  width: 70%;
+  height: 100%;
 `;
