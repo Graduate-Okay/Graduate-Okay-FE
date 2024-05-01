@@ -154,7 +154,6 @@ const Text = styled.p<TextProps>`
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.4rem;
-    width: 100px;
   }
 `;
 
