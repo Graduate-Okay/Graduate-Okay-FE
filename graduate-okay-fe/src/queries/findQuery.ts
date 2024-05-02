@@ -1,8 +1,5 @@
 import axios from "axios";
 import api from "../apis/api";
-import { Cookies } from "react-cookie";
-
-const cookies = new Cookies();
 
 export const postPasswordResetLink = async (email: string) => {
   await axios.post(`${api.user}/password-email`, {
