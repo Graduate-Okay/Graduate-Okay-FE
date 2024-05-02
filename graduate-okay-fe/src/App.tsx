@@ -27,6 +27,7 @@ const Administration = lazy(
 const MyReview = lazy(() => import("./pages/mypage/MyReview"));
 const Recruit = lazy(() => import("./pages/recruit/Recruit"));
 const More = lazy(() => import("./pages/More"));
+const Password = lazy(() => import("./pages/Password"));
 
 function App() {
   const [cookies, setCookie] = useCookies(["accessToken"]);
@@ -60,6 +61,7 @@ function App() {
           <Route path="/kyRecommend" element={<KyRecommend />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/password" element={<Password />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/administration" element={<Administration />} />
           <Route

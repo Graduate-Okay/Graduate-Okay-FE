@@ -82,7 +82,7 @@ const Login: React.FC = () => {
         <SubmitLogin onClick={() => submitLogin()}>로그인</SubmitLogin>
         <Account>
           <p onClick={() => navigate(`/signup`)}>회원가입</p>
-          <p onClick={() => navigate(`/find`)}>비밀번호찾기</p>
+          <p onClick={() => navigate(`/password`)}>비밀번호찾기</p>
         </Account>
       </LoginSection>
       {isError ? (
