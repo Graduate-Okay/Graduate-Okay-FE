@@ -1,29 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import HandleSection from "../components/HandleSection";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
-import { postPasswordResetLink } from "../queries/findQuery";
+import { patchPassword, postPasswordResetLink } from "../queries/findQuery";
 import { useMutation } from "@tanstack/react-query";
 import useInput from "../hooks/useInput";
 import Modal from "../components/Modal";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Password: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
   const emailInput = useInput("");
+  const passwordInput = useInput("");
   const [isError, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [keyParam, setKeyParam] = useState<string>("");
+  const [emailParam, setEmailParam] = useState<string>("");
 
   const postPasswordResetLinkMutation = useMutation({
     mutationFn: (email: string) => postPasswordResetLink(email),
-    onSuccess: () => setIsClick(true),
+    onSuccess: () => {
+      alert("메일로 인증번호를 전송했습니다");
+      setIsClick(true);
+    },
     onError: () => {
       setErrorMessage("올바른 아이디를 입력해주세요.");
       setError(true);
     },
   });
+
+  const patchPasswordMutation = useMutation({
+    mutationFn: (formData: {
+      email: string;
+      key: string;
+      password: string;
+    }) => {
+      const { email, key, password } = formData;
+      return patchPassword(email, key, password);
+    },
+    onSuccess: () => {
+      alert("비밀번호 변경이 완료되었습니다.");
+      navigate("/");
+    },
+  });
+
+  const handlePatchPassword = () => {
+    patchPasswordMutation.mutate({
+      email: emailParam,
+      key: keyParam,
+      password: passwordInput.value,
+    });
+  };
 
   const handlePostPasswordResetLink = () => {
     if (isEmpty()) {
@@ -44,6 +76,12 @@ const Password: React.FC = () => {
     setError(false);
   };
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    setKeyParam(searchParams.get("key") ?? "");
+    setEmailParam(searchParams.get("email") ?? "");
+  }, [location]);
+
   return (
     <ThemeProvider theme={theme}>
       <Section>
@@ -51,23 +89,40 @@ const Password: React.FC = () => {
         <LoginDiv>
           <Logo width="167" height="38" fill="#a489f0" />
         </LoginDiv>
-        <PasswordInput
-          placeholder="이메일을 입력해주세요(example@hs.ac.kr 또는 example)"
-          type="text"
-          value={emailInput.value}
-          onChange={emailInput.onChange}
-          autoFocus
-        />
-        {isClick ? (
-          <PasswordInput
-            placeholder="인증번호를 입력해주세요"
-            type="text"
-            autoFocus
-          />
-        ) : null}
-        <SubmitFind onClick={() => handlePostPasswordResetLink()}>
-          입력 완료
-        </SubmitFind>
+        {emailParam ? (
+          <>
+            <PasswordInput
+              placeholder="새로운 비밀번호를 입력해주세요"
+              type="password"
+              value={passwordInput.value}
+              onChange={passwordInput.onChange}
+              autoFocus
+            />
+            <SubmitFind onClick={() => handlePatchPassword()}>
+              입력 완료
+            </SubmitFind>
+          </>
+        ) : (
+          <>
+            <PasswordInput
+              placeholder="이메일을 입력해주세요(example@hs.ac.kr 또는 example)"
+              type="text"
+              value={emailInput.value}
+              onChange={emailInput.onChange}
+              autoFocus
+            />
+            {isClick ? (
+              <PasswordInput
+                placeholder="인증번호를 입력해주세요"
+                type="text"
+                autoFocus
+              />
+            ) : null}
+            <SubmitFind onClick={() => handlePostPasswordResetLink()}>
+              입력 완료
+            </SubmitFind>
+          </>
+        )}
       </Section>
       {isError ? (
         <Modal
