@@ -31,7 +31,7 @@ const Header: React.FC = () => {
     <ThemeProvider theme={theme}>
       <HeaderDiv>
         <TitleDiv>
-          <img
+          <Image
             src="imgs/logo.png"
             alt="헤더로고"
             onClick={() => navigate("/")}
@@ -72,12 +72,13 @@ const Header: React.FC = () => {
         <SubDiv>
           <Text
             onClick={() => navigate("/notice")}
-            borderRight={true}
+            // borderRight={true}
             width={"60px"}
             color={getFillValue("/notice")}
           >
             공지사항
           </Text>
+          <p>|</p>
           {cookies.accessToken ? (
             <Text onClick={() => handlelogOut()} width={"60px"}>
               로그아웃
@@ -133,6 +134,19 @@ const TitleDiv = styled.div`
 
 const SubDiv = styled.div`
   display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: space-evenly;
+
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 15%;
+  }
+  @media ${({ theme }) => theme.device.laptop} {
+    width: 13%;
+  }
+  @media ${({ theme }) => theme.device.largeLaptop} {
+    width: 10%;
+  }
 `;
 
 const Text = styled.p<TextProps>`
@@ -150,9 +164,6 @@ const Text = styled.p<TextProps>`
   }
 
   @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.3rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.4rem;
   }
 `;
@@ -161,4 +172,9 @@ const Navigation = styled.nav`
   display: flex;
   width: 70%;
   height: 100%;
+`;
+
+const Image = styled.img`
+  display: flex;
+  cursor: pointer;
 `;
