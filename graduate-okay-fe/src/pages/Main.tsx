@@ -30,7 +30,11 @@ const Main: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <IntroduceSection>
-        <IntroduceDiv backgroundImage={BackgroundImage}>
+        <IntroduceDiv
+          backgroundImage={BackgroundImage}
+          rel="preload"
+          as="image"
+        >
           <SVGDiv justifyContent="flex-end">
             <CapAndCircle width={250} height={230} />
           </SVGDiv>
