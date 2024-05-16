@@ -8,10 +8,10 @@ import HandleSection from "../../components/HandleSection";
 import Modal from "../../components/Modal";
 import { ReactComponent as Profile } from "../../assets/imgs/profile/profile.svg";
 import { ReactComponent as GraduationCap } from "../../assets/imgs/graduationCap.svg";
-import { ReactComponent as Next } from "../../assets/imgs/arrow/next.svg";
 import { ReactComponent as Withdrawal } from "../../assets/imgs/withdrawal.svg";
 import { getMypageDataQuery, withdrawal } from "../../queries/mypageQuery";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import MyPageRow from "./MyPageRow";
 
 const Mypage: React.FC = () => {
   const [, , removeCookie] = useCookies(["accessToken"]);
@@ -62,39 +62,7 @@ const Mypage: React.FC = () => {
         <Divide />
         <MypageDiv>
           <OptionList>
-            <MypageHeader>
-              <p>졸업요건 조회</p>
-            </MypageHeader>
-            <MypageRow onClick={() => navigate("/graduate")}>
-              <p>졸업결과 확인하기</p>
-              <Next />
-            </MypageRow>
-            <MypageRow onClick={() => navigate("/recruit")}>
-              <p>채용공고 확인하기</p>
-              <Next />
-            </MypageRow>
-            <MypageHeader>
-              <p>나의 정보</p>
-            </MypageHeader>
-            <MypageRow onClick={() => navigate("/mypage/modifyInfo")}>
-              <p>정보 수정하기</p>
-              <Next />
-            </MypageRow>
-            <MypageRow onClick={() => navigate("/mypage/myreview")}>
-              <p>리뷰 관리</p>
-              <Next />
-            </MypageRow>
-            <MypageHeader>
-              <p>기타</p>
-            </MypageHeader>
-            <MypageRow>
-              <p onClick={() => navigate("/notice")}>공지사항</p>
-              <Next />
-            </MypageRow>
-            <MypageRow>
-              <p onClick={() => handleOnModal()}>회원탈퇴</p>
-              <Next />
-            </MypageRow>
+            <MyPageRow handleOnModal={() => handleOnModal()} />
           </OptionList>
         </MypageDiv>
         {isOpen ? (
@@ -160,52 +128,6 @@ const OptionList = styled.div`
   display: flex;
   flex-direction: column;
   height: 85%;
-`;
-
-const MypageRow = styled.div`
-  display: flex;
-  width: 100%;
-  height: 3rem;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-
-  &:hover {
-    color: gray;
-  }
-  > p {
-    margin-left: 0.5rem;
-  }
-
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.3rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.5rem;
-    height: 4rem;
-  }
-`;
-
-const MypageHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 1.6rem;
-  font-weight: bold;
-  justify-contents: center;
-  height: 3rem;
-  margin-top: 2rem;
-
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 1.6rem;
-  }
-  @media ${({ theme }) => theme.device.laptop} {
-    font-size: 1.8rem;
-    height: 4rem;
-  }
-  @media ${({ theme }) => theme.device.largeLaptop} {
-    font-size: 2rem;
-  }
 `;
 
 const MyDiv = styled.div`
