@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { useLocation, useNavigate } from "react-router-dom";
+import { isEmpty } from "../utils/validate";
 
 const Password: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -58,7 +59,7 @@ const Password: React.FC = () => {
   };
 
   const handlePostPasswordResetLink = () => {
-    if (isEmpty()) {
+    if (isEmpty(emailInput.value)) {
       setErrorMessage("아이디/비밀번호가 비어있습니다.");
       setError(true);
       return;
@@ -66,10 +67,6 @@ const Password: React.FC = () => {
     const email = emailInput.value;
     emailInput.value = CheckSchoolEmail(email);
     postPasswordResetLinkMutation.mutate(emailInput.value);
-  };
-
-  const isEmpty = () => {
-    return emailInput.value === "";
   };
 
   const handleOnModal = () => {

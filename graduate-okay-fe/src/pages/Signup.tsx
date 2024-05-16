@@ -13,6 +13,7 @@ import {
   submitAuthNumberQuery,
   submitPasswordQuery,
 } from "../queries/signupQuery";
+import { isEmpty } from "../utils/validate";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Signup: React.FC = () => {
   });
 
   const sendAuthNumber = async () => {
-    if (isEmpty()) {
+    if (isEmpty(emailInput.value)) {
       alert("이메일을 입력해주세요");
       return;
     }
@@ -55,7 +56,7 @@ const Signup: React.FC = () => {
   };
 
   const submitAuthNumber = async () => {
-    if (isEmpty()) {
+    if (isEmpty(authNumber.value)) {
       alert("인증번호를 입력해주세요");
       return;
     }
@@ -72,7 +73,7 @@ const Signup: React.FC = () => {
   };
 
   const submitPassword = async () => {
-    if (isEmpty()) {
+    if (isEmpty(passwordInput.value)) {
       alert("비밀번호를 입력해주세요");
       return;
     }
@@ -82,10 +83,6 @@ const Signup: React.FC = () => {
       emailInput: emailInput.value,
       passwordInput: passwordInput.value,
     });
-  };
-
-  const isEmpty = () => {
-    return emailInput.value === "" ? true : false;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

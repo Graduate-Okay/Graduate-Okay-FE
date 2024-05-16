@@ -9,6 +9,7 @@ import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { useMutation } from "@tanstack/react-query";
 import { submitLoginQuery } from "../queries/loginQuery";
+import { isEmpty } from "../utils/validate";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -29,12 +30,8 @@ const Login: React.FC = () => {
     },
   });
 
-  const isEmpty = () => {
-    return emailInput.value === "" || passwordInput.value === "";
-  };
-
   const submitLogin = async () => {
-    if (isEmpty()) {
+    if (isEmpty(emailInput.value, passwordInput.value)) {
       setErrorMessage("아이디/비밀번호가 비어있습니다.");
       setError(true);
       return;
