@@ -4,6 +4,7 @@ import { Cookies } from "react-cookie";
 
 export const submitLoginQuery = async (email: string, password: string) => {
   const cookies = new Cookies();
+  // axios.defaults.withCredentials = true;
 
   await axios
     .post(`${api.user}/login`, {
@@ -20,8 +21,8 @@ export const submitLoginQuery = async (email: string, password: string) => {
       );
       cookies.set("accessToken", response?.data.data.tokenInfo.accessToken, {
         path: "/",
-        httpOnly: true,
-        secure: true,
+        // httpOnly: true,
+        // secure: true,
       });
     });
 };
