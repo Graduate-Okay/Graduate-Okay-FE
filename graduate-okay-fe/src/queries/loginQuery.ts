@@ -20,6 +20,8 @@ export const submitLoginQuery = async (email: string, password: string) => {
       );
       cookies.set("accessToken", response?.data.data.tokenInfo.accessToken, {
         path: "/",
+        httpOnly: true,
+        secure: true,
       });
     });
 };
