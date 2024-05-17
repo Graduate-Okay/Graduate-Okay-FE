@@ -35,8 +35,7 @@ const Login: React.FC = () => {
       setError(true);
       return;
     }
-    const email = emailInput.value;
-    emailInput.value = checkSchoolEmail(email);
+    emailInput.value = checkSchoolEmail(emailInput.value);
     submitLoginMutation.mutate({
       emailInput: emailInput.value,
       passwordInput: passwordInput.value,
