@@ -4,7 +4,6 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useInput from "../hooks/useInput";
 import { AxiosError } from "axios";
-import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 import HandleSection from "../components/HandleSection";
 import { useMutation } from "@tanstack/react-query";
@@ -13,7 +12,7 @@ import {
   submitAuthNumberQuery,
   submitPasswordQuery,
 } from "../queries/signupQuery";
-import { isEmpty } from "../utils/validate";
+import { checkSchoolEmail, emailValidate, isEmpty } from "../utils/validate";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -49,9 +48,14 @@ const Signup: React.FC = () => {
       alert("이메일을 입력해주세요");
       return;
     }
+    if (!emailValidate(emailInput.value)) {
+      alert("올바른 이메일 형식으로 입력해주세요");
+      return;
+    }
+
     alert("인증번호를 전송했습니다. 메일을 확인해주세요");
     const email = emailInput.value;
-    emailInput.value = CheckSchoolEmail(email);
+    emailInput.value = checkSchoolEmail(email);
     postAuthNumberToEmailMutation.mutate(emailInput.value);
   };
 
@@ -78,7 +82,7 @@ const Signup: React.FC = () => {
       return;
     }
     const email = emailInput.value;
-    emailInput.value = CheckSchoolEmail(email);
+    emailInput.value = checkSchoolEmail(email);
     submitPasswordMutation.mutate({
       emailInput: emailInput.value,
       passwordInput: passwordInput.value,

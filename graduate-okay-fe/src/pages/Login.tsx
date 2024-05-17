@@ -4,12 +4,11 @@ import theme from "../constants/theme";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import Modal from "../components/Modal";
-import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { ReactComponent as Logo } from "../assets/imgs/logo/logo.svg";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { useMutation } from "@tanstack/react-query";
 import { submitLoginQuery } from "../queries/loginQuery";
-import { isEmpty } from "../utils/validate";
+import { checkSchoolEmail, isEmpty } from "../utils/validate";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ const Login: React.FC = () => {
       return;
     }
     const email = emailInput.value;
-    emailInput.value = CheckSchoolEmail(email);
+    emailInput.value = checkSchoolEmail(email);
     submitLoginMutation.mutate({
       emailInput: emailInput.value,
       passwordInput: passwordInput.value,

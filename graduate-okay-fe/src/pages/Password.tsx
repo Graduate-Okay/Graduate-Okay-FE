@@ -8,9 +8,8 @@ import { useMutation } from "@tanstack/react-query";
 import useInput from "../hooks/useInput";
 import Modal from "../components/Modal";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
-import CheckSchoolEmail from "../utils/CheckSchoolEmail";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isEmpty } from "../utils/validate";
+import { checkSchoolEmail, isEmpty } from "../utils/validate";
 
 const Password: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -65,7 +64,7 @@ const Password: React.FC = () => {
       return;
     }
     const email = emailInput.value;
-    emailInput.value = CheckSchoolEmail(email);
+    emailInput.value = checkSchoolEmail(email);
     postPasswordResetLinkMutation.mutate(emailInput.value);
   };
 
