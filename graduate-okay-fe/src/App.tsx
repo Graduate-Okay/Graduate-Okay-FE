@@ -1,11 +1,10 @@
-import { Suspense, lazy, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Suspense, lazy } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import Spinner from "./components/Spinner";
-import authService from "./utils/authService";
 import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Notice = lazy(() => import("./pages/notice/Notice"));
@@ -30,25 +29,6 @@ const More = lazy(() => import("./pages/More"));
 const Password = lazy(() => import("./pages/Password"));
 
 function App() {
-  const [cookies, setCookie] = useCookies(["accessToken"]);
-  const isAccessTokenValid = authService.isAccessTokenExpired(
-    cookies.accessToken
-  );
-  const refreshToken = localStorage.getItem("refreshToken");
-
-  useEffect(() => {
-    if (isAccessTokenValid && refreshToken) {
-      authService
-        .refreshAccessToken(localStorage.getItem("refreshToken"))
-        .then((response) => {
-          if (response && response.data) {
-            localStorage.setItem("refreshToken", response?.data.refreshToken);
-            setCookie("accessToken", response?.data.accessToken);
-          }
-        });
-    }
-  }, [isAccessTokenValid, setCookie, refreshToken]);
-
   return (
     <BrowserRouter>
       <RouteChangeTracker />
@@ -59,60 +39,27 @@ function App() {
           <Route path="/notice" element={<Notice />} />
           <Route path="/notice/:id" element={<NoticeDetail />} />
           <Route path="/kyRecommend" element={<KyRecommend />} />
+          <Route
+            path="/kyRecommend/:id"
+            element={<ProtectedRoute element={KyRecommendDetail} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password" element={<Password />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/administration" element={<Administration />} />
           <Route
-            path="/kyRecommend/:id"
-            element={
-              cookies.accessToken ? (
-                <KyRecommendDetail />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route
             path="/graduate"
-            element={
-              cookies.accessToken ? (
-                <Graduate />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
+            element={<ProtectedRoute element={Graduate} />}
           />
-          <Route
-            path="/mypage"
-            element={
-              cookies.accessToken ? (
-                <Mypage />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
+          <Route path="/mypage" element={<ProtectedRoute element={Mypage} />} />
           <Route
             path="/mypage/modifyInfo"
-            element={
-              cookies.accessToken ? (
-                <ModifyInfo />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
+            element={<ProtectedRoute element={ModifyInfo} />}
           />
           <Route
             path="/mypage/myreview"
-            element={
-              cookies.accessToken ? (
-                <MyReview />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
+            element={<ProtectedRoute element={MyReview} />}
           />
           <Route path="/more" element={<More />} />
           <Route path="/recruit" element={<Recruit />} />
