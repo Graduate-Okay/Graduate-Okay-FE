@@ -72,22 +72,21 @@ const Header: React.FC = () => {
         <SubDiv>
           <Text
             onClick={() => navigate("/notice")}
-            // borderRight={true}
-            width={"60px"}
+            width={"70px"}
             color={getFillValue("/notice")}
           >
             공지사항
           </Text>
           <p>|</p>
           {cookies.accessToken ? (
-            <Text onClick={() => handlelogOut()} width={"60px"}>
+            <Text onClick={() => handlelogOut()} width={"70px"}>
               로그아웃
             </Text>
           ) : (
             <Text
               onClick={() => navigate("/login")}
               color={getFillValue("/login")}
-              width={"60px"}
+              width={"70px"}
             >
               로그인
             </Text>
@@ -134,7 +133,7 @@ const TitleDiv = styled.div`
 
 const SubDiv = styled.div`
   display: flex;
-  width: 25%;
+  width: 30%;
   align-items: center;
   justify-content: space-evenly;
 
@@ -156,7 +155,6 @@ const Text = styled.p<TextProps>`
   justify-content: center;
   margin: auto 0;
   cursor: pointer;
-  border-right: ${(props) => props.borderRight && "1px solid black"};
   color: ${(props) => props.color};
 
   &:hover {
