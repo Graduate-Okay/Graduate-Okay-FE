@@ -19,10 +19,6 @@ const KyRecommendDetail = lazy(
   () => import("./pages/kyRecommend/KyRecommendDetail")
 );
 const ModifyInfo = lazy(() => import("./pages/mypage/ModifyInfo"));
-const Admin = lazy(() => import("./pages/administration/Admin"));
-const Administration = lazy(
-  () => import("./pages/administration/Administration")
-);
 const MyReview = lazy(() => import("./pages/mypage/MyReview"));
 const Recruit = lazy(() => import("./pages/recruit/Recruit"));
 const More = lazy(() => import("./pages/More"));
@@ -46,8 +42,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/password" element={<Password />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/administration" element={<Administration />} />
           <Route
             path="/graduate"
             element={<ProtectedRoute element={Graduate} />}
