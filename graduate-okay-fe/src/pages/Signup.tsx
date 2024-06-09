@@ -49,6 +49,11 @@ const Signup: React.FC = () => {
       return;
     }
 
+    if (emailValidate(emailInput.value)) {
+      alert("올바른 이메일 형식을 입력해주세요");
+      return;
+    }
+
     alert("인증번호를 전송했습니다. 메일을 확인해주세요");
     const email = emailInput.value;
     emailInput.value = checkSchoolEmail(email);

@@ -14,8 +14,9 @@ export const isEmpty = (email: string, password?: string) => {
  * @param email - 입력받은 이메일 문자열
  */
 export const emailValidate = (email: string) => {
-  const regex = /^[A-Za-z0-9]+$/;
-  return regex.test(email);
+  const regex =
+    /^([A-Za-z0-9]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})$/;
+  return !regex.test(email);
 };
 
 /**
