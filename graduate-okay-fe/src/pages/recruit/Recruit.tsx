@@ -244,6 +244,10 @@ const Content = styled.div`
   @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.4rem;
   }
+
+  &:hover {
+    background-color: rgb(236, 229, 255, 0.4);
+  }
 `;
 
 const Filter = styled.div`
