@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../constants/theme";
 import useCheckMobile from "../hooks/useCheckMobile";
 import { useCookies } from "react-cookie";
+import { HEADER_DATA, LOGIN, LOGOUT, myPage } from "../constants/constants";
 
 interface TextProps {
   borderRight?: boolean;
@@ -38,57 +39,40 @@ const Header: React.FC = () => {
           />
           {useCheckMobile() < theme.deviceSizes.tablet ? null : (
             <Navigation>
-              <Text
-                onClick={() => navigate("/kyRecommend")}
-                color={getFillValue("/kyRecommend")}
-                width={"120px"}
-              >
-                인기교양추천
-              </Text>
-              <Text
-                onClick={() => navigate("/graduate")}
-                color={getFillValue("/graduate")}
-                width={"120px"}
-              >
-                졸업요건조회
-              </Text>
-              <Text
-                onClick={() => navigate("/recruit")}
-                color={getFillValue("/recruit")}
-                width={"120px"}
-              >
-                채용공고
-              </Text>
-              <Text
-                onClick={() => navigate("/mypage")}
-                color={getFillValue("/mypage")}
-                width={"120px"}
-              >
-                마이페이지
-              </Text>
+              {HEADER_DATA.map((data) => {
+                return (
+                  <Text
+                    onClick={() => navigate(`${data.navigate}`)}
+                    color={getFillValue(`${data.navigate}`)}
+                    width={"120px"}
+                  >
+                    {data.title}
+                  </Text>
+                );
+              })}
             </Navigation>
           )}
         </TitleDiv>
         <SubDiv>
           <Text
-            onClick={() => navigate("/notice")}
+            onClick={() => navigate(`${myPage[2].sub[0].link}`)}
             width={"70px"}
-            color={getFillValue("/notice")}
+            color={getFillValue(`${myPage[2].sub[0].link}`)}
           >
-            공지사항
+            {myPage[2].sub[0].text}
           </Text>
           <p>|</p>
           {cookies.accessToken ? (
             <Text onClick={() => handlelogOut()} width={"70px"}>
-              로그아웃
+              {LOGOUT.title}
             </Text>
           ) : (
             <Text
-              onClick={() => navigate("/login")}
-              color={getFillValue("/login")}
+              onClick={() => navigate(`${LOGIN.navigate}`)}
+              color={getFillValue(`${LOGIN.navigate}`)}
               width={"70px"}
             >
-              로그인
+              {LOGIN.title}
             </Text>
           )}
         </SubDiv>

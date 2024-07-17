@@ -39,3 +39,31 @@ export const myPage = [
     ],
   },
 ];
+
+export const HEADER_DATA = [
+  {
+    title: "인기교양추천",
+    navigate: "/kyRecommend",
+  },
+  {
+    title: "졸업요건조회",
+    navigate: "/graduate",
+  },
+  {
+    title: "채용공고",
+    navigate: "/recruit",
+  },
+  {
+    title: "마이페이지",
+    navigate: "/mypage",
+  },
+];
+
+export const LOGIN = {
+  title: "로그인",
+  navigate: "/login",
+};
+
+export const LOGOUT = {
+  title: "로그아웃",
+};
