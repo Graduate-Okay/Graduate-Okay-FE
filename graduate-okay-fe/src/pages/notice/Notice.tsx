@@ -81,7 +81,7 @@ const NoticeContent = styled.div`
   width: 90%;
   height: 75%;
   margin: 2vh auto;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
   @media ${({ theme }) => theme.device.tablet} {
@@ -104,12 +104,14 @@ const NoticeData = styled.div`
   height: 11%;
   min-height: 5rem;
   align-items: center;
+  margin-bottom: 1rem;
   &:hover {
     background-color: #ecf0f1;
   }
 
   @media ${({ theme }) => theme.device.laptop} {
     height: 12%;
+    min-height: 6rem;
   }
   @media ${({ theme }) => theme.device.largeLaptop} {
     width: 75%;
