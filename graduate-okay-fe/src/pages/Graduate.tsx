@@ -108,7 +108,9 @@ const Graduate: React.FC = () => {
         <Result>
           <Caution width={30} height={30} />
           <ResultExplain>
-            <p>교양과목 정보 외의 인적사항 및 학점은 따로 저장되지 않습니다.</p>
+            <EmergencyP>학교에서 지원하는 공식 서비스가 아닙니다.</EmergencyP>
+            <EmergencyP>참고용으로만 확인 부탁드립니다.</EmergencyP>
+            <p>교양과목 정보 외 인적사항 및 학점은 저장하지 않습니다.</p>
             <p>현재 학기를 제외한 수료완료 학기 기준으로 결과가 출력됩니다.</p>
           </ResultExplain>
           <GraduateTable>
@@ -259,7 +261,7 @@ const ResultExplain = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 1.2rem;
-  height: 10%;
+  height: 15%;
   align-items: center;
   justify-content: center;
 
@@ -269,6 +271,7 @@ const ResultExplain = styled.div`
   @media ${({ theme }) => theme.device.laptop} {
     font-size: 1.4rem;
     height: 8%;
+    height: 12%;
   }
 `;
 
@@ -398,4 +401,11 @@ const PDFInfo = styled.p`
   @media ${({ theme }) => theme.device.largeLaptop} {
     font-size: 1.7rem;
   }
+`;
+
+const EmergencyP = styled.p`
+  display: flex;
+  font-size: 1.4rem;
+  margin-bottom: 0.5vh;
+  color: red;
 `;
