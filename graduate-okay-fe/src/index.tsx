@@ -18,25 +18,20 @@ const GlobalStyle = createGlobalStyle`
     color : black;
   }
   @font-face {
-    font-family: 'JejuGothic';
-    font-weight: normal;
+    font-family: 'Jeju Gothic';
     font-style: normal;
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.eot');
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.eot?#iefix')
-            format('embedded-opentype'),
-        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.woff2')
-            format('woff2'),
-        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.woff')
-            format('woff'),
-        url('https://cdn.jsdelivr.net/gh/webfontworld/jeju/JejuGothic.ttf')
-            format('truetype');
-    font-display: swap;
+    font-weight: 400;
+    src: url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot);
+    src: url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot?#iefix) format('embedded-opentype'),
+         url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff2) format('woff2'),
+         url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff) format('woff'),
+         url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.ttf) format('truetype');
   }
   html{
     font-size : 62.5%;
   }
   body{
-    font-family : 'JejuGothic';
+    font-family : 'Jeju Gothic';
   }
 `;
 
