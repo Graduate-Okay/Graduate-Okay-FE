@@ -12,6 +12,9 @@ import { ReactComponent as Withdrawal } from "../../assets/imgs/withdrawal.svg";
 import { getMypageDataQuery, withdrawal } from "../../queries/mypageQuery";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import MyPageRow from "./MyPageRow";
+import Toast from "../../components/Toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Mypage: React.FC = () => {
   const [, , removeCookie] = useCookies(["accessToken"]);
@@ -26,7 +29,7 @@ const Mypage: React.FC = () => {
   const { mutate: withdrawalMutation } = useMutation({
     mutationFn: () => withdrawal(),
     onSuccess: () => {
-      alert("정상적으로 회원탈퇴되었습니다.");
+      toast.success("정상적으로 회원탈퇴되었습니다.");
       removeCookie("accessToken");
       localStorage.clear();
       navigate("/");
@@ -44,6 +47,7 @@ const Mypage: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <HandleSection
         prevBtn={false}
         title="마이페이지"

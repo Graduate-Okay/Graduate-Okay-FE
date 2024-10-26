@@ -10,6 +10,9 @@ import Modal from "../components/Modal";
 import { ReactComponent as Caution } from "../assets/imgs/caution.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { checkSchoolEmail, isEmpty } from "../utils/validate";
+import Toast from "../components/Toast";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Password: React.FC = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -25,7 +28,7 @@ const Password: React.FC = () => {
   const postPasswordResetLinkMutation = useMutation({
     mutationFn: (email: string) => postPasswordResetLink(email),
     onSuccess: () => {
-      alert("메일로 인증번호를 전송했습니다");
+      toast.info("메일로 인증번호를 전송했습니다.");
       setIsClick(true);
     },
     onError: () => {
@@ -44,7 +47,7 @@ const Password: React.FC = () => {
       return patchPassword(email, key, password);
     },
     onSuccess: () => {
-      alert("비밀번호 변경이 완료되었습니다.");
+      toast.success("비밀번호 변경이 완료되었습니다.");
       navigate("/");
     },
   });
@@ -80,6 +83,7 @@ const Password: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <Section>
         <HandleSection prevBtn={true} title="비밀번호 찾기" closeBtn={false} />
         <LoginDiv>

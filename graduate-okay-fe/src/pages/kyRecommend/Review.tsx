@@ -9,7 +9,9 @@ import {
   useMutation,
 } from "@tanstack/react-query";
 import { postReview } from "../../queries/reviewQuery";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../../components/Toast";
 interface ModalProps {
   onClose: () => void;
   title?: string;
@@ -40,7 +42,7 @@ const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
       return postReview(id, reviewTitle, reviewContent, selectedValue);
     },
     onSuccess: () => {
-      alert("리뷰 등록이 완료되었습니다.");
+      toast.success("리뷰 등록이 완료되었습니다.");
       onClose();
       if (refetch) {
         refetch();
@@ -59,6 +61,7 @@ const Review: React.FC<ModalProps> = ({ onClose, id, refetch }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <ReviewSection>
         <ModalContent>
           <Title>

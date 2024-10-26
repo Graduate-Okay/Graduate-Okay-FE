@@ -5,6 +5,9 @@ import theme from "../constants/theme";
 import useCheckMobile from "../hooks/useCheckMobile";
 import { useCookies } from "react-cookie";
 import { HEADER_DATA, LOGIN, LOGOUT, myPage } from "../constants/constants";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "./Toast";
 
 interface TextProps {
   borderRight?: boolean;
@@ -16,9 +19,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [cookies, , removeCookie] = useCookies(["accessToken"]);
-
   const handlelogOut = () => {
-    alert("로그아웃되었습니다.");
+    toast.success("로그아웃되었습니다.");
     removeCookie("accessToken");
     localStorage.clear();
     navigate("/");
@@ -30,6 +32,7 @@ const Header: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <HeaderDiv>
         <TitleDiv>
           <Image

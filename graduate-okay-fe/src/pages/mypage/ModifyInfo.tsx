@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as ProfileWithSetting } from "../../assets/imgs/profile/profileWithSetting.svg";
 import { useMutation } from "@tanstack/react-query";
 import { modifyInfoQuery } from "../../queries/mypageQuery";
+import Toast from "../../components/Toast";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModifyInfo: React.FC = () => {
   const loginInput = useInput("");
@@ -17,7 +20,7 @@ const ModifyInfo: React.FC = () => {
     mutationFn: (payload: { [key: string]: string }) =>
       modifyInfoQuery(payload),
     onSuccess: () => {
-      alert("변경이 완료되었습니다.");
+      toast.success("변경이 완료되었습니다.");
       navigate("/mypage");
     },
   });
@@ -31,7 +34,7 @@ const ModifyInfo: React.FC = () => {
       payload.password = passwordInput.value;
     }
     if (!loginInput.value && !passwordInput.value) {
-      alert("입력 값을 확인해주세요.");
+      toast.error("입력 값을 확인해주세요.");
       return;
     }
     changeMutation.mutate(payload);
@@ -45,6 +48,7 @@ const ModifyInfo: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <ModifyInfoSection>
         <HandleSection
           prevBtn={true}
@@ -53,7 +57,7 @@ const ModifyInfo: React.FC = () => {
           color="#a489f0"
         />
         <ModifyInfoDiv>
-          <ProfileWithSetting onClick={() => alert("준비 중입니다!")} />
+          <ProfileWithSetting onClick={() => toast.info("준비 중입니다!")} />
           <ChangeInfo>
             <Content>
               <Title>닉네임</Title>

@@ -13,6 +13,9 @@ import {
   submitPasswordQuery,
 } from "../queries/signupQuery";
 import { checkSchoolEmail, emailValidate, isEmpty } from "../utils/validate";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Toast from "../components/Toast";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -35,7 +38,7 @@ const Signup: React.FC = () => {
       return submitPasswordQuery(emailInput, passwordInput);
     },
     onSuccess: () => {
-      alert("회원가입이 완료되었습니다.");
+      toast.success("회원가입이 완료되었습니다.");
       navigate("/");
     },
     onError: (error: AxiosError) => {
@@ -45,16 +48,16 @@ const Signup: React.FC = () => {
 
   const sendAuthNumber = async () => {
     if (isEmpty(emailInput.value)) {
-      alert("이메일을 입력해주세요");
+      toast.info("이메일을 입력해주세요");
       return;
     }
 
     if (emailValidate(emailInput.value)) {
-      alert("올바른 이메일 형식을 입력해주세요");
+      toast.error("올바른 이메일 형식을 입력해주세요");
       return;
     }
 
-    alert("인증번호를 전송했습니다. 메일을 확인해주세요");
+    toast.info("인증번호를 전송했습니다. 메일을 확인해주세요");
     const email = emailInput.value;
     emailInput.value = checkSchoolEmail(email);
     postAuthNumberToEmailMutation.mutate(emailInput.value);
@@ -62,7 +65,7 @@ const Signup: React.FC = () => {
 
   const submitAuthNumber = async () => {
     if (isEmpty(authNumber.value)) {
-      alert("인증번호를 입력해주세요");
+      toast.error("인증번호를 입력해주세요");
       return;
     }
     try {
@@ -72,14 +75,14 @@ const Signup: React.FC = () => {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert(error.response?.data?.message);
+        toast.error(error.response?.data?.message);
       }
     }
   };
 
   const submitPassword = async () => {
     if (isEmpty(passwordInput.value)) {
-      alert("비밀번호를 입력해주세요");
+      toast.error("비밀번호를 입력해주세요");
       return;
     }
     const email = emailInput.value;
@@ -98,6 +101,7 @@ const Signup: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Toast />
       <SignupSection>
         <HandleSection prevBtn={true} title="회원가입" closeBtn={false} />
         <LoginDiv>
